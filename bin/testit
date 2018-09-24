@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+set -eo pipefail
+IFS=$'\n\t'
+
+ARGS="$1"
+
+build -Q || exit "Failed to build project"
+shell -Q --command true || exit "Failed to enter project shell"
