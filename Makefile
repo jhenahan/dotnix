@@ -5,9 +5,9 @@ ROOTS = /nix/var/nix/gcroots/per-user/jackhenahan/shells
 
 PROJS = src/hasktags
 
-PENVS = emacs26Env
+PENVS = emacs26Env ghc84Env
 
-ENVS  = emacs26Env
+ENVS  = emacs26Env ghc84Env
 
 all: switch env-all shells
 

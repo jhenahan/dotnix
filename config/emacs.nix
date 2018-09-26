@@ -17,8 +17,8 @@ pkgs:
       apache-mode
       apiwrap
       aria2
-      ascii
-      asoc
+      #ascii
+      #asoc
       async
       auctex
       auctex
@@ -34,12 +34,12 @@ pkgs:
       beacon
       biblio
       bm
-      bookmark-plus
+      #bookmark-plus
       browse-at-remote
       browse-kill-ring
-      browse-kill-ring-plus
+      #browse-kill-ring-plus
       button-lock
-      bytecomp-simplify
+      #bytecomp-simplify
       calfw
       calfw-cal
       calfw-org
@@ -51,7 +51,7 @@ pkgs:
       clipmon
       cmake-font-lock
       cmake-mode
-      col-highlight
+      #col-highlight
       color-moccur
       color-theme
       command-log-mode
@@ -73,11 +73,11 @@ pkgs:
       counsel-osx-app
       counsel-projectile
       counsel-tramp
-      crosshairs
+      #crosshairs
       crux
       csv-mode
       ctable
-      cursor-chg
+      #cursor-chg
       dante
       dash
       dash-at-point
@@ -101,13 +101,13 @@ pkgs:
       docker-compose-mode
       docker-tramp
       dockerfile-mode
-      doxymacs
+      #doxymacs
       dumb-jump
       ebdb
-      edit-env
+      #edit-env
       edit-indirect
       edit-server
-      edit-var
+      #edit-var
       editorconfig
       el-mock
       el-patch
@@ -118,7 +118,7 @@ pkgs:
       elisp-refs
       elisp-slime-nav
       elmacro
-      emacs-load-time
+      #emacs-load-time
       emms
       emojify
       engine-mode
@@ -126,8 +126,8 @@ pkgs:
       ensime
       epc
       epl
-      erc-highlight-nicknames
-      erc-yank
+      #erc-highlight-nicknames
+      #erc-yank
       erefactor
       eshell-autojump
       eshell-bookmark
@@ -143,8 +143,8 @@ pkgs:
       f
       fancy-narrow
       feebleline
-      fence-edit
-      fetchmail-mode
+      #fence-edit
+      #fetchmail-mode
       filladapt
       flx
       flycheck
@@ -167,7 +167,7 @@ pkgs:
       git-gutter
       git-link
       git-timemachine
-      git-undo
+      #git-undo
       gitattributes-mode
       gitconfig-mode
       github-pullrequest
@@ -176,7 +176,7 @@ pkgs:
       gntp
       gnu-apl-mode
       gnus-alias
-      gnus-harvest
+      #gnus-harvest
       golden-ratio
       google-this
       goto-last-change
@@ -195,11 +195,11 @@ pkgs:
       helm-org-rifle
       helpful
       highlight
-      highlight-cl
+      #highlight-cl
       highlight-defined
       highlight-numbers
       historian
-      hl-line-plus
+      #hl-line-plus
       ht
       htmlize
       hydra
@@ -209,9 +209,9 @@ pkgs:
       iedit
       iflipb
       imenu-list
-      indent-shift
+      #indent-shift
       inf-ruby
-      info-lookmore
+      #info-lookmore
       initsplit
       ipcalc
       ivy
@@ -221,7 +221,6 @@ pkgs:
       ivy-rich
       ix
       jinja2-mode
-      jobhours
       jq-mode
       js2-mode
       js3-mode
@@ -258,7 +257,7 @@ pkgs:
       magit-tbdiff
       magit-todos
       magithub
-      makefile-runner
+      #makefile-runner
       makey
       malyon
       markdown-mode
@@ -268,14 +267,14 @@ pkgs:
       mc-extras
       mediawiki
       memory-usage
-      message-x
+      #message-x
       mic-paren
       minimap
       mmm-mode
-      moccur-edit
+      #moccur-edit
       mode-line-bell
       monitor
-      mudel
+      #mudel
       multi-term
       multifiles
       multiple-cursors
@@ -283,7 +282,7 @@ pkgs:
       names
       nasm-mode
       navi-mode
-      nf-procmail-mode
+      #nf-procmail-mode
       nginx-mode
       nix-buffer
       nix-mode
@@ -298,14 +297,12 @@ pkgs:
       ob-restclient
       olivetti
       operate-on-number
-      org
-      org
       org-bookmark-heading
       org-bullets
       org-context
       org-gcal
       org-journal
-      org-opml
+      #org-opml
       org-pdfview
       org-plus-contrib
       org-pomodoro
@@ -322,11 +319,11 @@ pkgs:
       outorg
       outshine
       ov
-      ovpn-mode
-      ox-extra
+      #ovpn-mode
+      #ox-extra
       ox-hugo
       ox-pandoc
-      ox-texinfo-plus
+      #ox-texinfo-plus
       package-lint
       packed
       page-break-lines
@@ -341,9 +338,9 @@ pkgs:
       password-store-otp
       pcre2el
       pdf-tools
-      per-window-point
+      #per-window-point
       persistent-scratch
-      peval
+      #peval
       pfuture
       phi-search
       phi-search-mc
@@ -351,13 +348,13 @@ pkgs:
       plantuml-mode
       po-mode
       popup
-      popup-pos-tip
-      popup-ruler
+      #popup-pos-tip
+      #popup-ruler
       popwin
       pos-tip
       powerline
       powershell
-      pp-c-l
+      #pp-c-l
       prodigy
       projectile
       proof-general
@@ -373,13 +370,13 @@ pkgs:
       reveal-in-osx-finder
       rich-minority
       riscv-mode
-      rs-gnus-summary
+      #rs-gnus-summary
       rust-mode
       ryo-modal
       s
       sbt-mode
       scala-mode
-      sdcv-mode
+      #sdcv-mode
       selected
       seq
       shackle
@@ -387,7 +384,7 @@ pkgs:
       shm
       shut-up
       simple-httpd
-      sky-color-clock
+      #sky-color-clock
       slime
       smart-jump
       smart-mode-line
@@ -404,18 +401,18 @@ pkgs:
       sql-indent
       ssh-config-mode
       steam
-      stopwatch
+      #stopwatch
       string-edit
       string-inflection
       structured-haskell-mode
       super-save
-      supercite
+      #supercite
       swiper
       sx
-      tablegen-mode
+      #tablegen-mode
       tablist
       tagedit
-      tidy
+      #tidy
       transpose-mark
       treemacs
       tuareg
@@ -429,7 +426,7 @@ pkgs:
       visual-regexp
       visual-regexp-steroids
       vlf
-      vline
+      #vline
       w3m
       web
       web-beautify
@@ -442,15 +439,15 @@ pkgs:
       whole-line-or-region
       window-purpose
       with-editor
-      word-count-mode
+      #word-count-mode
       worf
       ws-butler
       x86-lookup
       xml-rpc
-      xray
+      #xray
       yaml-mode
-      yaoddmuse
-      yari-with-buttons
+      #yaoddmuse
+      #yari-with-buttons
       yasnippet
       z3-mode
       zoom

@@ -28,11 +28,13 @@
     browserpass
     curl
     epipe
+    emacs26System
     exa
     exiv2
     fd
     findutils
     gawk
+    ghc84System
     gnugrep
     gnupg
     gnused
@@ -95,7 +97,7 @@
     highlight
     hugo
     librsvg
-    (exe (haskPkgs.pandoc))
+    #(exe (haskPkgs.pandoc))
     pdf-tools-server
     plantuml
     poppler_utils

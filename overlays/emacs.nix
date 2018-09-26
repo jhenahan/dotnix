@@ -49,6 +49,21 @@ self:
             magithub = addBuildInputs (super.magithub) [
               (pkgs.git)
             ];
+            magit-filenotify = addBuildInputs (super.magit-filenotify) [
+              (pkgs.git)
+            ];
+            magit-lfs = addBuildInputs (super.magit-lfs) [
+              (pkgs.git)
+            ];
+            magit-tbdiff = addBuildInputs (super.magit-tbdiff) [
+              (pkgs.git)
+            ];
+            magit-imerge = addBuildInputs (super.magit-imerge) [
+              (pkgs.git)
+            ];
+            github-pullrequest = addBuildInputs (super.github-pullrequest) [
+              (pkgs.git)
+            ];
             powershell = notBroken (super.powershell);
             pdf-tools = lib.overrideDerivation super.pdf-tools (attrs: {
               src = fetchFromGitHub {
@@ -58,11 +73,11 @@ self:
                 sha256 = "0mhby1sjnw0vvwl1yjfqmhwk9nxv1chl3qxrvkd7n51d03bfrr3j";
               };
             });
-            org-plus-contrib = self.elpaBuild {
+            org-plus-contrib = self.elpaBuild rec {
               pname = "org-plus-contrib";
               version = "20180924";
               src = fetchurl {
-                url = "https://orgmode.org/elpa/org-plus-contrib-${self.version}.tar";
+                url = "https://orgmode.org/elpa/org-plus-contrib-${version}.tar";
                 sha256 = "1n76ymkkbrzdl5zc8g7zjc2vqw1640v2608is56pxqsbs4wcb5dh";
               };
               meta = {
@@ -72,7 +87,7 @@ self:
             };
           };
       mkEmacsPackages = emacs:
-        self.emacsPackagesNgGen (emacs.overrideScope) (super:
+        (self.emacsPackagesNgGen emacs).overrideScope (super:
           self:
             pkgs.lib.fix (pkgs.lib.extends myEmacsPackageOverrides (_:
               super.melpaPackages // {
@@ -85,6 +100,7 @@ self:
       emacs = pkgs.emacs26;
       emacsPackagesNg = self.emacs26PackagesNg;
       emacs26PackagesNg = mkEmacsPackages (self.emacs);
+      emacs26System = self.emacs26PackagesNg.emacsWithPackages;
       emacs26Env = myPkgs: pkgs.myEnvFun {
         name = "emacs26";
         buildInputs = [ (self.emacs26PackagesNg.emacsWithPackages myPkgs) ];

@@ -23,6 +23,8 @@ self:
               pipes-zlib = dontCheck (doJailbreak (super.pipes-zlib));
               text-show = dontCheck (doJailbreak (super.text-show));
               time-recurrence = doJailbreak (super.time-recurrence);
+              html-entities = doJailbreak (addSetupDepends super.html-entities [ super.cabal-doctest ]);
+              recursors = doJailbreak (addSetupDepends super.recursors [ super.QuickCheck super.hspec super.template-haskell ]);
               ListLike = overrideCabal (super.ListLike) (attrs:
                 {
                   libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
@@ -43,12 +45,13 @@ self:
                 rev = "8df39b87ebaeb4248a945e54ae1f0f02c25dd14d";
                 sha256 = "10pzn71nnfrmyywqv50vfak7xgf19c9aqy3i8k92lns5x9ycfqdv";
               }) {};
-              Agda = self.callCabal2Nix "Agda" (pkgs.fetchFromGitHub {
+              Agda-git = self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
                 owner = "agda";
                 repo = "agda";
                 rev = "3afae4659ea166933af672af8359bdd4d4349d1f";
-                sha256 = "0qk1f8p8jah0xzpqskcc6vvnmcng1w9941r13i26qj4d1y0c963i";
+                sha256 = "12q467vfnxk0dxpc8bkk31w84kq0alhpczz4ajd2arhrgdv3v1g5";
               }) {};
+              Agda = dontCheck (doJailbreak (addSetupDepends self.Agda-git [ super.attoparsec super.containers super.convertible super.mtl super.time ]));
               brittany = self.callCabal2nix "brittany" (pkgs.fetchFromGitHub {
                 owner = "lspitzner";
                 repo = "brittany";
@@ -121,9 +124,9 @@ self:
                                        drv
                                      , returnShellEnv ? pkgs.lib.inNixShell }:
                       let
-                        drv = pkgs.lib.composeExtensions (_:
+                        drv = ((pkgs.lib.composeExtensions (_:
                           _:
-                            self) (pkgs.lib.composeExtensions (self.packageSourceOverrides source-overrides) overrides) {} super.callCabal2nix (builtins.baseNameOf root) root {};
+                            self) (pkgs.lib.composeExtensions (self.packageSourceOverrides source-overrides) overrides)) {} super).callCabal2nix (builtins.baseNameOf root) root {};
                       in if returnShellEnv
                         then modifier drv.env
                         else modifier drv;
@@ -166,7 +169,6 @@ self:
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
             ghc843 = "2.2.0.0";
-            ghc861 = "2.4.0.0";
           };
           hie-nix = import (pkgs.fetchFromGitHub {
             owner = "domenkozar";
@@ -208,24 +210,16 @@ self:
         };
       };
       haskellPackages_8_4 = self.haskell.packages.ghc843;
-      haskellPackages_8_6 = self.haskell.packages.ghc861;
       ghcDefaultVersion = "ghc843";
       haskellPackages = self.haskellPackages_8_4;
       haskPkgs = self.haskellPackages;
+      ghc84System = myPkgs: self.haskellPackages_8_4.ghcWithHoogle (pkgs:
+        with pkgs;
+        myPkgs pkgs ++ [ compact ]);
       ghc84Env = myPkgs:
         pkgs.myEnvFun {
           name = "ghc84";
           buildInputs = with self.haskellPackages_8_4;
-          [
-            (ghcWithHoogle (pkgs:
-              with pkgs;
-              myPkgs pkgs ++ [ compact ]))
-          ];
-        };
-      ghc86Env = myPkgs:
-        pkgs.myEnvFun {
-          name = "ghc86";
-          buildInputs = with self.haskellPackages_8_6;
           [
             (ghcWithHoogle (pkgs:
               with pkgs;

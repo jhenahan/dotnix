@@ -12,7 +12,7 @@ pkgs:
         MemoTrie
         MissingH
         MonadPrompt
-        Network-NineP
+        #Network-NineP
         QuickCheck
         ShellCheck
         abstract-deque
@@ -299,7 +299,7 @@ pkgs:
         thyme
         time
         time-recurrence
-        timeparsers
+        #timeparsers
         tls
         total
         transformers
