@@ -3,13 +3,14 @@
   let
     exe = haskell.lib.justStaticExecutables;
   in [
-    nixUnstable
+    nixStable
     nix-scripts
     nix-prefetch-scripts
     home-manager
     coreutils
     moreutils
     gist
+    (exe (haskPkgs.cachix))
     #git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
