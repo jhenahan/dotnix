@@ -56,6 +56,7 @@
     renameutils
     ripgrep
     rlwrap
+    rustSystem
     srm
     stow
     terminal-notifier
