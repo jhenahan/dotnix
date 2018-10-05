@@ -2,8 +2,8 @@
   let
     home_directory = "/Users/jackhenahan";
     logdir = "${home_directory}/Library/Logs";
-    home_dns = import ../home/dns.nix;
-    work_dns = import ../work/dns.nix;
+    home_dns = import ../private/home/dns.nix;
+    work_dns = import ../private/work/dns.nix;
   in {
     system.defaults = import ./darwin/defaults.nix;
     networking = {
