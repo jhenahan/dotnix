@@ -7,3 +7,6 @@
 [submodule "home-manager"]
 	path = home-manager
 	url = git@github.com:rycee/home-manager.git
+[submodule "rust"]
+	path = rust
+	url = git@github.com:mozilla/nixpkgs-mozilla.git
