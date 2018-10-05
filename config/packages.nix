@@ -25,9 +25,13 @@
     (pass.withExtensions (ext:
       with ext;
       [ pass-otp pass-update ]))
+    ansible
+    ansible-lint
     bat
     browserpass
     curl
+    duma
+    skim
     epipe
     emacs26System
     exa
