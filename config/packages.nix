@@ -7,6 +7,7 @@
     nix-scripts
     nix-prefetch-scripts
     home-manager
+    alacritty
     coreutils
     moreutils
     gist
@@ -123,4 +124,5 @@
     Dash
     Docker
     Firefox
+    #LaunchBar # TODO: Figure out how to get past EULA
   ]

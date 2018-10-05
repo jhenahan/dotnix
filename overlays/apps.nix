@@ -106,4 +106,17 @@ self:
         description = "Mozilla Firefox (or simply Firefox) is a free and open-source web browser.";
         homepage = "https://www.mozilla.org/en-US/firefox/";
       };
+      LaunchBar = self.installApplication rec {
+        name = "LaunchBar";
+        version = "6.9.6";
+        sourceRoot = "LaunchBar.app";
+        src = super.fetchurl {
+          url = "https://www.obdev.at/downloads/launchbar/LaunchBar-${version}.dmg";
+          sha256 = "14xr57q6iwdsp6ssvs8gmsp94kl3hnmp2yspah97qw580q9dr167";
+        };
+        description = ''
+          Quick launcher
+        '';
+        homepage = "https://www.obdev.at/products/launchbar/index.html";
+      };
     }
