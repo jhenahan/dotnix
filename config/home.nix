@@ -125,6 +125,8 @@
           set -x PROMPT_DIRTRIM "2";
           set -x TINC_USE_NIX "yes";
           set -x WORDCHARS "";
+          set -x SKIM_DEFAULT_COMMAND 'rg --color=always --line-number "{}"'
+          set -x SKIM_DEFAULT_OPTIONS '--ansi --regex'
         '';
       };
       git = {
