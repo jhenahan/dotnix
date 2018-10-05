@@ -68,7 +68,7 @@ self:
                   enableLibraryProfiling = false;
                   enableExecutableProfiling = false;
                 });
-            };
+           };
       callPackage = hpkgs:
         ghc:
           path:
@@ -115,6 +115,7 @@ self:
                       withPackages = super.ghc.withHoogle;
                     };
                     ghcWithPackages = self.ghc.withPackages;
+                    
                     developPackage = { root
                                      , source-overrides ? {}
                                      , overrides ? self:
@@ -168,7 +169,7 @@ self:
           compiler = package.compiler;
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
-            ghc843 = "2.2.0.0";
+            ghc843 = "2.4.0.0";
           };
           hie-nix = import (pkgs.fetchFromGitHub {
             owner = "domenkozar";
@@ -186,6 +187,7 @@ self:
             criterion
             hdevtools
             (self.haskell.lib.doJailbreak (callHackage "cabal-install" (cabal.${ghc}) {}))
+            hie.${ghc}
           ] ++ packages.haskellBuildInputs);
       haskell = pkgs.haskell // {
         packages = pkgs.haskell.packages // {
@@ -213,9 +215,9 @@ self:
       ghcDefaultVersion = "ghc843";
       haskellPackages = self.haskellPackages_8_4;
       haskPkgs = self.haskellPackages;
-      ghc84System = myPkgs: self.haskellPackages_8_4.ghcWithHoogle (pkgs:
+      ghc84System = myPkgs: (self.haskellPackages_8_4.ghcWithHoogle (pkgs:
         with pkgs;
-        myPkgs pkgs ++ [ compact ]);
+        myPkgs pkgs ++ [ compact ]));
       ghc84Env = myPkgs:
         pkgs.myEnvFun {
           name = "ghc84";
