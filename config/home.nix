@@ -2,6 +2,7 @@
   let
     home_directory = builtins.getEnv "HOME";
     ca-bundle_crt = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    work_ssh = import ../private/work/ssh.nix;
     lib = pkgs.stdenv.lib;
   in rec {
     manual.manpages.enable = false;
@@ -42,9 +43,9 @@
         GHCVER = "84";
         GHCPKGVER = "843";
         ALTERNATE_EDITOR = "";
-        EMACS_SERVER_FILE = "/tmp/emacsclient.server";
+        #EMACS_SERVER_FILE = "/tmp/emacsclient.server";
         COLUMNS = "100";
-        EDITOR = "${pkgs.emacs26}/bin/emacsclient -s /tmp/emacs501/server -c";
+        EDITOR = "${pkgs.emacs26}/bin/emacsclient -c";
         EMAIL = "${programs.git.userEmail}";
         GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
         JAVA_OPTS = "-Xverify:none";
@@ -85,29 +86,54 @@
       fish = {
         enable = true;
         shellAliases = {
-          e = "\$EDITOR -n";
+          e = "eval \$EDITOR -n";
           E = "sudo -e";
           ls = "exa";
           l = "exa";
           ll = "exa -al";
         };
         loginShellInit = ''
+          set fish_greeting
           set -x GPG_TTY (tty)
           if not pgrep -x "gpg-agent" > /dev/null
               ${pkgs.gnupg}/bin/gpgconf --launch gpg-agent
           end
         '';
         shellInit = ''
-          set -x SSH_AUTH_SOCK (${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+          set -x SSH_AUTH_SOCK "${xdg.configHome}/gnupg/S.gpg-agent.ssh";
+          set -x GNUPGHOME "${xdg.configHome}/gnupg";
+
+          set -x CABAL_CONFIG "${xdg.configHome}/cabal/config";
+          set -x LESSHISTFILE "${xdg.cacheHome}/less/history";
+          set -x SCREENRC "${xdg.configHome}/screen/config";
+          set -x WWW_HOME "${xdg.cacheHome}/w3m";
+          set -x FONTCONFIG_PATH "${xdg.configHome}/fontconfig";
+          set -x FONTCONFIG_FILE "${xdg.configHome}/fontconfig/fonts.conf";
+          set -x PASSWORD_STORE_DIR "${home_directory}/Documents/.passwords";
+          set -x NIX_CONF "${home_directory}/src/dotnix";
+          set -x EMACSVER "26";
+          set -x GHCVER "84";
+          set -x GHCPKGVER "843";
+          set -x ALTERNATE_EDITOR "";
+          set -x COLUMNS "100";
+          set -x EDITOR "${pkgs.emacs26}/bin/emacsclient -c";
+          set -x EMAIL "${programs.git.userEmail}";
+          set -x GRAPHVIZ_DOT "${pkgs.graphviz}/bin/dot";
+          set -x JAVA_OPTS "-Xverify:none";
+          set -x LC_CTYPE "en_US.UTF-8";
+          set -x LESS "-FRSXM";
+          set -x PROMPT_DIRTRIM "2";
+          set -x TINC_USE_NIX "yes";
+          set -x WORDCHARS "";
         '';
       };
       git = {
         enable = true;
         userName = "Jack Henahan";
-        userEmail = "jack.henahan@uvmhealth.org";
+        userEmail = "root@proofte.ch";
         signing = {
-          key = "17F07DF3086C4BBF";
-          signByDefault = false;
+          key = "17F07DF3086C4BBFA5799F38EF21DED4826AAFCF";
+          signByDefault = true;
         };
         aliases = {
           amend = "commit --amend -C HEAD";
@@ -244,11 +270,12 @@
         hashKnownHosts = true;
         userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
         matchBlocks = {
-          id_local = {
+          default = {
             host = "*";
             identityFile = "${xdg.configHome}/ssh/id_local";
             identitiesOnly = true;
           };
+          work = (work_ssh xdg).ssh;
         };
       };
     };
