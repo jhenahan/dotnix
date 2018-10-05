@@ -2,11 +2,14 @@
   let
     home_directory = "/Users/jackhenahan";
     logdir = "${home_directory}/Library/Logs";
+    home_dns = import ../home/dns.nix;
+    work_dns = import ../work/dns.nix;
   in {
     system.defaults = import ./darwin/defaults.nix;
     networking = {
+      hostName = "noether";
       dns = [ "127.0.0.1" ];
-      search = [ "local" ];
+      search = [ "local" ] ++ work_dns.domains or [];
       knownNetworkServices = [
         "Ethernet"
         "Wi-Fi"
@@ -53,6 +56,11 @@
       systemPackages = import ./packages.nix {
         inherit pkgs;
       };
+      profiles =
+      [ "$HOME/.nix-profile"
+        "/run/current-system/sw"
+        "/nix/var/nix/profiles/default"
+      ];
       systemPath = [
         "${pkgs.Docker}/Applications/Docker.app/Contents/Resources/bin"
       ];
@@ -88,9 +96,10 @@
       extraOutputsToInstall = [
         "man"
       ];
+      etc."ads.pdnsd".source = ../files/ads.pdnsd;
       etc."pdnsd.conf".text = ''
         global {
-            perm_cache   = 8192;
+            perm_cache   = 65536;
             cache_dir    = "/Library/Caches/pdnsd";
             server_ip    = 127.0.0.1;
             status_ctl   = on;
@@ -102,6 +111,8 @@
             neg_rrs_pol  = on;
             par_queries  = 1;
         }
+      '' + home_dns.pdnsd_server + work_dns.pdnsd_server + 
+      ''
         server {
             label       = "cloudflare";
             ip          = 1.1.1.1, 1.0.0.1;
@@ -111,6 +122,7 @@
             exclude     = ".local";
             proxy_only  = on;
             purge_cache = off;
+            timeout     = 5;
         }
         server {
             label       = "google";
@@ -121,44 +133,20 @@
             exclude     = ".local";
             proxy_only  = on;
             purge_cache = off;
+            timeout     = 5;
         }
         server {
-            label       = "dyndns";
-            ip          = 216.146.35.35, 216.146.36.36;
+            label       = "comcast";
+            ip          = 75.75.75.75, 75.75.76.76;
             preset      = on;
             uptest      = none;
             edns_query  = yes;
             exclude     = ".local";
             proxy_only  = on;
             purge_cache = off;
+            timeout     = 5;
         }
-        # The servers provided by OpenDNS are fast, but they do not reply with
-        # NXDOMAIN for non-existant domains, instead they supply you with an
-        # address of one of their search engines. They also lie about the
-        # addresses of the search engines of google, microsoft and yahoo. If you
-        # do not like this behaviour the "reject" option may be useful.
-        server {
-            label       = "opendns";
-            ip          = 208.67.222.222, 208.67.220.220;
-            # You may need to add additional address ranges here if the addresses
-            # of their search engines change.
-            reject      = 208.69.32.0/24,
-                          208.69.34.0/24,
-                          208.67.219.0/24;
-            preset      = on;
-            uptest      = none;
-            edns_query  = yes;
-            exclude     = ".local";
-            proxy_only  = on;
-            purge_cache = off;
-        }
-        # This section is meant for resolving from root servers.
-        server {
-            label             = "root-servers";
-            root_server       = discover;
-            ip                = 198.41.0.4, 192.228.79.201;
-            randomize_servers = on;
-        }
+        include {file="/etc/ads.pdnsd";}
         source {
             owner         = localhost;
             serve_aliases = on;
@@ -173,15 +161,6 @@
         }
         rr { name = localunixsocket;       a = 127.0.0.1; }
         rr { name = localunixsocket.local; a = 127.0.0.1; }
-        rr { name = bugs.ledger-cli.org;   a = 192.168.128.132; }
-        neg {
-            name  = doubleclick.net;
-            types = domain;           # This will also block xxx.doubleclick.net, etc.
-        }
-        neg {
-            name  = bad.server.com;   # Badly behaved server you don't want to connect to.
-            types = A,AAAA;
-        }
       '';
       etc."DefaultKeyBinding.dict".text = ''
         {
@@ -210,8 +189,12 @@
     };
     services.nix-daemon.enable = true;
     services.activate-system.enable = true;
+    services.emacs = {
+      enable = true;
+      package = pkgs.emacs26System;
+    };
     nix = {
-      package = pkgs.nixUnstable;
+      package = pkgs.nixStable;
       nixPath = [
         "darwin-config=\$HOME/src/dotnix/config/darwin.nix"
         "home-manager=\$HOME/src/dotnix/home-manager"
@@ -224,7 +207,7 @@
         "@admin"
         "@wheel"
       ];
-      maxJobs = 8;
+      maxJobs = 32;
       buildCores = 8;
       gc.automatic = true;
       gc.options = "--max-freed \$((25 * 1024**3 - 1024 * \$(df -P -k /nix/store | tail -n 1 | awk '{ print \$4 }')))";
