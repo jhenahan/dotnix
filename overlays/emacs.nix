@@ -87,8 +87,8 @@ self:
             };
           };
       mkEmacsPackages = emacs:
-        (self.emacsPackagesNgGen emacs).overrideScope (super:
-          self:
+        (self.emacsPackagesNgGen emacs).overrideScope' (self:
+          super:
             pkgs.lib.fix (pkgs.lib.extends myEmacsPackageOverrides (_:
               super.melpaPackages // {
                 inherit emacs;
