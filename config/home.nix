@@ -16,7 +16,9 @@
       in with builtins;
       map (n:
         import (path + ("/" + n))) (filter (n:
-        match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix"))) (attrNames (readDir path)));
+        match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix"))) (attrNames (readDir path))) ++ [
+        (import ./envs.nix)
+      ];
     };
 #    services = {
 #      gpg-agent = {
@@ -43,9 +45,8 @@
         GHCVER = "84";
         GHCPKGVER = "843";
         ALTERNATE_EDITOR = "";
-        #EMACS_SERVER_FILE = "/tmp/emacsclient.server";
         COLUMNS = "100";
-        EDITOR = "${pkgs.emacs26}/bin/emacsclient -c";
+        EDITOR = "${pkgs.emacs26System}/bin/emacsclient -c";
         EMAIL = "${programs.git.userEmail}";
         GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
         JAVA_OPTS = "-Xverify:none";
@@ -116,7 +117,7 @@
           set -x GHCPKGVER "843";
           set -x ALTERNATE_EDITOR "";
           set -x COLUMNS "100";
-          set -x EDITOR "${pkgs.emacs26}/bin/emacsclient -c";
+          set -x EDITOR "${pkgs.emacs26System}/bin/emacsclient -n";
           set -x EMAIL "${programs.git.userEmail}";
           set -x GRAPHVIZ_DOT "${pkgs.graphviz}/bin/dot";
           set -x JAVA_OPTS "-Xverify:none";
@@ -174,7 +175,7 @@
         };
         extraConfig = {
           core = {
-            editor = "${pkgs.emacs26}/bin/emacsclient -s /tmp/emacs501/server -c";
+            editor = "${pkgs.emacs26System}/bin/emacsclient -c";
             trustctime = false;
             fsyncobjectfiles = true;
             pager = "${pkgs.less}/bin/less --tabs=4 -RFX";
