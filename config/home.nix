@@ -46,7 +46,8 @@
         GHCPKGVER = "843";
         ALTERNATE_EDITOR = "";
         COLUMNS = "100";
-        EDITOR = "${pkgs.emacs26System}/bin/emacsclient -c";
+        EDITOR = "${pkgs.emacs26System}/bin/emacsclient -ct";
+        VISUAL = "${pkgs.emacs26System}/bin/emacsclient -cn";
         EMAIL = "${programs.git.userEmail}";
         GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
         JAVA_OPTS = "-Xverify:none";
@@ -117,7 +118,9 @@
           set -x GHCPKGVER "843";
           set -x ALTERNATE_EDITOR "";
           set -x COLUMNS "100";
-          set -x EDITOR "${pkgs.emacs26System}/bin/emacsclient -n";
+          set -x EDITOR "${pkgs.emacs26System}/bin/emacsclient -ct";
+          set -x VISUAL "${pkgs.emacs26System}/bin/emacsclient -cn";
+          set -x DVTM_EDITOR vim
           set -x EMAIL "${programs.git.userEmail}";
           set -x GRAPHVIZ_DOT "${pkgs.graphviz}/bin/dot";
           set -x JAVA_OPTS "-Xverify:none";

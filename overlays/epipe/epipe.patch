@@ -1,0 +1,10 @@
+diff --git i/epipe w/epipe
+index 720c6dc..42a6301 100755
+--- i/epipe
++++ w/epipe
+@@ -1,4 +1,4 @@
+-#$!/usr/bin/env bash  -*- mode: sh; -*-
++#!/usr/bin/env bash
+ 
+ tty="/dev/$(ps -o tty= -p $$)"
+ 
