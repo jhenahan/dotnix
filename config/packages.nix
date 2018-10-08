@@ -10,6 +10,8 @@
     alacritty
     coreutils
     moreutils
+    abduco
+    dvtm
     gist
     (exe (haskPkgs.cachix))
     #git-lfs

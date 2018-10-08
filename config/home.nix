@@ -127,6 +127,12 @@
           set -x WORDCHARS "";
           set -x SKIM_DEFAULT_COMMAND 'rg --color=always --line-number "{}"'
           set -x SKIM_DEFAULT_OPTIONS '--ansi --regex'
+          set -x SHELL "${pkgs.fish}/bin/fish"
+          function dvtm_title --on-event fish_prompt
+             set -l host (hostname)
+             set -l dir (string replace $HOME '~' $PWD)
+             echo -ne "\033]0;$USER@$host:$dir\007"
+          end
         '';
       };
       git = {

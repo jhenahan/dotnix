@@ -1,0 +1,24 @@
+diff --git i/dvtm.c w/dvtm.c
+index 2b7ebdc..b51b9bc 100644
+--- i/dvtm.c
++++ w/dvtm.c
+@@ -358,7 +358,8 @@ drawbar(void) {
+ 	(void)y;
+ 	int maxwidth = screen.w - x - 2;
+ 
+-	addch(BAR_BEGIN);
++	const cchar_t w_bar_begin = {A_NORMAL, BAR_BEGIN};
++	add_wch(&w_bar_begin);
+ 	attrset(BAR_ATTR);
+ 
+ 	wchar_t wbuf[sizeof bar.text];
+@@ -380,7 +381,8 @@ drawbar(void) {
+ 	}
+ 
+ 	attrset(TAG_NORMAL);
+-	mvaddch(bar.y, screen.w - 1, BAR_END);
++	const cchar_t w_bar_end = {A_NORMAL, BAR_END};
++	mvadd_wch(bar.y, screen.w - 2, &w_bar_end);
+ 	attrset(NORMAL_ATTR);
+ 	move(sy, sx);
+ 	wnoutrefresh(stdscr);
