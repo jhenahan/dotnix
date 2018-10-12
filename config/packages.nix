@@ -13,6 +13,7 @@
     abduco
     dvtm
     gist
+    opmsg
     (exe (haskPkgs.cachix))
     #git-lfs
     (gitAndTools.git-crypt)
