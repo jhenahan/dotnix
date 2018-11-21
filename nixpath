@@ -1,0 +1,1 @@
+darwin-config=$HOME/src/dotnix/config/darwin.nix:home-manager=$HOME/src/dotnix/home-manager:darwin=$HOME/src/dotnix/darwin:nixpkgs=$HOME/src/dotnix/nixpkgs

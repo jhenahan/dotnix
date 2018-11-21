@@ -53,7 +53,7 @@ pkgs:
       cmake-mode
       #col-highlight
       color-moccur
-      color-theme
+      #color-theme
       command-log-mode
       company
       company-auctex

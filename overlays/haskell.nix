@@ -1,7 +1,9 @@
 self:
   pkgs:
     let
-      srcs = [ "hasktags" ];
+      srcs = [ 
+        "hasktags"
+      ];
       otherHackagePackages = ghc:
         let
           pkg = p:
@@ -24,6 +26,7 @@ self:
               text-show = dontCheck (doJailbreak (super.text-show));
               time-recurrence = doJailbreak (super.time-recurrence);
               html-entities = doJailbreak (addSetupDepends super.html-entities [ super.cabal-doctest ]);
+              rerebase = doJailbreak (addSetupDepends super.rerebase [ super.rebase ]);
               recursors = doJailbreak (addSetupDepends super.recursors [ super.QuickCheck super.hspec super.template-haskell ]);
               ListLike = overrideCabal (super.ListLike) (attrs:
                 {
@@ -32,13 +35,12 @@ self:
                   ];
                 });
               cabal2nix = dontCheck (super.cabal2nix);
-              dhall = dontCheck (super.dhall_1_17_0.overrideAttrs (attrs:
-                {
-                  strictDeps = true;
-                  nativeBuildInputs = [
-                    (pkgs.cacert)
-                  ] ++ attrs.nativeBuildInputs;
-                }));
+              megaparsec = super.megaparsec_7_0_4;
+              hspec-megaparsec = super.hspec-megaparsec_2_0_0;
+              modern-uri = super.modern-uri_0_3_0_1;
+              versions = super.versions_3_5_0;
+              repline = super.repline_0_2_0_0;
+              dhall = super.dhall_1_18_0;
               ghc-exactprint = self.callCabal2nix "ghc-exactprint" (pkgs.fetchFromGitHub {
                 owner = "alanz";
                 repo = "ghc-exactprint";
@@ -80,59 +82,51 @@ self:
                   returnShellEnv = false;
                 } // args)
                 else hpkgs.callCabal2nix hpkgs (builtins.baseNameOf path) path args);
-      myHaskellPackages = ghc:
-        self:
-          super:
-            let
-              fromSrc = arg:
-                let
-                  path = if builtins.isList arg
-                    then builtins.elemAt arg 0
-                    else arg;
-                  args = if builtins.isList arg
-                    then builtins.elemAt arg 1
-                    else {};
-                in {
-                  name = builtins.baseNameOf path;
-                  value = callPackage self ghc (~/src + "/${path}") args;
-                };
-            in builtins.listToAttrs (builtins.map fromSrc srcs);
-      usingWithHoogle = hpkgs:
-        hpkgs // rec {
-          ghc = hpkgs.ghc // {
-            withPackages = hpkgs.ghc.withHoogle;
+      myHaskellPackages = ghc: self: super:
+        let fromSrc = arg:
+          let
+            path = if builtins.isList arg then builtins.elemAt arg 0 else arg;
+            args = if builtins.isList arg then builtins.elemAt arg 1 else {};
+          in {
+            name  = builtins.baseNameOf path;
+            value = callPackage self ghc (~/src + "/${path}") args;
           };
-          ghcWithPackages = ghc.withPackages;
+        in builtins.listToAttrs (builtins.map fromSrc srcs);
+    
+      usingWithHoogle = hpkgs: hpkgs // rec {
+        ghc = hpkgs.ghc // { withPackages = hpkgs.ghc.withHoogle; };
+        ghcWithPackages = ghc.withPackages;
+      };
+        overrideHask = ghc: hpkgs: hoverrides: hpkgs.override {
+          overrides =
+            pkgs.lib.composeExtensions
+              hoverrides
+              (pkgs.lib.composeExtensions
+                 (otherHackagePackages ghc)
+                 (pkgs.lib.composeExtensions
+                    (myHaskellPackages ghc)
+                    (self: super: {
+                       ghc = super.ghc // { withPackages = super.ghc.withHoogle; };
+                       ghcWithPackages = self.ghc.withPackages;
+
+                       developPackage =
+                         { root
+                         , source-overrides ? {}
+                         , overrides ? self: super: {}
+                         , modifier ? drv: drv
+                         , returnShellEnv ? pkgs.lib.inNixShell }:
+                         let drv =
+                           ((pkgs.lib.composeExtensions
+                               (_: _: self)
+                               (pkgs.lib.composeExtensions
+                                  (self.packageSourceOverrides source-overrides)
+                                  overrides)) {} super)
+                           .callCabal2nix (builtins.baseNameOf root) root {};
+                         in if returnShellEnv
+                            then (modifier drv).env
+                            else modifier drv;
+                     })));
         };
-      overrideHask = ghc:
-        hpkgs:
-          hoverrides:
-            hpkgs.override {
-              overrides = pkgs.lib.composeExtensions hoverrides (pkgs.lib.composeExtensions (otherHackagePackages ghc) (pkgs.lib.composeExtensions (myHaskellPackages ghc) (self:
-                super:
-                  {
-                    ghc = super.ghc // {
-                      withPackages = super.ghc.withHoogle;
-                    };
-                    ghcWithPackages = self.ghc.withPackages;
-                    
-                    developPackage = { root
-                                     , source-overrides ? {}
-                                     , overrides ? self:
-                                       super:
-                                         {}
-                                     , modifier ? drv:
-                                       drv
-                                     , returnShellEnv ? pkgs.lib.inNixShell }:
-                      let
-                        drv = ((pkgs.lib.composeExtensions (_:
-                          _:
-                            self) (pkgs.lib.composeExtensions (self.packageSourceOverrides source-overrides) overrides)) {} super).callCabal2nix (builtins.baseNameOf root) root {};
-                      in if returnShellEnv
-                        then modifier drv.env
-                        else modifier drv;
-                  })));
-            };
       breakout = super:
         names:
           builtins.listToAttrs (builtins.map (x:
@@ -169,7 +163,7 @@ self:
           compiler = package.compiler;
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
-            ghc843 = "2.4.0.0";
+            ghc844 = "2.4.0.0";
           };
           hie-nix = import (pkgs.fetchFromGitHub {
             owner = "domenkozar";
@@ -178,7 +172,7 @@ self:
             sha256 = "1bcw59zwf788wg686p3qmcq03fr7bvgbcaa83vq8gvg231bgid4m";
           }) {};
           hie = {
-            ghc843 = hie-nix.hie84;
+            ghc844 = hie-nix.hie84;
           };
         in compiler.withHoogle (p:
           with p;
@@ -191,7 +185,7 @@ self:
           ] ++ packages.haskellBuildInputs);
       haskell = pkgs.haskell // {
         packages = pkgs.haskell.packages // {
-          ghc843 = overrideHask "ghc843" (pkgs.haskell.packages.ghc843) (self:
+          ghc844 = overrideHask "ghc844" (pkgs.haskell.packages.ghc844) (self:
             super:
               breakout super [
                 "compact"
@@ -211,8 +205,8 @@ self:
               }));
         };
       };
-      haskellPackages_8_4 = self.haskell.packages.ghc843;
-      ghcDefaultVersion = "ghc843";
+      haskellPackages_8_4 = self.haskell.packages.ghc844;
+      ghcDefaultVersion = "ghc844";
       haskellPackages = self.haskellPackages_8_4;
       haskPkgs = self.haskellPackages;
       ghc84System = myPkgs: (self.haskellPackages_8_4.ghcWithHoogle (pkgs:

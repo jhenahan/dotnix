@@ -134,7 +134,7 @@ pkgs:
         hlibgit2
         hlint
         hmatrix
-        hnix
+        #hnix
         hslogger
         hspec
         hspec-expectations
@@ -174,6 +174,7 @@ pkgs:
         logict
         machinecell
         machines
+        markov-chain
         megaparsec
         mmorph
         modern-uri

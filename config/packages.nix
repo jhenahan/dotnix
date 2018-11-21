@@ -7,14 +7,15 @@
     nix-scripts
     nix-prefetch-scripts
     home-manager
-    alacritty
+    #alacritty
+    awscli
     coreutils
     moreutils
     abduco
     dvtm
     gist
     opmsg
-    (exe (haskPkgs.cachix))
+    #(exe (haskPkgs.cachix))
     #git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
@@ -77,7 +78,7 @@
     xsv
     xz
     zip
-    (exe (haskPkgs.cabal-install))
+    #(exe (haskPkgs.cabal-install))
     tokei
     cacert
     dnsutils
@@ -93,6 +94,7 @@
     rclone
     rsync
     sipcalc
+    terraform
     w3m
     wget
     youtube-dl
