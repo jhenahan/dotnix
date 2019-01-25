@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
   let
-    home_directory = "/Users/jackhenahan";
+    home_directory = builtins.getEnv "HOME";
     logdir = "${home_directory}/Library/Logs";
     home_dns = import ../private/home/dns.nix;
     work_dns = import ../private/work/dns.nix;
@@ -8,25 +8,25 @@
     system.defaults = import ./darwin/defaults.nix;
     networking = {
       hostName = "noether";
-      dns = [ "127.0.0.1" ];
-      search = [ "local" ] ++ work_dns.domains or [];
+      #dns = [ "127.0.0.1" ];
+      #search = [ "local" ] ++ work_dns.domains or [];
       knownNetworkServices = [
-        "Ethernet"
         "Wi-Fi"
       ];
     };
     launchd.daemons = {
-      pdnsd = {
-        script = ''
-          cp -pL /etc/pdnsd.conf /tmp/.pdnsd.conf
-          chmod 700 /tmp/.pdnsd.conf
-          chown root /tmp/.pdnsd.conf
-          touch /Library/Caches/pdnsd/pdnsd.cache
-          ${pkgs.pdnsd}/sbin/pdnsd -c /tmp/.pdnsd.conf
-        '';
-        serviceConfig.RunAtLoad = true;
-        serviceConfig.KeepAlive = true;
-      };
+      nix-daemon.environment.OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
+      #pdnsd = {
+      #  script = ''
+      #    cp -pL /etc/pdnsd.conf /tmp/.pdnsd.conf
+      #    chmod 700 /tmp/.pdnsd.conf
+      #    chown root /tmp/.pdnsd.conf
+      #    touch /Library/Caches/pdnsd/pdnsd.cache
+      #    ${pkgs.pdnsd}/sbin/pdnsd -c /tmp/.pdnsd.conf
+      #  '';
+      #  serviceConfig.RunAtLoad = true;
+      #  serviceConfig.KeepAlive = true;
+      #};
     };
     launchd.user.agents = {};
     system.activationScripts.postActivation.text = ''
@@ -62,7 +62,13 @@
         "/nix/var/nix/profiles/default"
       ];
       systemPath = [
+        "${home_directory}/bin"
         "${pkgs.Docker}/Applications/Docker.app/Contents/Resources/bin"
+        "/usr/local/bin"
+        "/usr/bin"
+        "/bin"
+        "/usr/sbin"
+        "/sbin"
       ];
       variables = {
         HOME_MANAGER_CONFIG = "${home_directory}/src/dotnix/config/home.nix";
@@ -109,7 +115,7 @@
             timeout      = 10;    # Global timeout option (10 seconds).
             udpbufsize   = 1024;  # Upper limit on the size of UDP messages.
             neg_rrs_pol  = on;
-            par_queries  = 1;
+            par_queries  = 2;
         }
       '' + home_dns.pdnsd_server + work_dns.pdnsd_server + 
       ''
@@ -207,18 +213,14 @@
         "@admin"
         "@wheel"
       ];
-      maxJobs = 32;
+      maxJobs = 10;
       buildCores = 8;
       gc.automatic = true;
       gc.options = "--max-freed \$((25 * 1024**3 - 1024 * \$(df -P -k /nix/store | tail -n 1 | awk '{ print \$4 }')))";
       distributedBuilds = false;
-      binaryCaches = [
-        "https://cache.nixos.org"
-      ];
-      binaryCachePublicKeys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
     };
+    users.nix.configureBuildUsers = true;
+    users.nix.nrBuildUsers = 32;
     programs.bash.enable = true;
     programs.fish = {
       enable = true;
@@ -227,5 +229,5 @@
       vendor.functions.enable = true;
     };
     programs.nix-index.enable = true;
-    system.stateVersion = 2;
+    system.stateVersion = 3;
   }

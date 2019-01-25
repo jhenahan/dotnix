@@ -10,6 +10,7 @@ in
 
   ghc84Env        = pkgs.ghc84Env (myHaskellPackages 8.4);
   ghc84System     = pkgs.ghc84System (myHaskellPackages 8.4);
+  #ghc86System     = pkgs.ghc86System (myHaskellPackages 8.6);
 
   rustSystem      = pkgs.rustChannels.nightly.rust.override myRustConfig;
 

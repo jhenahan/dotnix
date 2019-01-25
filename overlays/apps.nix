@@ -34,33 +34,33 @@ self:
         };
       Anki = self.installApplication rec {
         name = "Anki";
-        version = "2.1.4";
+        version = "2.1.7";
         sourceRoot = "Anki.app";
         src = super.fetchurl {
           url = "https://apps.ankiweb.net/downloads/current/anki-${version}-mac.dmg";
-          sha256 = "0vzq1kzc3z0wi2ii7b0490mllbqg2cwq32mbwh6fw853r6n4531j";
+          sha256 = "0zh7gymlh47lldhkxqpj4bsyzsa66chfzzygvv7kzb4wzay53l8m";
         };
         description = "Anki is a program which makes remembering things easy";
         homepage = "https://apps.ankiweb.net";
       };
       Dash = self.installApplication rec {
         name = "Dash";
-        version = "4.5.2";
+        version = "4.6.0";
         sourceRoot = "Dash.app";
         src = super.fetchurl {
           url = "https://kapeli.com/downloads/v4/Dash.zip";
-          sha256 = "0z8365shmwn26c2fcwv18drmi1i06myj1wspc563kaic7g7z9l4v";
+          sha256 = "0n429q4b8g7fmpx50zkamq19hfd1629jgj055429iw0818891sdg";
         };
         description = "Dash is an API Documentation Browser and Code Snippet Manager";
         homepage = "https://kapeli.com/dash";
       };
       Docker = self.installApplication rec {
         name = "Docker";
-        version = "18.06.1-ce-mac73";
+        version = "2.0.0.2";
         sourceRoot = "Docker.app";
         src = super.fetchurl {
           url = "https://download.docker.com/mac/stable/Docker.dmg";
-          sha256 = "19a7n36nkw20rrklr8qlp76l5xhn037avqfnk81rilghik1yla9l";
+          sha256 = "0km0q18hia8asj7rgg3fsck74fzd6xqbhv3qhfqphdwwvbc0fqx0";
         };
         description = ''
           Docker CE for Mac is an easy-to-install desktop app for building,
@@ -70,12 +70,12 @@ self:
       };
       Firefox = self.installApplication rec {
         name = "Firefox";
-        version = "62.0.2";
+        version = "64.0";
         sourceRoot = "Firefox.app";
         src = super.fetchurl {
           name = "Firefox-${version}.dmg";
           url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/${version}/mac/en-US/Firefox%20${version}.dmg";
-          sha256 = "185nbvnarddq594x1nwac70bg4r116ybw57xvwbmpaidvv54kgyf";
+          sha256 = "0bz9ds4z5if5xqp4vqydkmyrdlryqr3l6sfsvh6fmsxzgz5113p1";
         };
         postInstall = ''
               for file in  \
@@ -119,4 +119,15 @@ self:
         '';
         homepage = "https://www.obdev.at/products/launchbar/index.html";
       };
+      meldx = self.installApplication rec {
+    name = "Meld";
+    version = "3.19.2-r6";
+    sourceRoot = "Meld.app";
+    src = super.fetchurl {
+      url = "https://github.com/yousseb/meld/releases/download/osx-15/meldmerge.dmg";
+      sha256 = "0nq704xzwlzjqifj5yk0svwjcwpdsmi4bd8z024w9zs6hdq9zxw1";
+    };
+    description = "This is a fork of Meld packaged and bundled for OSX.";
+    homepage = "https://yousseb.github.io/meld/";
+  };
     }

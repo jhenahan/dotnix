@@ -91,7 +91,6 @@ pkgs:
         dlist-instances
         dns
         doctest
-        doctest-prop
         either
         errors
         exceptions
@@ -117,7 +116,6 @@ pkgs:
         ghc-paths
         groupoids
         groups
-        hakyll
         hamlet
         happy
         hashable
@@ -293,7 +291,6 @@ pkgs:
         template-haskell
         temporary
         text
-        text-format
         text-metrics
         text-show
         these

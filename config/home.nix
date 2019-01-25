@@ -41,6 +41,7 @@
         FONTCONFIG_FILE = "${xdg.configHome}/fontconfig/fonts.conf";
         PASSWORD_STORE_DIR = "${home_directory}/Documents/.passwords";
         NIX_CONF = "${home_directory}/src/dotnix";
+        OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
         EMACSVER = "26";
         GHCVER = "84";
         GHCPKGVER = "843";
@@ -64,10 +65,7 @@
             source = builtins.toPath "${home_directory}/src/home/${path}";
           };
         }) [
-        "Library/Scripts/Applications/Download links to PDF.scpt"
-        "Library/Scripts/Applications/Media Pro"
-      ]) // {
-        ".docker".source = "${xdg.configHome}/docker";
+      ]) // { ".docker".source = "${xdg.configHome}/docker";
         ".gist".source = "${xdg.configHome}/gist/account_id";
         ".curlrc".text = ''
           capath=${pkgs.cacert}/etc/ssl/certs/
@@ -121,9 +119,9 @@
             function __format_time -d "Format milliseconds to a human readable format"
               set -l milliseconds $argv[1]
               set -l seconds (math "$milliseconds / 1000 % 60")
-              set -l minutes (math "$milliseconds / 60000 % 60")
-              set -l hours (math "$milliseconds / 3600000 % 24")
-              set -l days (math "$milliseconds / 86400000")
+              set -l minutes (math -s0 "$milliseconds / 60000 % 60")
+              set -l hours (math -s0 "$milliseconds / 3600000 % 24")
+              set -l days (math -s0 "$milliseconds / 86400000")
               set -l time
               set -l threshold $argv[2]
             
@@ -212,6 +210,7 @@
           set -x LESSHISTFILE "${xdg.cacheHome}/less/history";
           set -x SCREENRC "${xdg.configHome}/screen/config";
           set -x WWW_HOME "${xdg.cacheHome}/w3m";
+          set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY "YES";
           set -x FONTCONFIG_PATH "${xdg.configHome}/fontconfig";
           set -x FONTCONFIG_FILE "${xdg.configHome}/fontconfig/fonts.conf";
           set -x PASSWORD_STORE_DIR "${home_directory}/Documents/.passwords";
@@ -235,6 +234,7 @@
           set -x SKIM_DEFAULT_COMMAND 'rg --color=always --line-number "{}"'
           set -x SKIM_DEFAULT_OPTIONS '--ansi --regex'
           set -x SHELL "${pkgs.fish}/bin/fish"
+          set -x PATH /Users/JHENAHAN/.nix-profile/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin $PATH
           function dvtm_title --on-event fish_prompt
              set -l host (hostname)
              set -l dir (string replace $HOME '~' $PWD)
@@ -390,7 +390,7 @@
             identityFile = "${xdg.configHome}/ssh/id_local";
             identitiesOnly = true;
           };
-          work = (work_ssh xdg).ssh;
+          #work = (work_ssh xdg).ssh;
         };
       };
     };

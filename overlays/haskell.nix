@@ -12,19 +12,53 @@ self:
           super:
             with pkgs.haskell.lib;
             {
-              base-compat-batteries = doJailbreak (super.base-compat-batteries);
-              diagrams-contrib = doJailbreak (super.diagrams-contrib);
-              diagrams-graphviz = doJailbreak (super.diagrams-graphviz);
-              diagrams-svg = doJailbreak (super.diagrams-svg);
-              generic-lens = dontCheck (super.generic-lens);
-              haddock-library = dontHaddock (super.haddock-library);
-              language-ecmascript = doJailbreak (super.language-ecmascript);
-              liquidhaskell = doJailbreak (super.liquidhaskell);
-              pipes-binary = doJailbreak (super.pipes-binary);
-              pipes-text = doJailbreak (super.pipes-text);
-              pipes-zlib = dontCheck (doJailbreak (super.pipes-zlib));
-              text-show = dontCheck (doJailbreak (super.text-show));
-              time-recurrence = doJailbreak (super.time-recurrence);
+              #base-compat-batteries = dontCheck (doJailbreak (addSetupDepends super.base-compat-batteries [ super.contravariant ]));
+              base-compat-batteries = doJailbreak (overrideCabal (super.base-compat-batteries) (attrs:
+                {
+                  libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
+                    self.contravariant
+                  ];
+                }));
+              Diff = dontCheck (doJailbreak super.Diff);
+              cereal = dontCheck (doJailbreak super.cereal);
+              these = dontCheck (doJailbreak super.these);
+              pandoc = dontCheck (doJailbreak super.pandoc);
+              aeson = doJailbreak (overrideCabal (super.aeson) (attrs:
+                {
+                  libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
+                    self.contravariant
+                  ];
+                }));
+              heap = dontCheck (doJailbreak super.heap);
+              hakyll = doJailbreak (overrideCabal (super.hakyll) (attrs:
+                {
+                  libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
+                    self.pandoc
+                    self.pandoc-citeproc
+                  ];
+                }));
+              servant-docs = dontCheck (doJailbreak super.servant-docs);
+              insert-ordered-containers = dontCheck (doJailbreak super.insert-ordered-containers);
+              stylish-haskell = dontCheck (doJailbreak super.stylish-haskell);
+              lattices = dontCheck (doJailbreak super.lattices);
+              binary-orphans = dontCheck (doJailbreak super.binary-orphans);
+              machinecell = dontCheck (doJailbreak super.machinecell);
+              tdigest = dontCheck (doJailbreak super.tdigest);
+              diagrams-contrib = doJailbreak super.diagrams-contrib;
+              doctest-prop = dontCheck (doJailbreak super.doctest-prop);
+              diagrams-graphviz = doJailbreak super.diagrams-graphviz;
+              diagrams-svg = doJailbreak super.diagrams-svg;
+              generic-lens = overrideCabal (dontCheck (doJailbreak super.generic-lens)) (drv: { patches = []; });
+              haddock-library = dontHaddock super.haddock-library;
+              language-ecmascript = doJailbreak super.language-ecmascript;
+              liquidhaskell = doJailbreak super.liquidhaskell;
+              pipes-async = doJailbreak super.pipes-async;
+              pipes-binary = doJailbreak super.pipes-binary;
+              pipes-text = doJailbreak super.pipes-text;
+              pipes-zlib = dontCheck (doJailbreak super.pipes-zlib);
+              psqueues = dontCheck (doJailbreak super.psqueues);
+              text-show = dontCheck (doJailbreak super.text-show);
+              time-recurrence = doJailbreak super.time-recurrence;
               html-entities = doJailbreak (addSetupDepends super.html-entities [ super.cabal-doctest ]);
               rerebase = doJailbreak (addSetupDepends super.rerebase [ super.rebase ]);
               recursors = doJailbreak (addSetupDepends super.recursors [ super.QuickCheck super.hspec super.template-haskell ]);
@@ -35,30 +69,33 @@ self:
                   ];
                 });
               cabal2nix = dontCheck (super.cabal2nix);
-              megaparsec = super.megaparsec_7_0_4;
-              hspec-megaparsec = super.hspec-megaparsec_2_0_0;
-              modern-uri = super.modern-uri_0_3_0_1;
-              versions = super.versions_3_5_0;
-              repline = super.repline_0_2_0_0;
-              dhall = super.dhall_1_18_0;
+              darcs = doJailbreak super.darcs;
+              graphviz = doJailbreak (dontCheck super.graphviz);
+              #megaparsec = super.megaparsec_7_0_4;
+              #hspec-megaparsec = super.hspec-megaparsec_2_0_0;
+              #modern-uri = super.modern-uri_0_3_0_1;
+              #versions = super.versions_3_5_0;
+              #repline = super.repline_0_2_0_0;
+              #dhall = super.dhall_1_19_1;
               ghc-exactprint = self.callCabal2nix "ghc-exactprint" (pkgs.fetchFromGitHub {
                 owner = "alanz";
                 repo = "ghc-exactprint";
                 rev = "8df39b87ebaeb4248a945e54ae1f0f02c25dd14d";
                 sha256 = "10pzn71nnfrmyywqv50vfak7xgf19c9aqy3i8k92lns5x9ycfqdv";
               }) {};
-              Agda-git = self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
-                owner = "agda";
-                repo = "agda";
-                rev = "3afae4659ea166933af672af8359bdd4d4349d1f";
-                sha256 = "12q467vfnxk0dxpc8bkk31w84kq0alhpczz4ajd2arhrgdv3v1g5";
-              }) {};
-              Agda = dontCheck (doJailbreak (addSetupDepends self.Agda-git [ super.attoparsec super.containers super.convertible super.mtl super.time ]));
+              #Agda-git = self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
+              #  owner = "agda";
+              #  repo = "agda";
+              #  rev = "3afae4659ea166933af672af8359bdd4d4349d1f";
+              #  sha256 = "12q467vfnxk0dxpc8bkk31w84kq0alhpczz4ajd2arhrgdv3v1g5";
+              #}) {};
+              Agda = dontCheck (doJailbreak super.Agda);
+              equivalence = dontCheck super.equivalence;
               brittany = self.callCabal2nix "brittany" (pkgs.fetchFromGitHub {
                 owner = "lspitzner";
                 repo = "brittany";
-                rev = "460bd4dd2b14c11b171de99e61e3d778bb523604";
-                sha256 = "1df1bxbc5gzlb7ifamdng95nrgsz8qlkwswvybcir35mj7cplblw";
+                rev = "621e00bf3f24896d603978c3d4e5fd61dac3841a";
+                sha256 = "1shd30mfncqzdrcnmm5pfvgsivv030s7y9isn3753dclj5jag5aa";
               }) {};
               ghc-datasize = overrideCabal (super.ghc-datasize) (attrs:
                 {
@@ -111,17 +148,18 @@ self:
 
                        developPackage =
                          { root
+                         , name ? builtins.baseNameOf root
                          , source-overrides ? {}
                          , overrides ? self: super: {}
                          , modifier ? drv: drv
                          , returnShellEnv ? pkgs.lib.inNixShell }:
-                         let drv =
-                           ((pkgs.lib.composeExtensions
+                         let hpkgs =
+                           (pkgs.lib.composeExtensions
                                (_: _: self)
                                (pkgs.lib.composeExtensions
                                   (self.packageSourceOverrides source-overrides)
-                                  overrides)) {} super)
-                           .callCabal2nix (builtins.baseNameOf root) root {};
+                                  overrides)) {} super;
+                             drv = hpkgs.callCabal2nix name root {};
                          in if returnShellEnv
                             then (modifier drv).env
                             else modifier drv;
@@ -163,7 +201,7 @@ self:
           compiler = package.compiler;
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
-            ghc844 = "2.4.0.0";
+            ghc844 = "2.4.1.0";
           };
           hie-nix = import (pkgs.fetchFromGitHub {
             owner = "domenkozar";
@@ -179,9 +217,7 @@ self:
           [
             hpack
             criterion
-            hdevtools
             (self.haskell.lib.doJailbreak (callHackage "cabal-install" (cabal.${ghc}) {}))
-            hie.${ghc}
           ] ++ packages.haskellBuildInputs);
       haskell = pkgs.haskell // {
         packages = pkgs.haskell.packages // {
@@ -202,24 +238,31 @@ self:
                       sha256 = "0lyrx4l57v15rvazrmw0nfka9iyxs4wyaasjj9y1525va9s1z4fr";
                     };
                   }));
-              }));
+              })
+           );
         };
       };
       haskellPackages_8_4 = self.haskell.packages.ghc844;
+      haskellPackages_8_6 = self.haskell.packages.ghc863;
       ghcDefaultVersion = "ghc844";
       haskellPackages = self.haskellPackages_8_4;
       haskPkgs = self.haskellPackages;
-      ghc84System = myPkgs: (self.haskellPackages_8_4.ghcWithHoogle (pkgs:
+      ghcSystem = myPkgs: hpkgs: (hpkgs.ghcWithHoogle (pkgs:
         with pkgs;
         myPkgs pkgs ++ [ compact ]));
-      ghc84Env = myPkgs:
+      ghc84System = with self; myPkgs: (ghcSystem myPkgs haskellPackages_8_4);
+      ghc86System = with self; myPkgs: (ghcSystem myPkgs haskellPackages_8_6);
+
+      ghcEnv = myPkgs: hpkgs: envName:
         pkgs.myEnvFun {
-          name = "ghc84";
-          buildInputs = with self.haskellPackages_8_4;
+          name = envName;
+          buildInputs = with hpkgs;
           [
             (ghcWithHoogle (pkgs:
               with pkgs;
               myPkgs pkgs ++ [ compact ]))
           ];
         };
+      ghc84Env = with self; myPkgs: (ghcEnv myPkgs haskellPackages_8_4 "ghc84");
+      ghc86Env = with self; myPkgs: (ghcEnv myPkgs haskellPackages_8_6 "ghc86");
     }

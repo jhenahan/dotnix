@@ -9,12 +9,18 @@
     home-manager
     #alacritty
     awscli
+    awsebcli
     coreutils
     moreutils
     abduco
-    dvtm
+    #dvtm
     gist
     opmsg
+    nodejs
+    nodePackages.npm
+    nodePackages.node2nix
+    powershell
+    mu
     #(exe (haskPkgs.cachix))
     #git-lfs
     (gitAndTools.git-crypt)
@@ -31,7 +37,6 @@
       with ext;
       [ pass-otp pass-update ]))
     ansible
-    ansible-lint
     bat
     browserpass
     curl
@@ -45,6 +50,7 @@
     findutils
     gawk
     ghc84System
+    scala
     gnugrep
     gnupg
     gnused
@@ -65,7 +71,7 @@
     renameutils
     ripgrep
     rlwrap
-    rustSystem
+    #rustSystem
     srm
     stow
     terminal-notifier
@@ -74,12 +80,12 @@
     tree
     unrar
     unzip
-    xquartz
+    #xquartz
     xsv
     xz
     zip
     #(exe (haskPkgs.cabal-install))
-    tokei
+    #tokei
     cacert
     dnsutils
     httpie
@@ -104,13 +110,13 @@
     ffmpeg
     figlet
     fontconfig
-    graphviz-nox
+    graphviz
     groff
     highlight
     hugo
     librsvg
     #(exe (haskPkgs.pandoc))
-    pdf-tools-server
+    #pdf-tools-server
     plantuml
     poppler_utils
     qpdf
@@ -129,5 +135,7 @@
     Dash
     Docker
     Firefox
+    valgrind
+    meldx
     #LaunchBar # TODO: Figure out how to get past EULA
   ]

@@ -75,10 +75,10 @@ self:
             });
             org-plus-contrib = self.elpaBuild rec {
               pname = "org-plus-contrib";
-              version = "20180924";
+              version = "20181230";
               src = fetchurl {
                 url = "https://orgmode.org/elpa/org-plus-contrib-${version}.tar";
-                sha256 = "1n76ymkkbrzdl5zc8g7zjc2vqw1640v2608is56pxqsbs4wcb5dh";
+                sha256 = "0gibwcjlardjwq19bh0zzszv0dxxlml0rh5iikkcdynbgndk1aa1";
               };
               meta = {
                 homepage = "https://elpa.gnu.org/packages/org.html";
