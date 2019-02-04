@@ -2,6 +2,15 @@ pkgs:
   epkgs:
     with epkgs;
     [
+      prescient
+      ivy-prescient
+      company-prescient
+      blackout
+      geiser
+      swift-mode
+      esup
+      terraform-mode
+      osx-trash
       a
       ace-jump-buffer
       ace-jump-mode
@@ -20,7 +29,6 @@ pkgs:
       #ascii
       #asoc
       async
-      auctex
       auctex
       auctex-latexmk
       auto-compile
@@ -270,6 +278,7 @@ pkgs:
       #message-x
       mic-paren
       minimap
+      modalka
       mmm-mode
       #moccur-edit
       mode-line-bell
