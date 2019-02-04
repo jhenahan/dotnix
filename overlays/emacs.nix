@@ -46,6 +46,16 @@ self:
                 };
               };
           in {
+            blackout = compileEmacsFiles {
+              name = "blackout";
+              src = fetchFromGitHub {
+                owner = "raxod502";
+                repo = "blackout";
+                rev = "87822abd1ed46411368ef91752a7f51c0ef2aee0";
+                sha256 = "0n0889vsm3lzswkcdgdykgv3vz4pb9s88wwkinc5bn70vc187byp";
+                # date = 2018-12-14T19:32:49-08:00;
+              };
+            };
             magithub = addBuildInputs (super.magithub) [
               (pkgs.git)
             ];
