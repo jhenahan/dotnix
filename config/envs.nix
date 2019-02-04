@@ -12,7 +12,7 @@ in
   ghc84System     = pkgs.ghc84System (myHaskellPackages 8.4);
   #ghc86System     = pkgs.ghc86System (myHaskellPackages 8.6);
 
-  rustSystem      = pkgs.rustChannels.nightly.rust.override myRustConfig;
+  rustSystem      = (pkgs.rustChannelOf { date = "2019-01-26"; channel = "nightly"; }).rust.override myRustConfig;
 
   allEnvs = with self; [
     emacs26Env

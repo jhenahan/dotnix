@@ -7,6 +7,7 @@
     nix-scripts
     nix-prefetch-scripts
     home-manager
+    gnuapl
     #alacritty
     awscli
     awsebcli
@@ -19,6 +20,7 @@
     nodejs
     nodePackages.npm
     nodePackages.node2nix
+    nodePackages.tern
     powershell
     mu
     #(exe (haskPkgs.cachix))
@@ -71,7 +73,8 @@
     renameutils
     ripgrep
     rlwrap
-    #rustSystem
+    rustSystem
+    rustracer
     srm
     stow
     terminal-notifier
@@ -116,7 +119,7 @@
     hugo
     librsvg
     #(exe (haskPkgs.pandoc))
-    #pdf-tools-server
+    pdf-tools-server
     plantuml
     poppler_utils
     qpdf
@@ -127,15 +130,15 @@
     svg2tikz
     texFull
     xdg_utils
-    python27
-    (python27Packages.setuptools)
-    (python27Packages.pygments)
     python3
+    python3Packages.setuptools
+    python3Packages.pygments
+    python-language-server
+    solargraph
     Anki
     Dash
     Docker
     Firefox
     valgrind
-    meldx
     #LaunchBar # TODO: Figure out how to get past EULA
   ]
