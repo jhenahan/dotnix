@@ -4,13 +4,14 @@ self:
       pdf-tools-server = with self;
       super.stdenv.mkDerivation rec {
         pname = "emacs-pdf-tools-server";
-        version = "20180428.1527";
+        version = "0.80";
         name = "${pname}-${version}";
         src = super.fetchFromGitHub {
           owner = "politza";
           repo = "pdf-tools";
-          rev = "8aa7aecf19090692d910036f256f67c1b8968a75";
-          sha256 = "0mhby1sjnw0vvwl1yjfqmhwk9nxv1chl3qxrvkd7n51d03bfrr3j";
+          rev = "a4cd69ea1d50b8e74ea515eec95948ad87c6c732";
+          sha256 = "0m9hwihj2n8vv7hmcg6ax5sjxlmsb7wgsd6wqkp01x1xb5qjqhpm";
+          # date = 2018-12-21T20:13:05+01:00;
         };
         buildInputs = [
           clang
