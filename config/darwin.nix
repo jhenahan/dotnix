@@ -196,7 +196,7 @@
     services.nix-daemon.enable = true;
     services.activate-system.enable = true;
     services.emacs = {
-      enable = true;
+      enable = false;
       package = pkgs.emacs26System;
     };
     nix = {
