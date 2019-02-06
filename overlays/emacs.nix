@@ -62,6 +62,9 @@ self:
             magit-filenotify = addBuildInputs (super.magit-filenotify) [
               (pkgs.git)
             ];
+            magit-gh-pulls = addBuildInputs (super.magit-gh-pulls) [
+              (pkgs.git)
+            ];
             magit-lfs = addBuildInputs (super.magit-lfs) [
               (pkgs.git)
             ];

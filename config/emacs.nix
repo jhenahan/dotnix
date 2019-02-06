@@ -155,6 +155,7 @@ pkgs:
       #fetchmail-mode
       filladapt
       flx
+      flymake-shellcheck
       flycheck
       flycheck-haskell
       flycheck-hdevtools
@@ -256,6 +257,7 @@ pkgs:
       m-buffer
       macrostep
       magit
+      magit-gh-pulls
       magit-annex
       magit-filenotify
       magit-gitflow

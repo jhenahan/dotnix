@@ -8,6 +8,7 @@
     nix-prefetch-scripts
     home-manager
     gnuapl
+    thefuck
     #alacritty
     awscli
     awsebcli
