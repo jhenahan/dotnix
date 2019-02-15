@@ -8,7 +8,9 @@
     nix-prefetch-scripts
     home-manager
     gnuapl
+    mpv
     thefuck
+    emms-print-metadata
     #alacritty
     awscli
     awsebcli

@@ -134,8 +134,10 @@ pkgs:
       ensime
       epc
       epl
-      #erc-highlight-nicknames
-      #erc-yank
+      erc-hl-nicks
+      erc-image
+      erc-scrolltoplace
+      erc-terminal-notifier
       erefactor
       eshell-autojump
       eshell-bookmark
@@ -171,6 +173,7 @@ pkgs:
       ghub
       ghub-plus
       ghub-plus
+      gist
       git
       git-annex
       git-gutter
