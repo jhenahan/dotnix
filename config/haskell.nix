@@ -18,6 +18,16 @@ pkgs:
         abstract-deque
         abstract-par
         acid-state
+        amazonka
+        amazonka-ec2
+        amazonka-s3
+        amazonka-cloudwatch
+        amazonka-lambda
+        amazonka-iam
+        amazonka-iam-policy
+        amazonka-route53
+        amazonka-route53-autonaming
+        amazonka-route53-domains
         adjunctions
         aeson
         aeson-pretty
@@ -211,7 +221,6 @@ pkgs:
         pipes-bytestring
         pipes-concurrency
         pipes-extras
-        pipes-files
         pipes-group
         pipes-http
         pipes-network
@@ -221,6 +230,7 @@ pkgs:
         pipes-zlib
         pointed
         pointfree
+        pointful
         posix-paths
         pretty-show
         pretty-simple
@@ -269,7 +279,7 @@ pkgs:
         spoon
         stm
         stm-chans
-        stm-stats
+        #stm-stats
         strict
         stringsearch
         strptime
