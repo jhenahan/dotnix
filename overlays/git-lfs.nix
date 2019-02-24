@@ -13,6 +13,9 @@ self:
           "unpackPhase"
           "installPhase"
         ];
+        unpackPhase = ''
+          tar xvzf ${src}
+        '';
         installPhase = ''
           mkdir -p $out/bin
           cp -p git-lfs $out/bin
