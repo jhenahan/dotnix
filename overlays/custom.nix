@@ -3,7 +3,10 @@ self:
 {
   duma = super.callPackage ../packages/duma {};
   opmsg = super.callPackage ../packages/opmsg {};
-  valgrind-light = null;
+  #valgrind-light = null;
+  xapian = super.xapian.overrideAttrs (attrs: {
+    doCheck = false;
+  });
   tokei = super.tokei.overrideAttrs (attrs: {
     buildInputs = attrs.buildInputs or [] ++ super.stdenv.lib.optional super.stdenv.isDarwin super.darwin.apple_sdk.frameworks.Security;
   });

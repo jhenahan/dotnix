@@ -445,7 +445,6 @@ pkgs:
       visual-regexp-steroids
       vlf
       #vline
-      w3m
       web
       web-beautify
       web-mode
