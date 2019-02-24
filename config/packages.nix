@@ -11,13 +11,13 @@
     mpv
     thefuck
     emms-print-metadata
-    #alacritty
+    mb2md
+    isync
     awscli
     awsebcli
     coreutils
     moreutils
     abduco
-    #dvtm
     gist
     opmsg
     nodejs
@@ -26,8 +26,9 @@
     nodePackages.tern
     powershell
     mu
-    #(exe (haskPkgs.cachix))
-    #git-lfs
+    msmtp
+    #cachix
+    git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
     (gitAndTools.gitFull)
@@ -54,7 +55,7 @@
     fd
     findutils
     gawk
-    ghc84System
+    ghc86System
     scala
     gnugrep
     gnupg
@@ -90,8 +91,7 @@
     xsv
     xz
     zip
-    #(exe (haskPkgs.cabal-install))
-    #tokei
+    tokei
     cacert
     dnsutils
     httpie
@@ -121,7 +121,7 @@
     highlight
     hugo
     librsvg
-    #(exe (haskPkgs.pandoc))
+    pandoc
     pdf-tools-server
     plantuml
     poppler_utils
