@@ -3,6 +3,7 @@
     home_directory = builtins.getEnv "HOME";
     ca-bundle_crt = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     work_ssh = import ../private/work/ssh.nix;
+    gh_oauth = (import ../private/vars.nix).oauth_token;
     lib = pkgs.stdenv.lib;
   in rec {
     manual.manpages.enable = false;
@@ -39,7 +40,7 @@
         WWW_HOME = "${xdg.cacheHome}/w3m";
         FONTCONFIG_PATH = "${xdg.configHome}/fontconfig";
         FONTCONFIG_FILE = "${xdg.configHome}/fontconfig/fonts.conf";
-        PASSWORD_STORE_DIR = "${home_directory}/Documents/.passwords";
+        PASSWORD_STORE_DIR = "${home_directory}/Dropbox/.passwords";
         NIX_CONF = "${home_directory}/src/dotnix";
         OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
         EMACSVER = "26";
@@ -213,7 +214,7 @@
           set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY "YES";
           set -x FONTCONFIG_PATH "${xdg.configHome}/fontconfig";
           set -x FONTCONFIG_FILE "${xdg.configHome}/fontconfig/fonts.conf";
-          set -x PASSWORD_STORE_DIR "${home_directory}/Documents/.passwords";
+          set -x PASSWORD_STORE_DIR "${home_directory}/Dropbox/.passwords";
           set -x NIX_CONF "${home_directory}/src/dotnix";
           set -x EMACSVER "26";
           set -x GHCVER "84";
@@ -292,6 +293,7 @@
           branch.autosetupmerge = true;
           commit.gpgsign = true;
           github.user = "jhenahan";
+          github.oauth-token = gh_oauth;
           credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
           ghi.token = "!${pkgs.pass}/bin/pass api.github.com | head -1";
           hub.protocol = "${pkgs.openssh}/bin/ssh";
