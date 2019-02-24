@@ -102,6 +102,26 @@
       extraOutputsToInstall = [
         "man"
       ];
+      etc."offlineimap.py".source = ../files/offlineimap.py;
+      etc."msmtprc".text = ''
+        defaults
+        auth           on
+        tls            on
+        tls_trust_file ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+        port           587
+
+        account        iCloud
+        host           smtp.mail.me.com
+        from           jhenahan@me.com
+        user           jhenahan
+        passwordeval   "pass jhenahan@me.com"
+
+        account        Outlook
+        host           smtp.office365.com
+        from           jack.henahan@coxautoinc.com
+        user           jack.henahan@coxautoinc.com
+        passwordeval   "pass jack.henahan@coxautoinc.com"
+      '';
       etc."ads.pdnsd".source = ../files/ads.pdnsd;
       etc."pdnsd.conf".text = ''
         global {
@@ -198,6 +218,56 @@
     services.emacs = {
       enable = false;
       package = pkgs.emacs26System;
+    };
+    
+    services.offlineimap = {
+      enable = true;
+      path = [ pkgs.pass pkgs.mu pkgs.bash pkgs.python ];
+      startInterval = 60;
+      extraConfig = ''
+        [general]
+        pythonfile = /etc/offlineimap.py
+        accounts = iCloud, Outlook
+        maxsyncaccounts = 2
+    
+        [Account iCloud]
+        localrepository = LocaliCloud
+        remoterepository = RemoteiCloud
+    
+        [Account Outlook]
+        localrepository = LocalOutlook
+        remoterepository = RemoteOutlook
+    
+        [Repository LocaliCloud]
+        type = Maildir
+        sep = /
+        localfolders = ~/Mail/Personal
+    
+        [Repository LocalOutlook]
+        type = Maildir
+        sep = /
+        localfolders = ~/Mail/Work
+    
+        [Repository RemoteiCloud]
+        type = IMAP
+        ssl = yes
+        sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+        remotehost = imap.mail.me.com
+        remoteuser = jhenahan
+        remotepasseval = get_passwordstore(item='jhenahan@me.com')
+        create_folders = True
+        folderfilter = lambda folder: folder in [ 'Sent Messages', 'INBOX', 'Archive', 'Deleted Messages', 'Drafts', 'haskell-cafe-archive' ]
+
+        [Repository RemoteOutlook]
+        type = IMAP
+        ssl = yes
+        sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+        remotehost = outlook.office365.com
+        remoteuser = jack.henahan@coxautoinc.com
+        remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
+        create_folders = False
+        folderfilter = lambda folder: folder in [ 'INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Archive' ]
+      '';
     };
     nix = {
       package = pkgs.nixStable;
