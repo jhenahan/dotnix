@@ -11,6 +11,8 @@ pkgs:
       esup
       terraform-mode
       osx-trash
+      md4rd
+      objed
       a
       ace-jump-buffer
       ace-jump-mode
@@ -231,6 +233,7 @@ pkgs:
       ivy-hydra
       ivy-pass
       ivy-rich
+      ivy-explorer
       ix
       jinja2-mode
       jq-mode
@@ -350,6 +353,7 @@ pkgs:
       pass
       password-store
       password-store-otp
+      auth-source-pass
       pcre2el
       pdf-tools
       #per-window-point
@@ -460,6 +464,9 @@ pkgs:
       xml-rpc
       #xray
       yaml-mode
+      mu4e-alert
+      mu4e-conversation
+      slack
       #yaoddmuse
       #yari-with-buttons
       yasnippet
@@ -467,5 +474,7 @@ pkgs:
       zoom
       zoutline
       ztree
+      typit
       zzz-to-char
+      zygospore
     ]

@@ -56,6 +56,15 @@ self:
                 # date = 2018-12-14T19:32:49-08:00;
               };
             };
+            mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
+            lua-mode = super.lua-mode.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "immerrr";
+                repo = "lua-mode";
+                rev = "95c64bb5634035630e8c59d10d4a1d1003265743";
+                sha256 = "0cawb544qylifkvqads307n0nfqg7lvyphqbpbzr2xvr5iyi4901";
+              };
+            });
             magithub = addBuildInputs (super.magithub) [
               (pkgs.git)
             ];
