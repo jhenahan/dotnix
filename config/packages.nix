@@ -12,6 +12,8 @@
     thefuck
     emms-print-metadata
     mb2md
+    packer
+    imapfilter
     isync
     awscli
     awsebcli

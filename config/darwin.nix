@@ -28,7 +28,7 @@
       #  serviceConfig.KeepAlive = true;
       #};
     };
-    launchd.user.agents = {};
+    launchd.user.agents = { };
     system.activationScripts.postActivation.text = ''
       chflags nohidden ${home_directory}/Library
       sudo launchctl load -w \
@@ -102,6 +102,8 @@
       extraOutputsToInstall = [
         "man"
       ];
+      etc."imapfilter.lua".source = ../files/config.lua;
+      etc."configrules.lua".source = ../files/configrules.lua;
       etc."offlineimap.py".source = ../files/offlineimap.py;
       etc."msmtprc".text = ''
         defaults
@@ -231,10 +233,12 @@
         maxsyncaccounts = 2
     
         [Account iCloud]
+        presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
         localrepository = LocaliCloud
         remoterepository = RemoteiCloud
     
         [Account Outlook]
+        presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
         localrepository = LocalOutlook
         remoterepository = RemoteOutlook
     

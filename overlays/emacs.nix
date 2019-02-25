@@ -57,6 +57,14 @@ self:
               };
             };
             mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
+            auth-source-pass = super.auth-source-pass.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "DamienCassou";
+                repo = "auth-password-store";
+                rev = "8b0c7f0b12f73da9ad002569bac700ebd58e90c2";
+                sha256 = "0pf8rzlj960qx5l3dmm5qws51mkiqz18a5ay7s03f8bvfrx69qjs";
+              };
+            });
             lua-mode = super.lua-mode.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "immerrr";
