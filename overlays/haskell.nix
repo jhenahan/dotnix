@@ -1,7 +1,7 @@
 self:
   pkgs:
     let
-      srcs = [ 
+      srcs = [
         "hasktags"
         "pipes-async"
       ];
@@ -151,7 +151,7 @@ self:
             value = callPackage self ghc (~/src + "/${path}") args;
           };
         in builtins.listToAttrs (builtins.map fromSrc srcs);
-    
+
       usingWithHoogle = hpkgs: hpkgs // rec {
         ghc = hpkgs.ghc // { withPackages = hpkgs.ghc.withHoogle; };
         ghcWithPackages = ghc.withPackages;

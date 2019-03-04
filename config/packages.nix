@@ -10,6 +10,7 @@
     gnuapl
     mpv
     thefuck
+    haskell-ide-engine
     emms-print-metadata
     mb2md
     packer

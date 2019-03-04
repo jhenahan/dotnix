@@ -42,6 +42,7 @@ pkgs:
       backup-each-save
       backup-walker
       beacon
+      doom-modeline
       biblio
       bm
       #bookmark-plus
@@ -242,6 +243,7 @@ pkgs:
       json-mode
       json-reformat
       json-snatcher
+      keycast
       key-chord
       know-your-http-well
       kv
@@ -287,6 +289,7 @@ pkgs:
       mic-paren
       minimap
       modalka
+      moody
       mmm-mode
       #moccur-edit
       mode-line-bell
@@ -340,6 +343,7 @@ pkgs:
       #ox-extra
       ox-hugo
       ox-pandoc
+      ox-reveal
       #ox-texinfo-plus
       package-lint
       packed

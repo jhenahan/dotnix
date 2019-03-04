@@ -65,6 +65,14 @@ self:
                 sha256 = "0pf8rzlj960qx5l3dmm5qws51mkiqz18a5ay7s03f8bvfrx69qjs";
               };
             });
+            objed = super.objed.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "clemera";
+                repo = "objed";
+                rev = "50769c9b42e03174ca0aa632bd778047b2197d14";
+                sha256 = "0db7is3zfr33zi5a1z4zf0h3nqbfybgvp1dkkb01zrh6gi4rf9if";
+              };
+            });
             lua-mode = super.lua-mode.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "immerrr";
