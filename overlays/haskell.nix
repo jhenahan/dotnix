@@ -30,6 +30,29 @@ self:
                 sha256 = "0d1mwy6gyfir29svhkkdazabmcjscs1hr3pvzisr45zk0gwb6jn6";
               }) {});
               equivalence = dontCheck super.equivalence;
+              Chart = doJailbreak (self.callCabal2nixWithOptions "Chart" (pkgs.fetchFromGitHub {
+                owner = "timbod7";
+                repo = "haskell-chart";
+                rev = "23e9739b80ecbb6fe70c4a7989714414f9f915c7";
+                sha256 = "14irxdaa9vykf958izfsjdc2mdzm5fjrwbw7c53nfjm0vfg2qr46";
+              }) ''--subpath chart'' {});
+              Chart-diagrams = doJailbreak (self.callCabal2nixWithOptions "Chart-diagrams" (pkgs.fetchFromGitHub {
+                owner = "timbod7";
+                repo = "haskell-chart";
+                rev = "23e9739b80ecbb6fe70c4a7989714414f9f915c7";
+                sha256 = "14irxdaa9vykf958izfsjdc2mdzm5fjrwbw7c53nfjm0vfg2qr46";
+              }) ''--subpath chart-diagrams'' {});
+              SVGFonts-git = doJailbreak (self.callCabal2nix "SVGFonts" (pkgs.fetchFromGitHub {
+                owner = "diagrams";
+                repo = "SVGFonts";
+                rev = "f1e163e90c57ccce700b1775dad10c982cf3a587";
+                sha256 = "0d0b2djsim4h7r2b58q1rrls1wwvikbmk9b0iqpn3d6plai92mq7";
+              }) {});
+              SVGFonts = overrideCabal self.SVGFonts-git (attrs:
+              {
+                libraryHaskellDepends = attrs.libraryHaskellDepends ++ [ super.tuple ];
+              });
+              diagrams-postscript = doJailbreak super.diagrams-postscript;
               hierarchy = doJailbreak super.hierarchy;
               heap = dontCheck super.heap;
               html-entities = addSetupDepends super.html-entities [ super.cabal-doctest ];

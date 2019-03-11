@@ -12,6 +12,9 @@ pkgs:
         MemoTrie
         MissingH
         MonadPrompt
+        Decimal
+        Chart
+        Chart-diagrams
         #Network-NineP
         QuickCheck
         ShellCheck
@@ -22,6 +25,7 @@ pkgs:
         amazonka-ec2
         amazonka-s3
         amazonka-cloudwatch
+        amazonka-elbv2
         amazonka-lambda
         amazonka-iam
         amazonka-iam-policy
@@ -95,6 +99,7 @@ pkgs:
         derive-storable
         deriving-compat
         dhall
+        diagrams
         directory
         distributive
         dlist
