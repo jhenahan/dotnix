@@ -46,6 +46,14 @@ self:
                 };
               };
           in {
+            ox-reveal = super.ox-reveal.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "yjwen";
+                repo = "org-reveal";
+                rev = "1cdd088ec5fab631c564dca7f9f74fd3e9b7d4d4";
+                sha256 = "1vjxjadq2i74p96y9jxnqj1yb86fsgxzmn7bjgnb88ay6nvc1l72";
+              };
+            });
             blackout = compileEmacsFiles {
               name = "blackout";
               src = fetchFromGitHub {
