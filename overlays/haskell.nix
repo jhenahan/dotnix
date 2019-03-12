@@ -26,8 +26,8 @@ self:
               Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
                 owner = "agda";
                 repo = "agda";
-                rev = "959a42ed812781dd1760c91613fecb2bed4660ef";
-                sha256 = "0d1mwy6gyfir29svhkkdazabmcjscs1hr3pvzisr45zk0gwb6jn6";
+                rev = "6f3046e081ebfa40793c3a064e53bdbd83c82dcf";
+                sha256 = "1pgffhzs3c23cfc4klllyy5z3yjrahgylagw88b32psci050bn4c";
               }) {});
               equivalence = dontCheck super.equivalence;
               Chart = doJailbreak (self.callCabal2nixWithOptions "Chart" (pkgs.fetchFromGitHub {
@@ -246,16 +246,7 @@ self:
           compiler = package.compiler;
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
-            ghc863 = "2.4.1.0";
-          };
-          hie-nix = import (pkgs.fetchFromGitHub {
-            owner = "domenkozar";
-            repo = "hie-nix";
-            rev = "6794005f909600679d0b7894d0e7140985920775";
-            sha256 = "0pc90ns0xcsa6b630d8kkq5zg8yzszbgd7qmnylkqpa0l58zvnpn";
-          }) {};
-          hie = {
-            ghc863 = hie-nix.hie86;
+            ghc864 = "2.4.1.0";
           };
         in compiler.withHoogle (p:
           with p;
@@ -266,11 +257,11 @@ self:
           ] ++ packages.haskellBuildInputs);
       haskell = pkgs.haskell // {
         packages = pkgs.haskell.packages // {
-          ghc863 = overrideHask "ghc863" pkgs.haskell.packages.ghc863 (self: super: {});
+          ghc864 = overrideHask "ghc864" pkgs.haskell.packages.ghc864 (self: super: {});
         };
       };
-      haskellPackages_8_6 = self.haskell.packages.ghc863;
-      ghcDefaultVersion = "ghc863";
+      haskellPackages_8_6 = self.haskell.packages.ghc864;
+      ghcDefaultVersion = "ghc864";
       haskellPackages = self.haskell.packages.${self.ghcDefaultVersion};
       haskPkgs = self.haskellPackages;
       ghcSystem = myPkgs: hpkgs: (hpkgs.ghcWithHoogle (pkgs:
