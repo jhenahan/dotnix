@@ -30,7 +30,7 @@
     powershell
     mu
     msmtp
-    #cachix
+    cachix
     git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
