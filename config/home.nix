@@ -241,6 +241,13 @@
              set -l dir (string replace $HOME '~' $PWD)
              echo -ne "\033]0;$USER@$host:$dir\007"
           end
+          function wtr -a format
+            set -q format[1]; and set -l f "&format=$format[1]"; or set -l f ""
+            curl "https://wttr.in/?m$f"
+          end
+          function cheat -a topic
+            set -q topic[1]; and curl "https://cht.sh/$topic[1]/$argv[2..-1]"
+          end
         '';
       };
       git = {

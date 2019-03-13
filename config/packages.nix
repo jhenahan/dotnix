@@ -11,6 +11,7 @@
     mpv
     thefuck
     haskell-ide-engine
+    tealdeer
     emms-print-metadata
     mb2md
     packer
