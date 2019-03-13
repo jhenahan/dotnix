@@ -2,10 +2,10 @@ self:
   super:
 {
   haskell-ide-engine = (import (super.fetchFromGitHub {
-    owner = "domenkozar";
+    owner = "jhenahan";
     repo = "hie-nix";
-    rev = "6794005f909600679d0b7894d0e7140985920775";
-    sha256 = "0pc90ns0xcsa6b630d8kkq5zg8yzszbgd7qmnylkqpa0l58zvnpn";
+    rev = "f4652dc824b896217f6415b55d2692316469a678";
+    sha256 = "0kflindic0w1ndaph3lrwfgyb0a9fbhpxdvyv6264j28ki86d1c7";
   }) {}).hies;
   duma = super.callPackage ../packages/duma {};
   opmsg = super.callPackage ../packages/opmsg {};
