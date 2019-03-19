@@ -285,6 +285,7 @@ pkgs:
         stm
         stm-chans
         #stm-stats
+        streamly
         strict
         stringsearch
         strptime

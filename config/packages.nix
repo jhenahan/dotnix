@@ -21,6 +21,7 @@
     awsebcli
     coreutils
     moreutils
+    swagger-codegen
     abduco
     gist
     opmsg
