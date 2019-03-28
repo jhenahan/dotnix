@@ -3,7 +3,7 @@ self:
 {
   muHEAD = super.callPackage ../nixpkgs/pkgs/tools/networking/mu {
     texinfo = super.texinfo4;
-    gmime = super.gmime3;
+    gmime = super.gmime3.overrideDerivation (drv: { doCheck = false; });
   };
   mu = self.muHEAD.overrideDerivation (drv: {
     version = "9cf120b";

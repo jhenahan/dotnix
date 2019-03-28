@@ -4,6 +4,8 @@ self:
       srcs = [
         "hasktags"
         "pipes-async"
+        "rebase"
+        "rerebase"
       ];
       otherHackagePackages = ghc:
         let
@@ -15,14 +17,22 @@ self:
           seriouslyWith = p: ps:
             with pkgs.haskell.lib;
             seriously (addSetupDepends p ps);
+          unbreak = p:
+            with pkgs.haskell.lib;
+            overrideCabal p (attrs:
+            {
+              broken = false;
+            });
         in self:
           super:
             with pkgs.haskell.lib;
             {
               #base-compat-batteries = dontCheck (doJailbreak (addSetupDepends super.base-compat-batteries [ super.contravariant ]));
-              async-pool = doJailbreak (super.async-pool);
-              bytestring-show = doJailbreak (super.bytestring-show);
-              compressed = doJailbreak (super.compressed);
+              async-pool = doJailbreak (unbreak super.async-pool);
+              bytestring-show = doJailbreak (unbreak super.bytestring-show);
+              c2hsc = unbreak super.c2hsc;
+              kdt = unbreak super.kdt;
+              compressed = doJailbreak (unbreak super.compressed);
               Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
                 owner = "agda";
                 repo = "agda";
@@ -52,19 +62,23 @@ self:
               {
                 libraryHaskellDepends = attrs.libraryHaskellDepends ++ [ super.tuple ];
               });
+              hfsevents = overrideCabal super.hfsevents (attrs:
+              {
+                platforms = pkgs.stdenv.lib.platforms.darwin;
+              });
               diagrams-postscript = doJailbreak super.diagrams-postscript;
-              hierarchy = doJailbreak super.hierarchy;
-              heap = dontCheck super.heap;
+              hierarchy = doJailbreak (unbreak super.hierarchy);
+              heap = dontCheck (unbreak super.heap);
               html-entities = addSetupDepends super.html-entities [ super.cabal-doctest ];
-              lattices = dontCheck super.lattices;
-              machinecell = doJailbreak super.machinecell;
+              lattices = dontCheck (unbreak super.lattices);
+              machinecell = doJailbreak (unbreak super.machinecell);
               pipes-safe = doJailbreak super.pipes-safe;
-              recursors = seriouslyWith super.recursors [ super.template-haskell ];
+              recursors = seriouslyWith (unbreak super.recursors) [ super.template-haskell ];
               pipes-zlib = dontCheck super.pipes-zlib;
-              pipes-text = doJailbreak super.pipes-text;
-              speculation = doJailbreak super.speculation;
-              time-recurrence = doJailbreak super.time-recurrence;
-              pointful = doJailbreak super.pointful;
+              pipes-text = doJailbreak (unbreak super.pipes-text);
+              speculation = doJailbreak (unbreak super.speculation);
+              time-recurrence = doJailbreak (unbreak super.time-recurrence);
+              pointful = doJailbreak (unbreak super.pointful);
               servant-streaming-server = doJailbreak super.servant-streaming-server;
               #base-compat-batteries = doJailbreak (overrideCabal (super.base-compat-batteries) (attrs:
               #  {

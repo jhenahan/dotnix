@@ -10,6 +10,7 @@ pkgs:
       swift-mode
       esup
       terraform-mode
+      company-terraform
       osx-trash
       md4rd
       objed

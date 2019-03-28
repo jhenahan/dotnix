@@ -9,6 +9,7 @@
     home-manager
     gnuapl
     mpv
+    stoken
     thefuck
     haskell-ide-engine
     tealdeer
@@ -25,8 +26,6 @@
     abduco
     gist
     opmsg
-    nodejs
-    nodePackages.npm
     nodePackages.node2nix
     nodePackages.tern
     powershell
@@ -112,6 +111,9 @@
     rsync
     sipcalc
     terraform
+    terragrunt
+    terraform-landscape
+    terraform-docs
     w3m
     wget
     youtube-dl

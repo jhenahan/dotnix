@@ -92,8 +92,8 @@
           ls = "exa";
           l = "exa";
           ll = "exa -al";
-          ghci = "command ghci -hide-package base -package rerebase";
-          ghc = "command ghc -liconv";
+          #ghci = "command ghci -hide-package base -package rerebase";
+          #ghc = "command ghc -liconv";
         };
         loginShellInit = ''
           set fish_greeting
