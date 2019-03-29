@@ -31,7 +31,7 @@
     powershell
     mu
     msmtp
-    cachix
+    #cachix
     git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
@@ -143,7 +143,7 @@
     python3
     python3Packages.setuptools
     python3Packages.pygments
-    python-language-server
+    #python-language-server
     solargraph
     Anki
     Dash

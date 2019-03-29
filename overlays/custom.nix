@@ -8,7 +8,6 @@ self:
     sha256 = "0kflindic0w1ndaph3lrwfgyb0a9fbhpxdvyv6264j28ki86d1c7";
   }) {}).hies;
   duma = super.callPackage ../packages/duma {};
-  terraform = (super.callPackage ../packages/terraform {}).terraform_0_11;
   opmsg = super.callPackage ../packages/opmsg {};
   #valgrind-light = null;
   terragrunt = super.terragrunt.overrideAttrs (attrs: {

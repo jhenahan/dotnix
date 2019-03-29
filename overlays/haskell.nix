@@ -32,6 +32,10 @@ self:
               bytestring-show = doJailbreak (unbreak super.bytestring-show);
               c2hsc = unbreak super.c2hsc;
               kdt = unbreak super.kdt;
+              patat = addSetupDepend (unbreak super.patat) self.pandoc;
+              pandoc = super.pandoc_2_7_1;
+              req = super.req_2_0_1;
+              retry = super.retry_0_8_0_0;
               compressed = doJailbreak (unbreak super.compressed);
               Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
                 owner = "agda";
