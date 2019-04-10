@@ -302,6 +302,14 @@
       vendor.completions.enable = true;
       vendor.functions.enable = true;
     };
+    programs.tmux = {
+      enable = true;
+      enableMouse = true;
+      enableFzf = true;
+      enableVim = true;
+      enableSensible = true;
+      defaultCommand = "${pkgs.fish}/bin/fish --login";
+    };
     programs.nix-index.enable = true;
     system.stateVersion = 3;
   }

@@ -88,7 +88,8 @@
     stow
     terminal-notifier
     time
-    tmux
+    tmuxinator
+    tmux-cssh
     tree
     unrar
     unzip
