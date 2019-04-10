@@ -12,7 +12,7 @@ self:
         pylint = super.python3Packages.pylint;
         yapf = super.python3Packages.yapf;
       }).overridePythonAttrs (old: rec {
-        version = "0.25.0";
+        version = "0.26.1";
         src = super.fetchFromGitHub {
           owner = "palantir";
           repo = "python-language-server";

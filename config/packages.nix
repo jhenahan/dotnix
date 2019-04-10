@@ -11,6 +11,7 @@
     mpv
     stoken
     thefuck
+    alacritty
     haskell-ide-engine
     tealdeer
     emms-print-metadata

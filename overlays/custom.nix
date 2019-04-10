@@ -4,23 +4,28 @@ self:
   haskell-ide-engine = (import (super.fetchFromGitHub {
     owner = "jhenahan";
     repo = "hie-nix";
-    rev = "f4652dc824b896217f6415b55d2692316469a678";
-    sha256 = "0kflindic0w1ndaph3lrwfgyb0a9fbhpxdvyv6264j28ki86d1c7";
-  }) {}).hies;
+    rev = "4e5ccd6c1ceaeae7f7b3963ff2c29071b8e176e7";
+    sha256 = "0xnvr2d082p0vlzid9kp5plrddf8lv4zndgdhdm2a5jhq0f33fxw";
+  }) {}).hie86;
+  alacritty = super.callPackage ../packages/alacritty {
+    inherit (super.darwin.apple_sdk.frameworks)
+      AppKit CoreFoundation CoreGraphics CoreServices
+      CoreText Foundation OpenGL;
+    inherit (super.darwin) cf-private;
+  };
   duma = super.callPackage ../packages/duma {};
   opmsg = super.callPackage ../packages/opmsg {};
-  #valgrind-light = null;
   terragrunt = super.terragrunt.overrideAttrs (attrs: {
     postInstall = ''
       wrapProgram $bin/bin/terragrunt \
         --set TERRAGRUNT_TFPATH ${super.stdenv.lib.getBin super.terraform}/bin/terraform
     '';
   });
+  tokei = super.tokei.overrideAttrs (attrs: {
+    buildInputs = attrs.buildInputs or [] ++ super.stdenv.lib.optionals super.stdenv.isDarwin [ super.darwin.apple_sdk.frameworks.Security super.libiconv ];
+  });
   xapian = super.xapian.overrideAttrs (attrs: {
     doCheck = false;
-  });
-  tokei = super.tokei.overrideAttrs (attrs: {
-    buildInputs = attrs.buildInputs or [] ++ super.stdenv.lib.optional super.stdenv.isDarwin super.darwin.apple_sdk.frameworks.Security;
   });
   luit = super.luit.overrideAttrs (attrs: {
     #buildInputs = attrs.buildInputs or [] ++ self.libiconv;

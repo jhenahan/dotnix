@@ -1,0 +1,19 @@
+--- a/Lib/distutils/unixccompiler.py	2019-03-25 16:21:05.000000000 -0400
++++ b/Lib/distutils/unixccompiler.py	2019-04-09 07:58:19.000000000 -0400
+@@ -188,15 +188,7 @@
+                         i = 1
+                         while '=' in linker[i]:
+                             i += 1
+-
+-                    if os.path.basename(linker[i]) == 'ld_so_aix':
+-                        # AIX platforms prefix the compiler with the ld_so_aix
+-                        # script, so we need to adjust our linker index
+-                        offset = 1
+-                    else:
+-                        offset = 0
+-
+-                    linker[i+offset] = self.compiler_cxx[i]
++                    linker[i] = self.compiler_cxx[i]
+ 
+                 if sys.platform == 'darwin':
+                     linker = _osx_support.compiler_fixup(linker, ld_args)
