@@ -4,6 +4,13 @@
     logdir = "${home_directory}/Library/Logs";
     home_dns = import ../private/home/dns.nix;
     work_dns = import ../private/work/dns.nix;
+    tmuxPlugins = with pkgs.tmuxPlugins; [
+      logging
+      fpp
+      yank
+      open
+      copycat
+    ];
   in {
     system.defaults = import ./darwin/defaults.nix;
     networking = {
@@ -102,6 +109,7 @@
       extraOutputsToInstall = [
         "man"
       ];
+      etc."tmux-gruvbox-dark.conf".source = ../files/tmux-gruvbox-dark.conf;
       etc."imapfilter.lua".source = ../files/config.lua;
       etc."configrules.lua".source = ../files/configrules.lua;
       etc."offlineimap.py".source = ../files/offlineimap.py;
@@ -309,6 +317,10 @@
       enableVim = true;
       enableSensible = true;
       defaultCommand = "${pkgs.fish}/bin/fish --login";
+      tmuxConfig = ''
+        source-file /etc/tmux-gruvbox-dark.conf
+        ${lib.concatStrings (map (x: "run-shell ${x.rtp}\n") tmuxPlugins)}
+      '';
     };
     programs.nix-index.enable = true;
     system.stateVersion = 3;

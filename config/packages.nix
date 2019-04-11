@@ -12,6 +12,7 @@
     stoken
     thefuck
     alacritty
+    mysql
     haskell-ide-engine
     tealdeer
     emms-print-metadata
