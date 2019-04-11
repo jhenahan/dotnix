@@ -2,10 +2,10 @@ self:
   super:
 {
   haskell-ide-engine = (import (super.fetchFromGitHub {
-    owner = "jhenahan";
+    owner = "domenkozar";
     repo = "hie-nix";
-    rev = "4e5ccd6c1ceaeae7f7b3963ff2c29071b8e176e7";
-    sha256 = "0xnvr2d082p0vlzid9kp5plrddf8lv4zndgdhdm2a5jhq0f33fxw";
+    rev = "922bbc7bf85b3b51df9534d5799e8310cc0387c9";
+    sha256 = "1wf80g1zbgglc3lyqrzfdaqrzhdgmzhgg1p81hd2cpp57gpai9wh";
   }) {}).hie86;
   alacritty = super.callPackage ../packages/alacritty {
     inherit (super.darwin.apple_sdk.frameworks)

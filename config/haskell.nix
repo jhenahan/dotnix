@@ -236,6 +236,7 @@ pkgs:
         pointed
         pointfree
         pointful
+        polysemy
         posix-paths
         pretty-show
         pretty-simple

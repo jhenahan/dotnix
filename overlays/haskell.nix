@@ -6,6 +6,7 @@ self:
         "pipes-async"
         "rebase"
         "rerebase"
+        "polysemy"
       ];
       otherHackagePackages = ghc:
         let
