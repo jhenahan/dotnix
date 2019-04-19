@@ -7,6 +7,7 @@
     nix-scripts
     nix-prefetch-scripts
     home-manager
+    du-dust
     gnuapl
     mpv
     stoken

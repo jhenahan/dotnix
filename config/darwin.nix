@@ -268,7 +268,7 @@
         remoteuser = jhenahan
         remotepasseval = get_passwordstore(item='jhenahan@me.com')
         create_folders = True
-        folderfilter = lambda folder: folder in [ 'Sent Messages', 'INBOX', 'Archive', 'Deleted Messages', 'Drafts', 'haskell-cafe-archive' ]
+        folderfilter = lambda folder: folder in [ 'Sent Messages', 'INBOX', 'Archive', 'Deleted Messages', 'Drafts', 'haskell-cafe-archive', 'Accounts/Github' ]
 
         [Repository RemoteOutlook]
         type = IMAP
