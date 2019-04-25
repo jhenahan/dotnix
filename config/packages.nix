@@ -9,7 +9,10 @@
     home-manager
     du-dust
     gnuapl
+    kotlin
     mpv
+    jre
+    jdk
     stoken
     thefuck
     alacritty
@@ -34,7 +37,7 @@
     powershell
     mu
     msmtp
-    #cachix
+    cachix
     git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
@@ -42,6 +45,7 @@
     (gitAndTools.gitflow)
     (gitAndTools.hub)
     (gitAndTools.tig)
+    (gitAndTools.diff-so-fancy)
     patch
     patchutils
     pijul
@@ -95,7 +99,7 @@
     tree
     unrar
     unzip
-    #xquartz
+    xquartz
     xsv
     xz
     zip

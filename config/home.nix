@@ -293,7 +293,7 @@
             editor = "${pkgs.emacs26System}/bin/emacsclient -c";
             trustctime = false;
             fsyncobjectfiles = true;
-            pager = "${pkgs.less}/bin/less --tabs=4 -RFX";
+            pager = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | ${pkgs.less}/bin/less --tabs=4 -RFX";
             logAllRefUpdates = true;
             precomposeunicode = false;
             whitespace = "trailing-space,space-before-tab";
@@ -315,9 +315,22 @@
             sslCAinfo = "${ca-bundle_crt}";
             sslverify = true;
           };
+          "color \"diff-highlight\"" = {
+            oldNormal = "red bold";
+            oldHighlight = "red bold 52";
+            newNormal = "green bold";
+            newHighlight = "green bold 22";
+          };
+          "color \"diff\"" = {
+            meta = "yellow";
+            frag = "magenta bold";
+            commit = "yellow bold";
+            old = "red bold";
+            new = "green bold";
+            whitespace = "red reverse";
+          };
           color = {
             status = "auto";
-            diff = "auto";
             branch = "auto";
             interactive = "auto";
             ui = "auto";
@@ -393,6 +406,7 @@
         forwardAgent = true;
         serverAliveInterval = 60;
         hashKnownHosts = true;
+        compression = true;
         userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
         matchBlocks = {
           default = {
