@@ -7,17 +7,19 @@
     nix-scripts
     nix-prefetch-scripts
     home-manager
+    emacs-all-the-icons-fonts
     du-dust
     gnuapl
     kotlin
     mpv
     jre
     jdk
-    stoken
+    #stoken
     thefuck
     alacritty
     mysql
-    haskell-ide-engine
+    all-hies.latest
+    #haskell-ide-engine
     tealdeer
     emms-print-metadata
     mb2md
@@ -57,7 +59,7 @@
     bat
     browserpass
     curl
-    duma
+    #duma
     skim
     epipe
     emacs26System

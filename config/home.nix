@@ -87,7 +87,7 @@
       fish = {
         enable = true;
         shellAliases = {
-          e = "eval \$VISUAL -n";
+          e = "eval \$VISUAL";
           E = "sudo -e";
           ls = "exa";
           l = "exa";

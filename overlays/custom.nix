@@ -1,18 +1,7 @@
 self:
   super:
 {
-  haskell-ide-engine = (import (super.fetchFromGitHub {
-    owner = "domenkozar";
-    repo = "hie-nix";
-    rev = "922bbc7bf85b3b51df9534d5799e8310cc0387c9";
-    sha256 = "1wf80g1zbgglc3lyqrzfdaqrzhdgmzhgg1p81hd2cpp57gpai9wh";
-  }) {}).hie86;
-  alacritty = super.callPackage ../packages/alacritty {
-    inherit (super.darwin.apple_sdk.frameworks)
-      AppKit CoreFoundation CoreGraphics CoreServices
-      CoreText Foundation OpenGL;
-    inherit (super.darwin) cf-private;
-  };
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   duma = super.callPackage ../packages/duma {};
   opmsg = super.callPackage ../packages/opmsg {};
   terragrunt = super.terragrunt.overrideAttrs (attrs: {

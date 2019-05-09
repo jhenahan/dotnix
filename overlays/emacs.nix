@@ -46,6 +46,22 @@ self:
                 };
               };
           in {
+            lsp-mode = super.lsp-mode.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "emacs-lsp";
+                repo  = "lsp-mode";
+                rev = "1800dac68f2a142ba551aa61037a0e35a85686db";
+                sha256 = "0xzq05wjsqm5zp3b0wy6c3cp7482c41wssqq0vp4mxlhmm5nd8as";
+              };
+            });
+            lsp-ui = super.lsp-ui.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "emacs-lsp";
+                repo  = "lsp-ui";
+                rev = "f2e2f742d0d2cd45def3e28197c84e0e85581e94";
+                sha256 = "0qvqgkh1iakxddy5kpnv9aii75g38wy3nnqhmfa0hcwvncfbimx3";
+              };
+            });
             ox-reveal = super.ox-reveal.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "yjwen";
@@ -65,6 +81,14 @@ self:
               };
             };
             mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
+            org-trello = super.org-trello.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "org-trello";
+                repo = "org-trello";
+                rev = "f02e92f5d7be03289f774875fc4e6877fe7b1aaa";
+                sha256 = "0c0f6wf7d86nq3kwvjr429ddxz3q3aylm2apahw19hxx212vipb3";
+              };
+            });
             auth-source-pass = super.auth-source-pass.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "DamienCassou";

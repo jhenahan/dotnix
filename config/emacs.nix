@@ -44,6 +44,7 @@ pkgs:
       backup-walker
       beacon
       doom-modeline
+      doom-themes
       biblio
       bm
       #bookmark-plus
@@ -78,6 +79,7 @@ pkgs:
       company-quickhelp
       company-restclient
       company-statistics
+      company-tern
       copy-as-format
       counsel
       counsel-dash
@@ -151,6 +153,15 @@ pkgs:
       eval-expr
       eval-in-repl
       evil
+      evil-collection
+      evil-lion
+      evil-magit
+      evil-surround
+      evil-matchit
+      evil-goggles
+      evil-nerd-commenter
+      evil-lispy
+      org-evil
       exec-path-from-shell
       expand-region
       eyebrowse
@@ -173,6 +184,7 @@ pkgs:
       fringe-helper
       fullframe
       fuzzy
+      general
       ggtags
       ghub
       ghub-plus
@@ -331,6 +343,7 @@ pkgs:
       org-rich-yank
       org-super-agenda
       org-tree-slide
+      org-trello
       org-web-tools
       orgit
       orgnav
@@ -419,6 +432,7 @@ pkgs:
       sort-words
       sos
       spaceline
+      spaceline-all-the-icons
       spinner
       springboard
       sql-indent

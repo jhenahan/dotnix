@@ -13,8 +13,8 @@ pkgs:
         MissingH
         MonadPrompt
         Decimal
-        Chart
-        Chart-diagrams
+        #Chart
+        #Chart-diagrams
         #Network-NineP
         QuickCheck
         ShellCheck
@@ -237,6 +237,7 @@ pkgs:
         pointfree
         pointful
         polysemy
+        polysemy-plugin
         posix-paths
         pretty-show
         pretty-simple
@@ -327,6 +328,7 @@ pkgs:
         uuid
         vector
         void
+        wreq
         xeno
         xml
         xmlbf

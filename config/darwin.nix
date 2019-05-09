@@ -226,7 +226,7 @@
     services.nix-daemon.enable = true;
     services.activate-system.enable = true;
     services.emacs = {
-      enable = true;
+      enable = false;
       package = pkgs.emacs26System;
     };
     
@@ -300,6 +300,9 @@
       gc.automatic = true;
       gc.options = "--max-freed \$((25 * 1024**3 - 1024 * \$(df -P -k /nix/store | tail -n 1 | awk '{ print \$4 }')))";
       distributedBuilds = false;
+      #extraOptions = ''
+      #  auto-optimise-store = true
+      #'';
     };
     users.nix.configureBuildUsers = true;
     users.nix.nrBuildUsers = 32;

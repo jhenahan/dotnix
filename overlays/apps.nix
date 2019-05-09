@@ -70,12 +70,12 @@ self:
       };
       Firefox = self.installApplication rec {
         name = "Firefox";
-        version = "66.0b14";
+        version = "67.0b17";
         sourceRoot = "Firefox.app";
         src = super.fetchurl {
           name = "Firefox-${version}.dmg";
           url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/${version}/mac/en-US/Firefox%20${version}.dmg";
-          sha256 = "1vnx1bzllvf3rr188vsg8hni0631dijp84s2l152rbj3lzlvl3yz";
+          sha256 = "1fj3wy0jfa04g9pl3fpmf5p6nnvyxjbzs5yx8484zw2hmhn1rz8r";
         };
         postInstall = ''
               for file in  \
@@ -90,7 +90,7 @@ self:
           export PATH=${super.gnupg}/bin:${super.pass}/bin:$PATH
           export PASSWORD_STORE_ENABLE_EXTENSIONS="true"
           export PASSWORD_STORE_EXTENSIONS_DIR="/run/current-system/sw/lib/password-store/extensions";
-          export PASSWORD_STORE_DIR="$HOME/Documents/.passwords";
+          export PASSWORD_STORE_DIR="$HOME/Dropbox/.passwords";
           export GNUPGHOME="$HOME/.config/gnupg"
           export GPG_TTY=$(tty)
           if ! pgrep -x "gpg-agent" > /dev/null; then
@@ -119,15 +119,4 @@ self:
         '';
         homepage = "https://www.obdev.at/products/launchbar/index.html";
       };
-      meldx = self.installApplication rec {
-    name = "Meld";
-    version = "3.19.2-r6";
-    sourceRoot = "Meld.app";
-    src = super.fetchurl {
-      url = "https://github.com/yousseb/meld/releases/download/osx-15/meldmerge.dmg";
-      sha256 = "0nq704xzwlzjqifj5yk0svwjcwpdsmi4bd8z024w9zs6hdq9zxw1";
-    };
-    description = "This is a fork of Meld packaged and bundled for OSX.";
-    homepage = "https://yousseb.github.io/meld/";
-  };
     }
