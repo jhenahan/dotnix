@@ -3,6 +3,22 @@
   let
     exe = haskell.lib.justStaticExecutables;
   in [
+    (exe haskPkgs.pointful)
+    (exe haskPkgs.pointfree)
+    (exe haskPkgs.darcs)
+    (exe haskPkgs.ShellCheck)
+    (exe haskPkgs.alex)
+    (exe haskPkgs.happy)
+    (exe haskPkgs.cabal-install)
+    (exe haskPkgs.c2hsc)
+    (exe haskPkgs.cabal2nix)
+    (exe haskPkgs.cpphs)
+    (exe haskPkgs.doctest)
+    (exe haskPkgs.ghc-core)
+    (exe haskPkgs.hlint)
+    (exe haskPkgs.hnix)
+    (exe haskPkgs.structured-haskell-mode)
+    (exe haskPkgs.stylish-haskell)
     nixStable
     nix-scripts
     nix-prefetch-scripts
@@ -51,7 +67,6 @@
     patch
     patchutils
     pijul
-    (exe (haskPkgs.darcs))
     (pass.withExtensions (ext:
       with ext;
       [ pass-otp pass-update ]))

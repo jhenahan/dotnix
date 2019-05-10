@@ -3,24 +3,79 @@ pkgs:
     hpkgs:
       with hpkgs;
       [
-        Agda
-        Boolean
-        HTTP
-        HUnit
-        IfElse
-        ListLike
-        MemoTrie
-        MissingH
-        MonadPrompt
-        Decimal
-        #Chart
-        #Chart-diagrams
-        #Network-NineP
+        # kmettiverse
+        adjunctions
+        algebra
+        approximate
+        base-orphans
+        bifunctors
+        bits
+        bound
+        bytes
+        compensated
+        compressed
+        concurrent-supply
+        constraints
+        contravariant
+        discrimination
+        distributive
+        either
+        eq
+        exceptions
+        gc
+        gl
+        heaps
+        hyperloglog
+        hyphenation
+        intern
+        intervals
+        kan-extensions
+        lens
+        lens-action
+        linear
+        machines
+        perhaps
+        pointed
+        profunctors
+        recursion-schemes
+        reducers
+        semigroupoids
+        tagged
+        transformers-compat
+        unpacked-containers
+        vector-instances
+        zippers
+        # end kmett
+        # effects
+        polysemy
+        polysemy-plugin
+        polysemy-zoo
+        # end effects
+        # servant
+        servant
+        servant-client
+        servant-docs
+        servant-foreign
+        servant-server
+        # end servant
+        # testagram
+        checkers
+        hedgehog
+        hspec
+        hspec-expectations
+        hspec-megaparsec
+        hspec-wai
+        lens-properties
         QuickCheck
-        ShellCheck
-        abstract-deque
-        abstract-par
-        acid-state
+        quickcheck-instances
+        tasty
+        tasty-hedgehog
+        tasty-hspec
+        tasty-hunit
+        tasty-quickcheck
+        tasty-th
+        # end test
+        # AWS
         amazonka
         amazonka-ec2
         amazonka-s3
@@ -32,68 +87,54 @@ pkgs:
         amazonka-route53
         amazonka-route53-autonaming
         amazonka-route53-domains
-        adjunctions
+        # end AWS
+        # JSON
         aeson
         aeson-pretty
-        alex
+        lens-aeson
+        # end JSON
+        # lenses
+        lens
+        lens-action
+        lens-datetime
+        lens-family
+        lens-family-core
+        lens-family-th
+        fclabels
+        # end lenses
+        Agda
+        Boolean
+        ListLike
+        Decimal
+        Chart
+        Chart-diagrams
         amqp
-        async
-        async-pool
-        attempt
         attoparsec
         base
         base-unicode-symbols
-        base16-bytestring
-        base64-bytestring
-        basic-prelude
-        bifunctors
         binary
         binary-orphans
         bindings-DSL
-        bool-extras
-        bound
-        byteable
-        byteorder
-        bytes
         bytestring
         bytestring-mmap
         bytestring-show
-        c2hsc
-        cabal-install
-        cabal2nix
         case-insensitive
         cassava
-        categories
         cereal
-        charset
-        checkers
-        chunked-data
-        cmdargs
+        #chronos
+        #co-log
         comonad
-        comonad-transformers
         composition
-        compressed
-        cond
-        configurator
         connection
-        constraints
         containers
-        contravariant
         convertible
-        cpphs
         criterion
-        cryptohash
-        cryptohash-md5
-        cryptohash-sha1
-        cryptohash-sha256
-        cryptohash-sha512
         cryptonite
         css-text
         curl
         data-checked
         data-default
         data-default-class
-        data-fix
         deepseq
         deepseq-generics
         derive-storable
@@ -101,59 +142,30 @@ pkgs:
         dhall
         diagrams
         directory
-        distributive
         dlist
         dlist-instances
         dns
-        doctest
-        either
         errors
-        exceptions
-        extensible-exceptions
-        failure
-        fast-logger
-        fclabels
         fgl
         file-embed
-        filemanip
         filepath
         fingertree
         fmlist
         foldl
-        free
-        free-vl
-        freer-simple
         fsnotify
         generic-lens
         generic-random
         ghc
-        ghc-core
-        ghc-paths
-        groupoids
         groups
-        hamlet
-        happy
         hashable
-        hashing
         hashtables
-        haskell-lexer
         haskell-src
         haskell-src-exts
         haskell-src-meta
         hasktags
-        hedgehog
-        here
         hierarchy
-        hlibgit2
-        hlint
         hmatrix
-        #hnix
         hslogger
-        hspec
-        hspec-expectations
-        hspec-megaparsec
-        hspec-wai
-        html
         http-client
         http-client-tls
         http-date
@@ -162,99 +174,29 @@ pkgs:
         insert-ordered-containers
         interpolate
         io-memoize
-        io-storage
-        io-streams
-        json
-        json-stream
-        kan-extensions
-        kdt
-        keys
         language-c
         lattices
-        lens
-        lens-action
-        lens-aeson
-        lens-datetime
-        lens-family
-        lens-family-core
-        lens-family-th
         lifted-async
         lifted-base
         linear
-        list-extras
-        list-t
-        logging
         logict
-        machinecell
         machines
+        managed
         markov-chain
         megaparsec
         mmorph
         modern-uri
-        monad-control
-        monad-coroutine
-        monad-extras
-        monad-logger
-        monad-loops
-        monad-par
-        monad-par-extras
-        monad-parallel
-        monad-stm
-        monadlist
-        monadloc
-        mono-traversable
-        monoid-extras
-        mtl
-        multimap
-        nats
-        network
-        network-simple
-        newtype
-        numbers
-        operational
         optparse-applicative
         optparse-generic
         parallel
         parallel-io
-        parsec
-        parsers
-        pcre-heavy
         pipes
-        pipes-async
-        pipes-attoparsec
-        pipes-binary
-        pipes-bytestring
-        pipes-concurrency
-        pipes-extras
-        pipes-group
-        pipes-http
-        pipes-network
-        pipes-parse
-        pipes-safe
-        pipes-text
-        pipes-zlib
         pointed
-        pointfree
-        pointful
-        polysemy
-        polysemy-plugin
-        posix-paths
-        pretty-show
-        pretty-simple
         prettyprinter
         prettyprinter-ansi-terminal
         primitive
-        process
-        process-extras
-        profunctors
-        quickcheck-instances
-        random
+        typed-process
         random-fu
-        random-source
-        recursion-schemes
-        recursors
-        reducers
-        reflection
         regex-applicative
         regex-base
         regex-compat
@@ -263,68 +205,31 @@ pkgs:
         repline
         req
         rerebase
-        resourcet
         retry
         safe
-        safecopy
         scientific
-        semigroupoids
-        semigroups
-        semiring-simple
-        serialise
-        servant
-        servant-client
-        servant-docs
-        servant-foreign
-        servant-server
         shake
-        shakespeare
-        silently
-        simple-reflect
-        speculation
         split
-        spoon
         stm
         stm-chans
-        #stm-stats
         streamly
-        strict
-        stringsearch
-        strptime
-        structured-haskell-mode
-        stylish-haskell
-        styx
-        syb
-        system-fileio
-        system-filepath
-        tagged
         tar
         tardis
-        tasty
-        tasty-hedgehog
-        tasty-hspec
-        tasty-hunit
-        tasty-quickcheck
-        tasty-th
         template-haskell
         temporary
         text
         text-metrics
         text-show
+        text-show-instances
         these
-        thyme
-        time
-        time-recurrence
-        #timeparsers
-        tls
         total
         transformers
         transformers-base
         turtle
+        unagi-chan
         uniplate
         unix-compat
         unordered-containers
-        unpacked-containers
         uuid
         vector
         void
@@ -334,6 +239,5 @@ pkgs:
         xmlbf
         xmlbf-xeno
         yaml
-        zippers
         zlib
       ]
