@@ -2,11 +2,6 @@ self:
   pkgs:
     let
       srcs = [
-        #"hasktags"
-        #"pipes-async"
-        #"rebase"
-        #"rerebase"
-        #"polysemy"
       ];
       otherHackagePackages = ghc:
         let
@@ -34,78 +29,28 @@ self:
               Chart = unbreak super.Chart;
               Chart-diagrams = unbreak super.Chart-diagrams;
               algebra = bigBreak super.algebra;
-              #algebra = unbreak (super.algebra.overrideScope (self: super: { containers = self.containers_0_4_2_1; }));
+              ansi-terminal = super.ansi-terminal_0_9;
               bytestring-show = bigBreak super.bytestring-show;
               c2hsc = unbreak super.c2hsc;
+              co-log = super.co-log_0_3_0_0;
+              co-log-core = super.co-log-core_0_2_0_0;
+              co-log-polysemy = unbreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
+              dhall = dontCheck super.dhall_1_22_0;
               haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
               lattices = unbreak super.lattices;
-              #nat-sized-numbers = dontCheck (unbreak super.nat-sized-numbers);
               perhaps = bigBreak super.perhaps;
               pointful = bigBreak super.pointful;
-              #semiring-num = bigBreak super.semiring-num;
-              #total-map = unbreak super.total-map;
-              #base-compat-batteries = dontCheck (doJailbreak (addSetupDepends super.base-compat-batteries [ super.contravariant ]));
-              #polysemy-plugin = super.callHackage "polysemy-plugin" "0.1.0.0" {};
-              #async-pool = bigBreak super.async-pool;
-              #bytestring-show = bigBreak super.bytestring-show;
-              #c2hsc = unbreak super.c2hsc;
-              #compressed = bigBreak super.compressed;
-              #hierarchy = bigBreak super.hierarchy;
-              #kdt = unbreak super.kdt;
-              #haskell-src-exts-simple = unbreak super.haskell-src-exts-simple;
-              #haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
-              #pointful = bigBreak super.pointful;
-              #heap = dontCheck (bigBreak super.heap); # https://github.com/pruvisto/heap/issues/11
-              #lattices = unbreak super.lattices;
-              #machinecell = bigBreak super.machinecell;
-              #pipes-text = bigBreak super.pipes-text;
-              #pipes-zlib = dontCheck super.pipes-zlib;
-              #pointful = unbreak super.pointful;
-              #recursors = bigBreak super.recursors;
-              #recursors = seriouslyWith (unbreak super.recursors) [ super.template-haskell ];
-              #speculation = unbreak super.speculation;
-              #time-recurrence = unbreak super.time-recurrence;
-              #patat = addSetupDepend (unbreak super.patat) self.pandoc;
-              #pandoc = super.pandoc_2_7_2;
+              servant-auth-server = dontCheck super.servant-auth-server;
+              tls = dontCheck super.tls;
+              typerep-map = super.typerep-map_0_3_2;
               #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
               #  owner = "agda";
               #  repo = "agda";
               #  rev = "6f3046e081ebfa40793c3a064e53bdbd83c82dcf";
               #  sha256 = "1pgffhzs3c23cfc4klllyy5z3yjrahgylagw88b32psci050bn4c";
               #}) {});
-              #equivalence = dontCheck super.equivalence;
-              #Chart = doJailbreak (self.callCabal2nixWithOptions "Chart" (pkgs.fetchFromGitHub {
-              #  owner = "timbod7";
-              #  repo = "haskell-chart";
-              #  rev = "23e9739b80ecbb6fe70c4a7989714414f9f915c7";
-              #  sha256 = "14irxdaa9vykf958izfsjdc2mdzm5fjrwbw7c53nfjm0vfg2qr46";
-              #}) ''--subpath chart'' {});
-              #Chart-diagrams = doJailbreak (self.callCabal2nixWithOptions "Chart-diagrams" (pkgs.fetchFromGitHub {
-              #  owner = "timbod7";
-              #  repo = "haskell-chart";
-              #  rev = "23e9739b80ecbb6fe70c4a7989714414f9f915c7";
-              #  sha256 = "14irxdaa9vykf958izfsjdc2mdzm5fjrwbw7c53nfjm0vfg2qr46";
-              #}) ''--subpath chart-diagrams'' {});
-              #SVGFonts-git = doJailbreak (self.callCabal2nix "SVGFonts" (pkgs.fetchFromGitHub {
-              #  owner = "diagrams";
-              #  repo = "SVGFonts";
-              #  rev = "f1e163e90c57ccce700b1775dad10c982cf3a587";
-              #  sha256 = "0d0b2djsim4h7r2b58q1rrls1wwvikbmk9b0iqpn3d6plai92mq7";
-              #}) {});
-              #SVGFonts = overrideCabal self.SVGFonts-git (attrs:
-              #{
-              #  libraryHaskellDepends = attrs.libraryHaskellDepends ++ [ super.tuple ];
-              #});
-              #hfsevents = overrideCabal super.hfsevents (attrs:
-              #{
-              #  platforms = pkgs.stdenv.lib.platforms.darwin;
-              #});
-              #diagrams-postscript = doJailbreak super.diagrams-postscript;
-              #html-entities = addSetupDepends super.html-entities [ super.cabal-doctest ];
-              #pipes-text = doJailbreak (unbreak super.pipes-text);
-              #servant-streaming-server = doJailbreak super.servant-streaming-server;
               #base-compat-batteries = doJailbreak (overrideCabal (super.base-compat-batteries) (attrs:
               #  {
               #    libraryHaskellDepends = attrs.libraryHaskellDepends ++ [

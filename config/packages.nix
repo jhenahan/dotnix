@@ -25,15 +25,14 @@
     home-manager
     emacs-all-the-icons-fonts
     du-dust
-    gnuapl
+    #gnuapl
     kotlin
     mpv
     jre
     jdk
-    #stoken
+    stoken
     thefuck
     alacritty
-    mysql
     all-hies.latest
     #haskell-ide-engine
     tealdeer
@@ -55,11 +54,13 @@
     powershell
     mu
     msmtp
+    mysql
     cachix
     git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
     (gitAndTools.gitFull)
+    (gitAndTools.bfg-repo-cleaner)
     (gitAndTools.gitflow)
     (gitAndTools.hub)
     (gitAndTools.tig)
@@ -129,7 +130,7 @@
     lftp
     mitmproxy
     mtr
-    nmap
+    #nmap
     openssh
     pdnsd
     rclone

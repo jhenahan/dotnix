@@ -50,6 +50,7 @@ pkgs:
         polysemy
         polysemy-plugin
         polysemy-zoo
+        co-log-polysemy
         # end effects
         # servant
         servant
@@ -121,8 +122,8 @@ pkgs:
         case-insensitive
         cassava
         cereal
-        #chronos
-        #co-log
+        chronos
+        co-log
         comonad
         composition
         connection
