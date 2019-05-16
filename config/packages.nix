@@ -24,7 +24,9 @@
     nix-prefetch-scripts
     home-manager
     emacs-all-the-icons-fonts
+    exercism
     du-dust
+    procs
     #gnuapl
     kotlin
     mpv
