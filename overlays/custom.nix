@@ -2,6 +2,7 @@ self:
   super:
 {
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  hie865 = self.all-hies.unstableFallback.selection { selector = p: { inherit (p) ghc865; }; };
   duma = super.callPackage ../packages/duma {};
   opmsg = super.callPackage ../packages/opmsg {};
   terragrunt = super.terragrunt.overrideAttrs (attrs: {

@@ -110,6 +110,7 @@
         "man"
       ];
       etc."tmux-gruvbox-dark.conf".source = ../files/tmux-gruvbox-dark.conf;
+      etc."tmux-srcery".source = ../files/srcery-tmux;
       etc."imapfilter.lua".source = ../files/config.lua;
       etc."configrules.lua".source = ../files/configrules.lua;
       etc."offlineimap.py".source = ../files/offlineimap.py;
@@ -321,7 +322,8 @@
       enableSensible = true;
       defaultCommand = "${pkgs.fish}/bin/fish --login";
       tmuxConfig = ''
-        source-file /etc/tmux-gruvbox-dark.conf
+        set -g @srcery_tmux_patched_font '1'
+        run -b /etc/tmux-srcery/srcery.tmux
         ${lib.concatStrings (map (x: "run-shell ${x.rtp}\n") tmuxPlugins)}
       '';
     };

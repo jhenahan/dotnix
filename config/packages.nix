@@ -34,8 +34,9 @@
     jdk
     stoken
     thefuck
+    aria
     alacritty
-    all-hies.latest
+    hie865
     #haskell-ide-engine
     tealdeer
     emms-print-metadata

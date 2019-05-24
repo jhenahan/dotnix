@@ -15,12 +15,11 @@ pkgs:
       md4rd
       objed
       a
-      ace-jump-buffer
-      ace-jump-mode
+      frog-jump-buffer
+      frog-menu
       ace-link
       ace-mc
       ace-window
-      adaptive-wrap
       agda2-mode
       aggressive-indent
       alert
@@ -28,31 +27,17 @@ pkgs:
       anki-editor
       apache-mode
       apiwrap
-      aria2
-      #ascii
-      #asoc
       async
       auctex
       auctex-latexmk
       auto-compile
-      auto-yasnippet
-      autothemer
       avy
-      avy-menu
       avy-zap
-      backup-each-save
-      backup-walker
       beacon
       doom-modeline
       doom-themes
       biblio
       bm
-      #bookmark-plus
-      browse-at-remote
-      browse-kill-ring
-      #browse-kill-ring-plus
-      button-lock
-      #bytecomp-simplify
       calfw
       calfw-cal
       calfw-org
@@ -64,10 +49,6 @@ pkgs:
       clipmon
       cmake-font-lock
       cmake-mode
-      #col-highlight
-      color-moccur
-      #color-theme
-      command-log-mode
       company
       company-auctex
       company-cabal
@@ -87,25 +68,14 @@ pkgs:
       counsel-osx-app
       counsel-projectile
       counsel-tramp
-      #crosshairs
-      crux
       csv-mode
-      ctable
-      #cursor-chg
-      dante
       dash
       dash-at-point
       dashboard
       deadgrep
       debbugs
-      dedicated
-      deferred
-      deft
-      delight
       dhall-mode
-      diff-hl
       diffview
-      diminish
       dired-ranger
       dired-toggle
       direnv
@@ -115,15 +85,8 @@ pkgs:
       docker-compose-mode
       docker-tramp
       dockerfile-mode
-      #doxymacs
-      dumb-jump
-      ebdb
-      #edit-env
       edit-indirect
-      edit-server
-      #edit-var
       editorconfig
-      el-mock
       el-patch
       elfeed
       elfeed-org
@@ -132,14 +95,11 @@ pkgs:
       elisp-refs
       elisp-slime-nav
       elmacro
-      #emacs-load-time
       emms
       emojify
       engine-mode
       enh-ruby-mode
       ensime
-      epc
-      epl
       erc-hl-nicks
       erc-image
       erc-scrolltoplace
@@ -211,7 +171,9 @@ pkgs:
       graphviz-dot-mode
       grapnel
       gruvbox-theme
+      srcery-theme
       haskell-mode
+      hasky-extensions
       helm
       helm-bibtex
       helm-dash
@@ -280,7 +242,6 @@ pkgs:
       magit
       magit-gh-pulls
       magit-annex
-      magit-filenotify
       magit-gitflow
       magit-imerge
       magit-lfs

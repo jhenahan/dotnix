@@ -80,6 +80,16 @@ self:
                 # date = 2018-12-14T19:32:49-08:00;
               };
             };
+            frog-jump-buffer = compileEmacsFiles {
+              name = "frog-jump-buffer";
+              src = fetchFromGitHub {
+                owner = "waymondo";
+                repo = "frog-jump-buffer";
+                rev = "e995fccac1ea34da34477bdcede6f1bfc0ff96f8";
+                sha256 = "1b51ghpfzka905h8ii4sm7h85ncbfblrwir3rbljqpn1827xn4yx";
+              };
+              buildInputs = [ super.avy super.dash super.projectile super.frog-menu super.posframe ];
+            };
             mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
             org-trello = super.org-trello.overrideAttrs (attrs: {
               src = fetchFromGitHub {
@@ -145,10 +155,10 @@ self:
             });
             org-plus-contrib = self.elpaBuild rec {
               pname = "org-plus-contrib";
-              version = "20181230";
+              version = "20190520";
               src = fetchurl {
                 url = "https://orgmode.org/elpa/org-plus-contrib-${version}.tar";
-                sha256 = "0gibwcjlardjwq19bh0zzszv0dxxlml0rh5iikkcdynbgndk1aa1";
+                sha256 = "0kmq5a4xx0hszbi3cc84q1mkv7qgkl9sgyzhchg4iv0vyzp6prqz";
               };
               meta = {
                 homepage = "https://elpa.gnu.org/packages/org.html";
@@ -164,7 +174,7 @@ self:
                 inherit emacs;
                 inherit (super) melpaBuild
                                 elpaBuild;
-                inherit (super.elpaPackages) hyperbole;
+                inherit (super.elpaPackages) hyperbole frog-menu;
               })));
     in {
       emacs = pkgs.emacs26;

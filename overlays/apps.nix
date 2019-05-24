@@ -70,12 +70,12 @@ self:
       };
       Firefox = self.installApplication rec {
         name = "Firefox";
-        version = "67.0b17";
+        version = "67.0b19";
         sourceRoot = "Firefox.app";
         src = super.fetchurl {
           name = "Firefox-${version}.dmg";
           url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/${version}/mac/en-US/Firefox%20${version}.dmg";
-          sha256 = "1fj3wy0jfa04g9pl3fpmf5p6nnvyxjbzs5yx8484zw2hmhn1rz8r";
+          sha256 = "1r3v14xydfl51962xnjnx3hig08f6nh39nl06x0j3qp432m375vx";
         };
         postInstall = ''
               for file in  \
