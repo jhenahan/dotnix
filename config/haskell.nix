@@ -50,7 +50,7 @@ pkgs:
         polysemy
         polysemy-plugin
         polysemy-zoo
-        co-log-polysemy
+        #co-log-polysemy # broken until they bump the polysemy bound
         # end effects
         # servant
         servant

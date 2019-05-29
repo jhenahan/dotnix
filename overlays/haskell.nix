@@ -29,10 +29,10 @@ self:
               Chart = unbreak super.Chart;
               Chart-diagrams = unbreak super.Chart-diagrams;
               algebra = bigBreak super.algebra;
-              ansi-terminal = super.ansi-terminal_0_9;
+              ansi-terminal = super.ansi-terminal_0_9_1;
               bytestring-show = bigBreak super.bytestring-show;
               c2hsc = unbreak super.c2hsc;
-              co-log = super.co-log_0_3_0_0;
+              co-log = unbreak super.co-log_0_3_0_0;
               co-log-core = super.co-log-core_0_2_0_0;
               co-log-polysemy = unbreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
@@ -44,7 +44,8 @@ self:
               pointful = bigBreak super.pointful;
               servant-auth-server = dontCheck super.servant-auth-server;
               tls = dontCheck super.tls;
-              typerep-map = super.typerep-map_0_3_2;
+              typerep-map = bigBreak super.typerep-map_0_3_2;
+              concurrent-output = super.concurrent-output_1_10_10;
               #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
               #  owner = "agda";
               #  repo = "agda";

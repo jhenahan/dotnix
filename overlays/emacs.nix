@@ -178,6 +178,7 @@ self:
               })));
     in {
       emacs = pkgs.emacs26;
+      #emacs = pkgs.emacsMacport;
       emacsPackagesNg = self.emacs26PackagesNg;
       emacs26PackagesNg = mkEmacsPackages (self.emacs);
       emacs26System = self.emacs26PackagesNg.emacsWithPackages;
