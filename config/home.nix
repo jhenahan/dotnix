@@ -237,6 +237,7 @@
           set -x SHELL "${pkgs.fish}/bin/fish"
           set -x PATH /Users/JHENAHAN/.nix-profile/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin $PATH
           alias cat=bat
+          ${pkgs.thefuck}/bin/thefuck --alias | source
           function dvtm_title --on-event fish_prompt
              set -l host (hostname)
              set -l dir (string replace $HOME '~' $PWD)

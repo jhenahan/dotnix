@@ -22,6 +22,7 @@ pkgs:
         either
         eq
         exceptions
+        free
         gc
         gl
         heaps
@@ -50,7 +51,7 @@ pkgs:
         polysemy
         polysemy-plugin
         polysemy-zoo
-        #co-log-polysemy # broken until they bump the polysemy bound
+        co-log-polysemy
         # end effects
         # servant
         servant

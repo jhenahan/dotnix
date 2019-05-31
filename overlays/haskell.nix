@@ -34,7 +34,7 @@ self:
               c2hsc = unbreak super.c2hsc;
               co-log = unbreak super.co-log_0_3_0_0;
               co-log-core = super.co-log-core_0_2_0_0;
-              co-log-polysemy = unbreak super.co-log-polysemy;
+              co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
               dhall = dontCheck super.dhall_1_23_0;
               haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
