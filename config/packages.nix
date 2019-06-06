@@ -31,13 +31,11 @@
     kotlin
     mpv
     jre
-    jdk
     stoken
     thefuck
     aria
     alacritty
     hie865
-    #haskell-ide-engine
     tealdeer
     emms-print-metadata
     mb2md
@@ -89,6 +87,7 @@
     gawk
     ghc86System
     scala
+    sbt
     gnugrep
     gnupg
     gnused
@@ -133,7 +132,8 @@
     lftp
     mitmproxy
     mtr
-    #nmap
+    nmap
+    netcat
     openssh
     pdnsd
     rclone

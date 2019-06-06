@@ -177,8 +177,8 @@ self:
                 inherit (super.elpaPackages) hyperbole frog-menu;
               })));
     in {
-      emacs = pkgs.emacs26;
-      #emacs = pkgs.emacsMacport;
+      #emacs = pkgs.emacs26;
+      emacs = pkgs.emacsMacport;
       emacsPackagesNg = self.emacs26PackagesNg;
       emacs26PackagesNg = mkEmacsPackages (self.emacs);
       emacs26System = self.emacs26PackagesNg.emacsWithPackages;

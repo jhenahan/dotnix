@@ -357,6 +357,7 @@ pkgs:
       proof-general
       python-mode
       racer
+      racket-mode
       rainbow-delimiters
       rainbow-mode
       redshank
