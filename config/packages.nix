@@ -5,6 +5,7 @@
   in [
     (exe haskPkgs.pointful)
     (exe haskPkgs.pointfree)
+    #(exe haskPkgs.brittany)
     (exe haskPkgs.darcs)
     (exe haskPkgs.ShellCheck)
     (exe haskPkgs.alex)
