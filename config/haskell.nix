@@ -108,8 +108,6 @@ pkgs:
         Boolean
         ListLike
         Decimal
-        Chart
-        Chart-diagrams
         amqp
         attoparsec
         base
@@ -119,7 +117,6 @@ pkgs:
         bindings-DSL
         bytestring
         bytestring-mmap
-        bytestring-show
         case-insensitive
         cassava
         cereal
@@ -221,8 +218,6 @@ pkgs:
         temporary
         text
         text-metrics
-        text-show
-        text-show-instances
         these
         total
         transformers

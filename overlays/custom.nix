@@ -17,6 +17,12 @@ self:
   gpgme = super.gpgme.overrideAttrs (attrs: {
     doCheck = false;
   });
+  git = super.git.overrideAttrs (attrs: {
+    doInstallCheck = false;
+  });
+  libpsl = super.libpsl.overrideAttrs (attrs: {
+    doCheck = false;
+  });
   tokei = super.tokei.overrideAttrs (attrs: {
     buildInputs = attrs.buildInputs or [] ++ super.stdenv.lib.optionals super.stdenv.isDarwin [ super.darwin.apple_sdk.frameworks.Security super.libiconv ];
   });

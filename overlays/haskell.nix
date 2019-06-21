@@ -26,24 +26,26 @@ self:
           super:
             with pkgs.haskell.lib;
             {
-              Chart = unbreak super.Chart;
-              Chart-diagrams = unbreak super.Chart-diagrams;
+              aeson = super.aeson_1_4_3_0;
               algebra = bigBreak super.algebra;
               ansi-terminal = super.ansi-terminal_0_9_1;
-              bytestring-show = bigBreak super.bytestring-show;
               c2hsc = unbreak super.c2hsc;
               co-log = unbreak super.co-log_0_3_0_0;
               co-log-core = super.co-log-core_0_2_0_0;
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
-              dhall = dontCheck super.dhall_1_23_0;
+              dhall = dontCheck super.dhall_1_24_0;
               haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
-              lattices = unbreak super.lattices;
+              hpack = dontCheck super.hpack;
               perhaps = bigBreak super.perhaps;
               pointful = bigBreak super.pointful;
-              servant-auth-server = dontCheck super.servant-auth-server;
-              tls = dontCheck super.tls;
+              polysemy = unbreak super.polysemy;
+              polysemy-plugin = unbreak super.polysemy-plugin;
+              polysemy-zoo = unbreak super.polysemy-zoo;
+              th-abstraction = super.th-abstraction_0_3_1_0;
+              th-lift = super.th-lift_0_8_0_1;
+              th-lift-instances = super.th-lift-instances_0_1_13;
               typerep-map = bigBreak super.typerep-map_0_3_2;
               concurrent-output = super.concurrent-output_1_10_10;
               #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
