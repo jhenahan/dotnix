@@ -50,24 +50,16 @@ self:
               src = fetchFromGitHub {
                 owner = "emacs-lsp";
                 repo  = "lsp-mode";
-                rev = "1800dac68f2a142ba551aa61037a0e35a85686db";
-                sha256 = "0xzq05wjsqm5zp3b0wy6c3cp7482c41wssqq0vp4mxlhmm5nd8as";
+                rev = "b8dd0caccc21568a086a2b450e393ffd75e836b7";
+                sha256 = "1fx71c7ypdsi578a3gcg5wykhvsm43m3zs9mfpr8ldsikxws5chc";
               };
             });
             lsp-ui = super.lsp-ui.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "emacs-lsp";
                 repo  = "lsp-ui";
-                rev = "f2e2f742d0d2cd45def3e28197c84e0e85581e94";
-                sha256 = "0qvqgkh1iakxddy5kpnv9aii75g38wy3nnqhmfa0hcwvncfbimx3";
-              };
-            });
-            ox-reveal = super.ox-reveal.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "yjwen";
-                repo = "org-reveal";
-                rev = "1cdd088ec5fab631c564dca7f9f74fd3e9b7d4d4";
-                sha256 = "1vjxjadq2i74p96y9jxnqj1yb86fsgxzmn7bjgnb88ay6nvc1l72";
+                rev = "3ccc3e3386732c3ee22c151e6b5215a0e4c99173";
+                sha256 = "1k51lwrd3qy1d0afszg1i041cm8a3pz4qqdj7561sncy8m0szrwk";
               };
             });
             blackout = compileEmacsFiles {
@@ -85,8 +77,8 @@ self:
               src = fetchFromGitHub {
                 owner = "waymondo";
                 repo = "frog-jump-buffer";
-                rev = "e995fccac1ea34da34477bdcede6f1bfc0ff96f8";
-                sha256 = "1b51ghpfzka905h8ii4sm7h85ncbfblrwir3rbljqpn1827xn4yx";
+                rev = "20e7393f07dfe2f4671c93912c8b3374b9bea678";
+                sha256 = "0qzxl8wzbg83ysdhig3a2srip2a528gwhsp077xrdqwf3c7s2s7a";
               };
               buildInputs = [ super.avy super.dash super.projectile super.frog-menu super.posframe ];
             };
