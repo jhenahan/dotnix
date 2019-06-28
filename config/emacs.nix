@@ -269,7 +269,6 @@ pkgs:
       mode-line-bell
       monitor
       #mudel
-      multi-term
       multifiles
       multiple-cursors
       muse
