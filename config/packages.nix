@@ -20,7 +20,10 @@
     (exe haskPkgs.hnix)
     (exe haskPkgs.structured-haskell-mode)
     (exe haskPkgs.stylish-haskell)
+    (exe haskPkgs.dhall-to-cabal)
     (hunspellWithDicts [hunspellDicts.en-us])
+    easy-ps.purs
+    easy-ps.spago
     nixStable
     nix-scripts
     nix-prefetch-scripts

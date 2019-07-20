@@ -35,6 +35,7 @@ self:
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
               dhall = dontCheck super.dhall_1_24_0;
+              dhall-to-cabal = unbreak super.dhall-to-cabal;
               haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
               hpack = dontCheck super.hpack;
