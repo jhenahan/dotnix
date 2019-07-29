@@ -24,6 +24,7 @@
     (hunspellWithDicts [hunspellDicts.en-us])
     easy-ps.purs
     easy-ps.spago
+    jl
     nixStable
     nix-scripts
     nix-prefetch-scripts
@@ -114,7 +115,6 @@
     ripgrep
     rlwrap
     rustSystem
-    rustracer
     srm
     stow
     terminal-notifier
