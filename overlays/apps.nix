@@ -45,22 +45,22 @@ self:
       };
       Dash = self.installApplication rec {
         name = "Dash";
-        version = "4.6.4";
+        version = "4.6.5";
         sourceRoot = "Dash.app";
         src = super.fetchurl {
           url = "https://kapeli.com/downloads/v4/Dash.zip";
-          sha256 = "0xdsd0qh16yk7cg191rpr0x9f76llnz5xd7fc1pch6dy5jra3gbz";
+          sha256 = "0zvc119n30ya7xja4f2ksgqcdf8c4xjzszr8w0zgm8w65nfsi8y1";
         };
         description = "Dash is an API Documentation Browser and Code Snippet Manager";
         homepage = "https://kapeli.com/dash";
       };
       Docker = self.installApplication rec {
         name = "Docker";
-        version = "2.0.0.3";
+        version = "2.x";
         sourceRoot = "Docker.app";
         src = super.fetchurl {
           url = "https://download.docker.com/mac/stable/Docker.dmg";
-          sha256 = "09gwqdppnzw7hhlmgxakczxql4jfknk4ayc5z09g4kr8agqn4m55";
+          sha256 = "06nhg3hddzn3l7yky36drypjkcvbbc2qbyazkjj0i0yq09knjf5n";
         };
         description = ''
           Docker CE for Mac is an easy-to-install desktop app for building,

@@ -5,7 +5,7 @@
   in [
     (exe haskPkgs.pointful)
     (exe haskPkgs.pointfree)
-    #(exe haskPkgs.brittany)
+    (exe haskPkgs.brittany)
     (exe haskPkgs.darcs)
     (exe haskPkgs.ShellCheck)
     (exe haskPkgs.alex)
@@ -17,10 +17,8 @@
     (exe haskPkgs.doctest)
     (exe haskPkgs.ghc-core)
     (exe haskPkgs.hlint)
-    (exe haskPkgs.hnix)
     (exe haskPkgs.structured-haskell-mode)
     (exe haskPkgs.stylish-haskell)
-    (exe haskPkgs.dhall-to-cabal)
     (hunspellWithDicts [hunspellDicts.en-us])
     easy-ps.purs
     easy-ps.spago
@@ -52,7 +50,6 @@
     imapfilter
     isync
     awscli
-    awsebcli
     coreutils
     moreutils
     swagger-codegen
@@ -65,7 +62,7 @@
     mu
     msmtp
     mysql
-    cachix
+    #cachix
     git-lfs
     (gitAndTools.git-crypt)
     (gitAndTools.git-imerge)
@@ -81,7 +78,6 @@
     (pass.withExtensions (ext:
       with ext;
       [ pass-otp pass-update ]))
-    ansible
     bat
     browserpass
     curl
@@ -137,7 +133,6 @@
     httrack
     iperf
     lftp
-    mitmproxy
     mtr
     nmap
     netcat
@@ -175,10 +170,7 @@
     texFull
     xdg_utils
     python3
-    python3Packages.setuptools
     python3Packages.pygments
-    python3Packages.boto3
-    #python-language-server
     solargraph
     Anki
     Dash

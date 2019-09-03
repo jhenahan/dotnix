@@ -1,6 +1,7 @@
 self:
   pkgs:
     {
+      biber = pkgs.biber.overrideAttrs (attrs: { doCheck = false; });
       texFull = pkgs.texlive.combine {
         inherit (pkgs.texlive) scheme-full
                                texdoc latex2e-help-texinfo;

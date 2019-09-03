@@ -82,7 +82,7 @@ self:
               };
               buildInputs = [ super.avy super.dash super.projectile super.frog-menu super.posframe ];
             };
-            mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
+            #mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
             org-trello = super.org-trello.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "org-trello";
@@ -141,8 +141,8 @@ self:
               src = fetchFromGitHub {
                 owner = "politza";
                 repo = "pdf-tools";
-                rev = "8aa7aecf19090692d910036f256f67c1b8968a75";
-                sha256 = "0mhby1sjnw0vvwl1yjfqmhwk9nxv1chl3qxrvkd7n51d03bfrr3j";
+                rev = "db7de3901ae0e55f6ab8cf9baec257f706c3d16e";
+                sha256 = "1vvhgxxg5lpmh0kqjgy8x1scdaah3wb76h2zj7x99ayym2bxyigv";
               };
             });
             org-plus-contrib = self.elpaBuild rec {

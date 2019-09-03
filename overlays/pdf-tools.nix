@@ -9,9 +9,8 @@ self:
         src = super.fetchFromGitHub {
           owner = "politza";
           repo = "pdf-tools";
-          rev = "a4cd69ea1d50b8e74ea515eec95948ad87c6c732";
-          sha256 = "0m9hwihj2n8vv7hmcg6ax5sjxlmsb7wgsd6wqkp01x1xb5qjqhpm";
-          # date = 2018-12-21T20:13:05+01:00;
+          rev = "db7de3901ae0e55f6ab8cf9baec257f706c3d16e";
+          sha256 = "1vvhgxxg5lpmh0kqjgy8x1scdaah3wb76h2zj7x99ayym2bxyigv";
         };
         buildInputs = [
           clang
@@ -23,9 +22,9 @@ self:
           zlib
           poppler
         ];
-        patches = [
-          ./emacs/patches/pdf-tools.patch
-        ];
+        #patches = [
+        #  ./emacs/patches/pdf-tools.patch
+        #];
         preConfigure = ''
           cd server
           ./autogen.sh

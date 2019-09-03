@@ -26,33 +26,39 @@ self:
           super:
             with pkgs.haskell.lib;
             {
-              hbeat = unbreak super.hbeat;
-              aeson = dontCheck super.aeson_1_4_4_0;
+              #hbeat = unbreak super.hbeat;
               algebra = bigBreak super.algebra;
-              ansi-terminal = super.ansi-terminal_0_9_1;
               c2hsc = unbreak super.c2hsc;
-              co-log = unbreak super.co-log_0_3_0_0;
-              co-log-core = super.co-log-core_0_2_0_0;
+              cachix = unbreak super.cachix;
+              cachix-api = unbreak super.cachix-api;
+              co-log = unbreak super.co-log;
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
-              dhall = dontCheck super.dhall_1_24_0;
-              dhall-to-cabal = unbreak super.dhall-to-cabal;
-              first-class-families = super.first-class-families_0_5_0_0;
-              haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
+              #haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
               hpack = dontCheck super.hpack;
               perhaps = bigBreak super.perhaps;
               pointful = bigBreak super.pointful;
-              polysemy = unbreak super.polysemy;
+              polysemy = dontCheck (self.callCabal2nix "polysemy" (pkgs.fetchFromGitHub {
+               owner = "polysemy-research";
+               repo = "polysemy";
+               rev = "d1faef0be6c3ccefee69a27b7ae15e98e441b29b";
+               sha256 = "1jwdzqhksmq6wjha3by19m664pj88il5iff5clb1s92p0p7d6h7k";
+              }) {});
               polysemy-plugin = dontCheck (unbreak super.polysemy-plugin);
-              polysemy-zoo = dontCheck (unbreak super.polysemy-zoo);
-              th-abstraction = super.th-abstraction_0_3_1_0;
-              th-lift = super.th-lift_0_8_0_1;
-              th-lift-instances = super.th-lift-instances_0_1_13;
-              time-compat = dontCheck super.time-compat_1_9_2_2;
-              typerep-map = bigBreak super.typerep-map_0_3_2;
-              type-errors = unbreak super.type-errors;
-              concurrent-output = super.concurrent-output_1_10_10;
+              polysemy-zoo = bigBreak (dontCheck super.polysemy-zoo);
+              #polysemy-zoo = dontCheck (self.callCabal2nix "polysemy-zoo" (pkgs.fetchFromGitHub {
+              # owner = "polysemy-research";
+              # repo = "polysemy-zoo";
+              # rev = "5a6d359ee989e9da610578e82505b9fd0fa04175";
+              # sha256 = "1aa62s5k5iaji6c2jk3c26nmlbsbhcckmy8xfl1rq8l2zry4p2ps";
+              #}) {});
+              #th-lift = super.th-lift_0_8_0_1;
+              #th-lift-instances = super.th-lift-instances_0_1_13;
+              #time-compat = dontCheck super.time-compat_1_9_2_2;
+              typerep-map = bigBreak super.typerep-map;
+              #type-errors = unbreak super.type-errors;
+              #concurrent-output = super.concurrent-output_1_10_10;
               #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
               #  owner = "agda";
               #  repo = "agda";

@@ -50,8 +50,7 @@ pkgs:
         # effects
         polysemy
         polysemy-plugin
-        polysemy-zoo
-        co-log-polysemy
+        #polysemy-zoo
         # end effects
         # servant
         servant
@@ -78,17 +77,17 @@ pkgs:
         tasty-th
         # end test
         # AWS
-        amazonka
-        amazonka-ec2
-        amazonka-s3
-        amazonka-cloudwatch
-        amazonka-elbv2
-        amazonka-lambda
-        amazonka-iam
-        amazonka-iam-policy
-        amazonka-route53
-        amazonka-route53-autonaming
-        amazonka-route53-domains
+        #amazonka
+        #amazonka-ec2
+        #amazonka-s3
+        #amazonka-cloudwatch
+        #amazonka-elbv2
+        #amazonka-lambda
+        #amazonka-iam
+        #amazonka-iam-policy
+        #amazonka-route53
+        #amazonka-route53-autonaming
+        #amazonka-route53-domains
         # end AWS
         # JSON
         aeson
@@ -230,10 +229,6 @@ pkgs:
         vector
         void
         wreq
-        xeno
-        xml
-        xmlbf
-        xmlbf-xeno
         yaml
         zlib
       ]
