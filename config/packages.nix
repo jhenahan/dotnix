@@ -24,6 +24,9 @@
     (hunspellWithDicts [hunspellDicts.en-us])
     easy-ps.purs
     easy-ps.spago
+    easy-dhall.dhall-simple
+    easy-dhall.dhall-json-simple
+    easy-dhall.dhall-bash-simple
     jl
     nixStable
     nix-scripts
@@ -34,9 +37,9 @@
     du-dust
     procs
     #gnuapl
+    jdk
     kotlin
     mpv
-    jre
     stoken
     thefuck
     aria
@@ -82,7 +85,6 @@
     bat
     browserpass
     curl
-    #duma
     skim
     epipe
     emacs26System
@@ -144,8 +146,6 @@
     rclone
     rsync
     sipcalc
-    terraform
-    terragrunt
     terraform-landscape
     terraform-docs
     w3m
@@ -177,6 +177,7 @@
     python3
     python3Packages.setuptools
     python3Packages.pygments
+    python3Packages.boto3
     #python-language-server
     solargraph
     Anki

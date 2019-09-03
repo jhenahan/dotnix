@@ -2,19 +2,19 @@
 
 rustPlatform.buildRustPackage rec {
   name = "duma-${version}";
-  version = "0.1.0";
+  version = "0.1.1";
 
   src = fetchFromGitHub {
     owner = "mattgathu";
     repo = "duma";
-    rev = "41dc7a443bccb94b0d9ca090609428922c03b8ca";
-    sha256 = "1swnafbr2hvk1pwlg34gcpbbnc17a42ldx1wx6wsly1xgiwcx9z5";
+    rev = "94d796affa0425b12aaf12b81cd7d68cc3059e25";
+    sha256 = "03frn4w3sk0z3kgavzjhqq85r42d956z0m4wamygzfkcj4239wgw";
   };
 
   buildInputs = stdenv.lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
 
   doCheck = false;
-  cargoSha256 = "1axmnaqjv61dgdm9qrkjpch1cj4bkd4j098if6fkwphr8gpfl29m";
+  cargoSha256 = "06ambcdq57h0lgafb0r2v83zhmj0lg5460g8h9wjr2zxrwv8hiyd";
 
   meta = with stdenv.lib; {
     description = "wget in rust";

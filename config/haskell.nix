@@ -138,7 +138,6 @@ pkgs:
         deepseq-generics
         derive-storable
         deriving-compat
-        dhall
         diagrams
         directory
         dlist

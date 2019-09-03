@@ -4,6 +4,7 @@ self:
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   hie865 = self.all-hies.unstableFallback.selection { selector = p: { inherit (p) ghc865; }; };
   duma = super.callPackage ../packages/duma {};
+  sbt = super.callPackage ../packages/sbt {};
   opmsg = super.callPackage ../packages/opmsg {};
   emacsMacport = with super; super.emacsMacport.override {
     stdenv = if stdenv.cc.isClang then llvmPackages_6.stdenv else stdenv;
