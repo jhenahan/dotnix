@@ -13,40 +13,44 @@ self:
           seriouslyWith = p: ps:
             with pkgs.haskell.lib;
             seriously (addSetupDepends p ps);
-          unbreak = p:
-            with pkgs.haskell.lib;
-            overrideCabal p (attrs:
-            {
-              broken = false;
-            });
           bigBreak = p:
             with pkgs.haskell.lib;
-            doJailbreak (unbreak p);
+            doJailbreak (unmarkBroken p);
         in self:
           super:
             with pkgs.haskell.lib;
             {
-              #hbeat = unbreak super.hbeat;
+              #hbeat = unmarkBroken super.hbeat;
               algebra = bigBreak super.algebra;
-              c2hsc = unbreak super.c2hsc;
-              cachix = unbreak super.cachix;
-              cachix-api = unbreak super.cachix-api;
-              co-log = unbreak super.co-log;
+              c2hsc = unmarkBroken super.c2hsc;
+              Cabal = super.Cabal_2_4_1_0;
+              cabal-install = super.callHackage "cabal-install" "2.4.1.0" {};
+              cachix = unmarkBroken super.cachix;
+              cachix-api = unmarkBroken super.cachix-api;
+              co-log = unmarkBroken super.co-log;
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
-              #haskell-src-exts-simple = unbreak (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
+              #haskell-src-exts-simple = unmarkBroken (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
+              higgledy = doJailbreak (dontCheck (unmarkBroken super.higgledy));
               hpack = dontCheck super.hpack;
+              massiv = unmarkBroken super.massiv;
+              scheduler = unmarkBroken super.scheduler;
               perhaps = bigBreak super.perhaps;
               pointful = bigBreak super.pointful;
               polysemy = dontCheck (self.callCabal2nix "polysemy" (pkgs.fetchFromGitHub {
                owner = "polysemy-research";
                repo = "polysemy";
-               rev = "d1faef0be6c3ccefee69a27b7ae15e98e441b29b";
-               sha256 = "1jwdzqhksmq6wjha3by19m664pj88il5iff5clb1s92p0p7d6h7k";
+               rev = "ac6d7b312114863987f103871df54b2a5d1fe7d8";
+               sha256 = "148pbpivpka2dlnym98dws2njli1v4f0zq8bq4rklrfzdraayd9a";
               }) {});
-              polysemy-plugin = dontCheck (unbreak super.polysemy-plugin);
-              polysemy-zoo = bigBreak (dontCheck super.polysemy-zoo);
+              polysemy-plugin = dontCheck (self.callHackage "polysemy-plugin" "0.2.3.0" {});
+              polysemy-zoo = dontCheck (self.callCabal2nix "polysemy-zoo" (pkgs.fetchFromGitHub {
+               owner = "polysemy-research";
+               repo = "polysemy-zoo";
+               rev = "5f7c1a7da2b424356d40fad253bc2551cf30ce7f";
+               sha256 = "03dgdhpzypxvygmh5jji973x9kidkh8043l807alra7s5bqqbf1l";
+              }) {});
               #polysemy-zoo = dontCheck (self.callCabal2nix "polysemy-zoo" (pkgs.fetchFromGitHub {
               # owner = "polysemy-research";
               # repo = "polysemy-zoo";
@@ -57,7 +61,7 @@ self:
               #th-lift-instances = super.th-lift-instances_0_1_13;
               #time-compat = dontCheck super.time-compat_1_9_2_2;
               typerep-map = bigBreak super.typerep-map;
-              #type-errors = unbreak super.type-errors;
+              #type-errors = unmarkBroken super.type-errors;
               #concurrent-output = super.concurrent-output_1_10_10;
               #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
               #  owner = "agda";

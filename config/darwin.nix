@@ -273,9 +273,10 @@
 
         [Repository RemoteOutlook]
         type = IMAP
-        ssl = yes
+        ssl = no
         sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-        remotehost = outlook.office365.com
+        remotehost = localhost
+        remoteport = 1143
         remoteuser = jack.henahan@coxautoinc.com
         remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
         create_folders = False

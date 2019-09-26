@@ -26,6 +26,7 @@
     easy-dhall.dhall-json-simple
     easy-dhall.dhall-bash-simple
     jl
+    davmail
     nixStable
     nix-scripts
     nix-prefetch-scripts

@@ -109,6 +109,7 @@ pkgs:
         Decimal
         amqp
         attoparsec
+        barbies
         base
         base-unicode-symbols
         binary
@@ -161,6 +162,7 @@ pkgs:
         haskell-src-meta
         hasktags
         hierarchy
+        higgledy
         hmatrix
         hslogger
         http-client
@@ -180,6 +182,7 @@ pkgs:
         machines
         managed
         markov-chain
+        massiv
         megaparsec
         mmorph
         modern-uri
@@ -204,6 +207,7 @@ pkgs:
         rerebase
         retry
         safe
+        safe-money
         scientific
         shake
         split

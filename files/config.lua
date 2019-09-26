@@ -22,10 +22,10 @@ function main()
   }
 
   work = IMAP {
-    server = 'outlook.office365.com',
+    server = 'localhost',
+    port = 1143,
     username = 'jack.henahan@coxautoinc.com',
     password = get_pass('jack.henahan@coxautoinc.com'),
-    ssl = 'tls1',
   }
 
   personal_mail = get_mail(personal)
