@@ -188,6 +188,7 @@ pkgs:
         modern-uri
         optparse-applicative
         optparse-generic
+        ormolu
         parallel
         parallel-io
         pipes

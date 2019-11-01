@@ -128,7 +128,9 @@
         passwordeval   "pass jhenahan@me.com"
 
         account        Outlook
-        host           smtp.office365.com
+        host           localhost
+        port           1025
+        tls            off
         from           jack.henahan@coxautoinc.com
         user           jack.henahan@coxautoinc.com
         passwordeval   "pass jack.henahan@coxautoinc.com"
@@ -238,30 +240,39 @@
       extraConfig = ''
         [general]
         pythonfile = /etc/offlineimap.py
-        accounts = iCloud, Outlook
+        accounts = iCloud, Work, WorkArchive
         maxsyncaccounts = 2
     
         [Account iCloud]
         presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-        localrepository = LocaliCloud
-        remoterepository = RemoteiCloud
+        localrepository = LocalPersonal
+        remoterepository = Personal
     
-        [Account Outlook]
+        [Account Work]
         presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-        localrepository = LocalOutlook
-        remoterepository = RemoteOutlook
+        localrepository = LocalWork
+        remoterepository = Work
+
+        [Account WorkArchive]
+        localrepository = LocalWorkArchive
+        remoterepository = WorkArchive
     
-        [Repository LocaliCloud]
+        [Repository LocalPersonal]
         type = Maildir
         sep = /
         localfolders = ~/Mail/Personal
     
-        [Repository LocalOutlook]
+        [Repository LocalWork]
         type = Maildir
         sep = /
         localfolders = ~/Mail/Work
+
+        [Repository LocalWorkArchive]
+        type = Maildir
+        sep = /
+        localfolders = ~/Mail/WorkArchive
     
-        [Repository RemoteiCloud]
+        [Repository Personal]
         type = IMAP
         ssl = yes
         sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
@@ -271,7 +282,7 @@
         create_folders = True
         folderfilter = lambda folder: folder in [ 'Sent Messages', 'INBOX', 'Archive', 'Deleted Messages', 'Drafts', 'haskell-cafe-archive', 'Accounts/Github' ]
 
-        [Repository RemoteOutlook]
+        [Repository Work]
         type = IMAP
         ssl = no
         sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
@@ -280,6 +291,19 @@
         remoteuser = jack.henahan@coxautoinc.com
         remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
         create_folders = False
+        folderfilter = lambda folder: folder in [ 'INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Archive' ]
+
+        [Repository WorkArchive]
+        type = IMAP
+        ssl = no
+        sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
+        remotehost = localhost
+        remoteport = 1143
+        remoteuser = jack.henahan@coxautoinc.com
+        remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
+        create_folders = False
+        readonly = yes
+        sync_deletes = no
         folderfilter = lambda folder: folder in [ 'INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Archive' ]
       '';
     };

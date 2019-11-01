@@ -36,6 +36,12 @@ self:
               hpack = dontCheck super.hpack;
               massiv = unmarkBroken super.massiv;
               scheduler = unmarkBroken super.scheduler;
+              ormolu = dontCheck (self.callCabal2nix "ormolu" (pkgs.fetchFromGitHub {
+               owner = "tweag";
+               repo = "ormolu";
+               rev = "de1a2789c0bc183e04aa2800db1af9ba881eb2e8";
+               sha256 = "19ydr39fwbg89zqrkwhxmnaacpw0ffg81mryk6z9yh956sxgm3l2";
+              }) {});
               perhaps = bigBreak super.perhaps;
               pointful = bigBreak super.pointful;
               polysemy = dontCheck (self.callCabal2nix "polysemy" (pkgs.fetchFromGitHub {

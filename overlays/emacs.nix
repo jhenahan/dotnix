@@ -46,20 +46,28 @@ self:
                 };
               };
           in {
+            lsp-haskell = withPatches (super.lsp-haskell.overrideAttrs (attrs: {
+              src = fetchFromGitHub {
+                owner = "emacs-lsp";
+                repo  = "lsp-haskell";
+                rev = "64106be79350f9ce6903d22c66b29761dadb5001";
+                sha256 = "1d2jvcsx0x7w7f9q93gdi4x2fc6ymyr7d213m9ca5jj52rxjfsm2";
+              };
+            })) [ ./emacs/patches/fix-hie.patch ];
             lsp-mode = super.lsp-mode.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "emacs-lsp";
                 repo  = "lsp-mode";
-                rev = "b8dd0caccc21568a086a2b450e393ffd75e836b7";
-                sha256 = "1fx71c7ypdsi578a3gcg5wykhvsm43m3zs9mfpr8ldsikxws5chc";
+                rev = "4ee6808e0e1853399ef78f0cff01f28683ec9ca1";
+                sha256 = "05cijqybwljv72i91ldlcfbyby7bh7g1agbyiv74j8kllirnhc7h";
               };
             });
             lsp-ui = super.lsp-ui.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "emacs-lsp";
                 repo  = "lsp-ui";
-                rev = "3ccc3e3386732c3ee22c151e6b5215a0e4c99173";
-                sha256 = "1k51lwrd3qy1d0afszg1i041cm8a3pz4qqdj7561sncy8m0szrwk";
+                rev = "c8fa40c0f9c65877d1cabe1739e5f787adb24898";
+                sha256 = "040qzkd1zvyb0q3yxs2vd4f3qp37c8anr3zcmx96bjvj1v7pmpmn";
               };
             });
             blackout = compileEmacsFiles {
@@ -82,7 +90,14 @@ self:
               };
               buildInputs = [ super.avy super.dash super.projectile super.frog-menu super.posframe ];
             };
-            #mu4e-conversation = withPatches (super.mu4e-conversation) [ ./emacs/patches/mu4e-conversation.patch ];
+            ivy-explorer = super.ivy-explorer.overrideAttrs (attrs: {
+	      src = fetchFromGitHub {
+	        owner = "clemera";
+	        repo  = "ivy-explorer";
+	        rev = "a413966cfbcecacc082d99297fa1abde0c10d3f3";
+	        sha256 = "1720g8i6jq56myv8m9pnr0ab7wagsflm0jgkg7cl3av7zc90zq8r";
+	      };
+	    }); 
             org-trello = super.org-trello.overrideAttrs (attrs: {
               src = fetchFromGitHub {
                 owner = "org-trello";
@@ -170,10 +185,29 @@ self:
               })));
     in {
       #emacs = pkgs.emacs26;
+      emacsHEAD = with pkgs; stdenv.lib.overrideDerivation (self.emacs26.override { srcRepo = true; }) (attrs: rec {
+        name = "emacs-${version}${versionModifier}";
+        version = "27.0";
+        versionModifier = ".50";
+
+        doCheck = false;
+        buildInputs = attrs.buildInputs ++ [ harfbuzz.dev jansson freetype ];
+
+        patches = lib.optionals stdenv.isDarwin
+          [ ./emacs/patches/tramp-detect-wrapped-gvfsd.patch
+            ./emacs/patches/at-fdcwd.patch
+          ];
+
+          src = ~/src/emacs;
+      });
+
+      emacsHEADPackagesNg = mkEmacsPackages self.emacsHEAD;
+
       emacs = pkgs.emacsMacport;
       emacsPackagesNg = self.emacs26PackagesNg;
       emacs26PackagesNg = mkEmacsPackages (self.emacs);
       emacs26System = self.emacs26PackagesNg.emacsWithPackages;
+      emacs27System = self.emacsHEADPackagesNg.emacsWithPackages;
       emacs26Env = myPkgs: pkgs.myEnvFun {
         name = "emacs26";
         buildInputs = [ (self.emacs26PackagesNg.emacsWithPackages myPkgs) ];

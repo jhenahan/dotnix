@@ -210,6 +210,7 @@ pkgs:
       ivy-pass
       ivy-rich
       ivy-explorer
+      ivy-posframe
       ix
       jinja2-mode
       jq-mode

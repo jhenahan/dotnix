@@ -25,7 +25,9 @@
     easy-dhall.dhall-simple
     easy-dhall.dhall-json-simple
     easy-dhall.dhall-bash-simple
+    darwin.iproute2mac
     jl
+    ansible
     davmail
     nixStable
     nix-scripts
@@ -84,7 +86,7 @@
     curl
     skim
     epipe
-    emacs26System
+    emacs27System
     exa
     exiv2
     fd
