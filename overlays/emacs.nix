@@ -127,7 +127,7 @@ self:
                 owner = "immerrr";
                 repo = "lua-mode";
                 rev = "95c64bb5634035630e8c59d10d4a1d1003265743";
-                sha256 = "0cawb544qylifkvqads307n0nfqg7lvyphqbpbzr2xvr5iyi4901";
+                sha256 = "0i38fkq50g1z1lvvjm1k4qdzjizv8kqm3j3523s9s72vbmal7jy4";
               };
             });
             magithub = addBuildInputs (super.magithub) [

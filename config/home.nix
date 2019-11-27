@@ -48,8 +48,8 @@
         GHCPKGVER = "843";
         ALTERNATE_EDITOR = "";
         COLUMNS = "100";
-        EDITOR = "${pkgs.emacs26System}/bin/emacsclient -ct";
-        VISUAL = "${pkgs.emacs26System}/bin/emacsclient -cn";
+        EDITOR = "${pkgs.emacs27System}/bin/emacsclient -ct";
+        VISUAL = "${pkgs.emacs27System}/bin/emacsclient -cn";
         EMAIL = "${programs.git.userEmail}";
         GRAPHVIZ_DOT = "${pkgs.graphviz}/bin/dot";
         JAVA_OPTS = "-Xverify:none";
@@ -221,8 +221,8 @@
           set -x GHCPKGVER "843";
           set -x ALTERNATE_EDITOR "";
           set -x COLUMNS "100";
-          set -x EDITOR "${pkgs.emacs26System}/bin/emacsclient -ct";
-          set -x VISUAL "${pkgs.emacs26System}/bin/emacsclient -cn";
+          set -x EDITOR "${pkgs.emacs27System}/bin/emacsclient -ct";
+          set -x VISUAL "${pkgs.emacs27System}/bin/emacsclient -cn";
           set -x DVTM_EDITOR vim
           set -x EMAIL "${programs.git.userEmail}";
           set -x GRAPHVIZ_DOT "${pkgs.graphviz}/bin/dot";
@@ -291,7 +291,7 @@
         };
         extraConfig = {
           core = {
-            editor = "${pkgs.emacs26System}/bin/emacsclient -c";
+            editor = "${pkgs.emacs27System}/bin/emacsclient -c";
             trustctime = false;
             fsyncobjectfiles = true;
             pager = "${pkgs.gitAndTools.diff-so-fancy}/bin/diff-so-fancy | ${pkgs.less}/bin/less --tabs=4 -RFX";

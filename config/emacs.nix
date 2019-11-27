@@ -99,7 +99,7 @@ pkgs:
       emojify
       engine-mode
       enh-ruby-mode
-      ensime
+      #ensime
       erc-hl-nicks
       erc-image
       erc-scrolltoplace

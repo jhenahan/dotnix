@@ -77,7 +77,7 @@
     (gitAndTools.diff-so-fancy)
     patch
     patchutils
-    pijul
+    #pijul
     (pass.withExtensions (ext:
       with ext;
       [ pass-otp pass-update ]))
@@ -144,6 +144,7 @@
     rclone
     rsync
     sipcalc
+    terragrunt
     terraform-landscape
     terraform-docs
     w3m
