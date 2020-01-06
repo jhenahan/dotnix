@@ -32,7 +32,8 @@
     nixStable
     nix-scripts
     nix-prefetch-scripts
-    home-manager
+    niv
+    #home-manager
     emacs-all-the-icons-fonts
     exercism
     du-dust
@@ -106,7 +107,7 @@
     jq
     less
     m-cli
-    multitail
+    #multitail
     p7zip
     paperkey
     pass-git-helper

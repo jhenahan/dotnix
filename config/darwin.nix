@@ -326,6 +326,8 @@
       gc.automatic = true;
       gc.options = "--max-freed \$((25 * 1024**3 - 1024 * \$(df -P -k /nix/store | tail -n 1 | awk '{ print \$4 }')))";
       distributedBuilds = false;
+      binaryCaches = [ https://cache.nixos.org https://nix-tools.cachix.org ];
+      binaryCachePublicKeys = [ cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-tools.cachix.org-1:ebBEBZLogLxcCvipq2MTvuHlP7ZRdkazFSQsbs0Px1A= ];
       #extraOptions = ''
       #  auto-optimise-store = true
       #'';

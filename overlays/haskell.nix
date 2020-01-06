@@ -23,13 +23,14 @@ self:
               #hbeat = unmarkBroken super.hbeat;
               algebra = bigBreak super.algebra;
               c2hsc = unmarkBroken super.c2hsc;
-              Cabal = super.Cabal_2_4_1_0;
-              cabal-install = super.callHackage "cabal-install" "2.4.1.0" {};
+              #Cabal = super.Cabal_2_4_1_0;
+              #cabal-install = super.callHackage "cabal-install" "2.4.1.0" {};
               cachix = unmarkBroken super.cachix;
               cachix-api = unmarkBroken super.cachix-api;
               co-log = unmarkBroken super.co-log;
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
+              gitignore = doJailbreak (unmarkBroken super.gitignore);
               #haskell-src-exts-simple = unmarkBroken (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
               hierarchy = bigBreak super.hierarchy;
               higgledy = doJailbreak (dontCheck (unmarkBroken super.higgledy));
@@ -69,12 +70,19 @@ self:
               typerep-map = bigBreak super.typerep-map;
               #type-errors = unmarkBroken super.type-errors;
               #concurrent-output = super.concurrent-output_1_10_10;
-              #Agda = dontCheck (self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
-              #  owner = "agda";
-              #  repo = "agda";
-              #  rev = "6f3046e081ebfa40793c3a064e53bdbd83c82dcf";
-              #  sha256 = "1pgffhzs3c23cfc4klllyy5z3yjrahgylagw88b32psci050bn4c";
-              #}) {});
+              Agda-dev = self.callCabal2nix "Agda" (pkgs.fetchFromGitHub {
+                owner = "agda";
+                repo = "agda";
+                rev = "cfba5317228f50d2d248b622b162bc8bd2932bc7";
+                sha256 = "1c42xpnsml5rsqmspxb8y6lk36abzaxgnmdnz3iqjvdvr34vwny2";
+              }) {};
+              Agda = dontCheck (self.Agda-dev.overrideScope (self: super: { 
+                regex-compat = self.regex-compat_0_95_2_0;
+                regex-pcre-builtin = self.regex-pcre-builtin_0_95_1_1_8_43;
+                regex-posix = self.regex-posix_0_96_0_0;
+                regex-base = self.regex-base_0_94_0_0;
+                regex-tdfa = self.regex-tdfa_1_3_1_0;
+              }));
               #base-compat-batteries = doJailbreak (overrideCabal (super.base-compat-batteries) (attrs:
               #  {
               #    libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
@@ -180,7 +188,7 @@ self:
           compiler = package.compiler;
           packages = self.haskell.lib.getHaskellBuildInputs package;
           cabal = {
-            ghc865 = "2.4.1.0";
+            ghc865 = "3.0.0.0";
           };
         in compiler.withHoogle (p:
           with p;

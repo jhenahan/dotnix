@@ -34,11 +34,11 @@ self:
         };
       Anki = self.installApplication rec {
         name = "Anki";
-        version = "2.1.7";
+        version = "2.1.15";
         sourceRoot = "Anki.app";
         src = super.fetchurl {
           url = "https://apps.ankiweb.net/downloads/current/anki-${version}-mac.dmg";
-          sha256 = "0zh7gymlh47lldhkxqpj4bsyzsa66chfzzygvv7kzb4wzay53l8m";
+          sha256 = "0l4sw46jfwz1l42d6bsrb78pi350na0prpvbizzy3bl4169khjhf";
         };
         description = "Anki is a program which makes remembering things easy";
         homepage = "https://apps.ankiweb.net";
@@ -49,7 +49,7 @@ self:
         sourceRoot = "Dash.app";
         src = super.fetchurl {
           url = "https://kapeli.com/downloads/v4/Dash.zip";
-          sha256 = "1dkrzh4l5an0z7qv25irmagssaymscjzzgdn1jha11sqhhna9lh1";
+          sha256 = "1dizd4mmmr3vrqa5x4pdbyy0g00d3d5y45dfrh95zcj5cscypdg2";
         };
         description = "Dash is an API Documentation Browser and Code Snippet Manager";
         homepage = "https://kapeli.com/dash";
@@ -60,7 +60,7 @@ self:
         sourceRoot = "Docker.app";
         src = super.fetchurl {
           url = "https://download.docker.com/mac/stable/Docker.dmg";
-          sha256 = "06g3s7igf0rxsybwas13df78cphqkg4kflnr53y6gcj10vq7jlsl";
+          sha256 = "1nhvxi4j6sqmln5yv1d97p2ljnii2ip0k49pmhikabb75bkrhw4g";
         };
         description = ''
           Docker CE for Mac is an easy-to-install desktop app for building,
@@ -70,12 +70,12 @@ self:
       };
       Firefox = self.installApplication rec {
         name = "Firefox";
-        version = "70.0";
+        version = "71.0";
         sourceRoot = "Firefox.app";
         src = super.fetchurl {
           name = "Firefox-${version}.dmg";
           url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/${version}/mac/en-US/Firefox%20${version}.dmg";
-          sha256 = "0z0r4h2s1rb4hjrm5zcprmfip2iaa85mxznhm6lczvm46jy8zjra";
+          sha256 = "1227vh040a24g335df5zz23s2wql9n57hi5kp8snk1y3rdnx5v2b";
         };
         postInstall = ''
               for file in  \
