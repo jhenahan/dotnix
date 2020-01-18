@@ -1,7 +1,10 @@
 self:
   super:
+  let sources = import ../nix/sources.nix;
+      hies-src = sources.all-hies;
+  in
 {
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  all-hies = import hies-src {};
   hie865 = self.all-hies.unstableFallback.selection { selector = p: { inherit (p) ghc865; }; };
   duma = super.callPackage ../packages/duma {};
   sbt = super.callPackage ../packages/sbt {};

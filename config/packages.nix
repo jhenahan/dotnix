@@ -20,6 +20,7 @@
     (exe haskPkgs.structured-haskell-mode)
     (exe haskPkgs.stylish-haskell)
     (hunspellWithDicts [hunspellDicts.en-us])
+    maven
     easy-ps.purs
     easy-ps.spago
     easy-dhall.dhall-simple
@@ -30,9 +31,9 @@
     ansible
     davmail
     nixStable
+    niv
     nix-scripts
     nix-prefetch-scripts
-    niv
     #home-manager
     emacs-all-the-icons-fonts
     exercism

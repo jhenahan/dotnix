@@ -1,6 +1,7 @@
 self:
   pkgs:
     let
+      sources = import ../nix/sources.nix;
       myEmacsPackageOverrides = self:
         super:
           let
@@ -19,6 +20,12 @@ self:
                   {
                     buildInputs = attrs.buildInputs ++ inputs;
                   });
+            addPropagatedBuildInputs = pkg:
+              inputs:
+                pkg.overrideAttrs (attrs:
+                  {
+                    propagatedBuildInputs = attrs.propagatedBuildInputs ++ inputs;
+                  });
             notBroken = pkg:
               pkg.overrideAttrs (attrs:
                 rec { meta.broken = false; });
@@ -34,6 +41,15 @@ self:
                 inherit sha256;
                 url = "https://www.emacswiki.org/emacs/download/" + name;
               });
+            compileNivFile = { name
+                             , buildInputs ? []
+                             , propagatedBuildInputs ? []
+                             , patches ? [] }:
+              compileEmacsFiles {
+                inherit name buildInputs
+                        propagatedBuildInputs patches;
+                src = sources.${name};
+              };
             compileEmacsWikiFile = { name
                                    , sha256
                                    , buildInputs ? []
@@ -46,49 +62,99 @@ self:
                 };
               };
           in {
-            lsp-haskell = withPatches (super.lsp-haskell.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "emacs-lsp";
-                repo  = "lsp-haskell";
-                rev = "64106be79350f9ce6903d22c66b29761dadb5001";
-                sha256 = "1d2jvcsx0x7w7f9q93gdi4x2fc6ymyr7d213m9ca5jj52rxjfsm2";
-              };
-            })) [ ./emacs/patches/fix-hie.patch ];
+            apropos-plus = compileNivFile { name = "apropos+"; };
+            thingatpt-plus = compileNivFile { name = "thingatpt+"; };
+            pp-plus = compileNivFile { name = "pp+"; };
+            mbdepth-plus = compileNivFile { name = "mbdepth+"; };
+            lacarte = compileNivFile { name = "lacarte"; };
+            icomplete-plus = compileNivFile { name = "icomplete+"; };
+            hexrgb = compileNivFile { name = "hexrgb"; };
+            fuzzy-match = compileNivFile { name = "fuzzy-match"; };
+            frame-fns = compileNivFile { name = "frame-fns"; };
+            misc-fns = compileNivFile { name = "misc-fns"; };
+            synonyms = compileNivFile { name = "synonyms";
+                                        buildInputs = [ self.thingatpt-plus ];
+                                      };
+
+            hl-line-plus = compileNivFile { name = "hl-line+"; };
+            vline = compileNivFile { name = "vline"; };
+            col-highlight = compileNivFile { name = "col-highlight";
+                                             buildInputs = [ self.vline ];
+                                           };
+            crosshairs = compileNivFile { name = "crosshairs";
+                                          buildInputs = [ self.col-highlight self.hl-line-plus ];
+                                        };
+
+            naked = compileNivFile { name = "naked"; };
+            apropos-fn-var = compileNivFile { name = "apropos-fn+var"; 
+                                              buildInputs = [ self.naked ];
+                                            };
+            frame-cmds = compileNivFile { name = "frame-cmds";
+                                          buildInputs = [
+                                                          self.frame-fns
+                                                          self.misc-fns
+                                                          self.thingatpt-plus
+                                                        ];
+                                        };
+            faces-plus = compileNivFile { name = "faces+";
+                                          buildInputs = [ self.thingatpt-plus ];
+                                        };
+            doremi = compileNivFile { name = "doremi"; };
+            doremi-frm = compileNivFile { name = "doremi-frm";
+                                          buildInputs = [
+                                                          self.doremi
+                                                          self.hexrgb
+                                                          self.frame-cmds
+                                                          self.frame-fns
+                                                          self.misc-fns
+                                                          self.thingatpt-plus
+                                                          self.faces-plus
+                                                        ];
+                                        };
+            bookmark-plus = compileNivFile { name = "bookmark+";
+                                             buildInputs = [
+                                                             self.apropos-plus
+                                                             self.thingatpt-plus
+                                                             self.col-highlight
+                                                             self.crosshairs
+                                                             self.font-lock-plus
+                                                             self.frame-fns
+                                                           ];
+                                           };
+            icicles = compileNivFile { name = "icicles";
+                                       buildInputs = [ 
+                                                       self.apropos-fn-var 
+                                                       self.bookmark-plus
+                                                       self.crosshairs
+                                                       self.doremi
+                                                     ];
+                                     };
+            doom-modeline = super.doom-modeline.overrideAttrs (attrs: {
+              src = sources.doom-modeline;
+            });
+            dash = super.dash.overrideAttrs (attrs: {
+              src = sources.dash;
+            });
+            doom-themes = super.doom-themes.overrideAttrs (attrs: {
+              src = sources.emacs-doom-themes;
+            });
+            lsp-haskell = super.lsp-haskell.overrideAttrs (attrs: {
+              src = sources.lsp-haskell;
+            });
             lsp-mode = super.lsp-mode.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "emacs-lsp";
-                repo  = "lsp-mode";
-                rev = "4ee6808e0e1853399ef78f0cff01f28683ec9ca1";
-                sha256 = "05cijqybwljv72i91ldlcfbyby7bh7g1agbyiv74j8kllirnhc7h";
-              };
+              src = sources.lsp-mode;
             });
             lsp-ui = super.lsp-ui.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "emacs-lsp";
-                repo  = "lsp-ui";
-                rev = "c8fa40c0f9c65877d1cabe1739e5f787adb24898";
-                sha256 = "040qzkd1zvyb0q3yxs2vd4f3qp37c8anr3zcmx96bjvj1v7pmpmn";
-              };
+              src = sources.lsp-ui;
             });
             blackout = compileEmacsFiles {
               name = "blackout";
-              src = fetchFromGitHub {
-                owner = "raxod502";
-                repo = "blackout";
-                rev = "87822abd1ed46411368ef91752a7f51c0ef2aee0";
-                sha256 = "0n0889vsm3lzswkcdgdykgv3vz4pb9s88wwkinc5bn70vc187byp";
-                # date = 2018-12-14T19:32:49-08:00;
-              };
+              src = sources.blackout;
             };
             frog-jump-buffer = compileEmacsFiles {
               name = "frog-jump-buffer";
-              src = fetchFromGitHub {
-                owner = "waymondo";
-                repo = "frog-jump-buffer";
-                rev = "20e7393f07dfe2f4671c93912c8b3374b9bea678";
-                sha256 = "0qzxl8wzbg83ysdhig3a2srip2a528gwhsp077xrdqwf3c7s2s7a";
-              };
-              buildInputs = [ super.avy super.dash super.projectile super.frog-menu super.posframe ];
+              src = sources.frog-jump-buffer;
+              buildInputs = [ super.avy self.dash super.projectile super.frog-menu super.posframe ];
             };
             ivy-explorer = super.ivy-explorer.overrideAttrs (attrs: {
 	      src = fetchFromGitHub {
@@ -114,43 +180,7 @@ self:
                 sha256 = "0pf8rzlj960qx5l3dmm5qws51mkiqz18a5ay7s03f8bvfrx69qjs";
               };
             });
-            objed = super.objed.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "clemera";
-                repo = "objed";
-                rev = "50769c9b42e03174ca0aa632bd778047b2197d14";
-                sha256 = "0db7is3zfr33zi5a1z4zf0h3nqbfybgvp1dkkb01zrh6gi4rf9if";
-              };
-            });
-            lua-mode = super.lua-mode.overrideAttrs (attrs: {
-              src = fetchFromGitHub {
-                owner = "immerrr";
-                repo = "lua-mode";
-                rev = "95c64bb5634035630e8c59d10d4a1d1003265743";
-                sha256 = "0i38fkq50g1z1lvvjm1k4qdzjizv8kqm3j3523s9s72vbmal7jy4";
-              };
-            });
-            magithub = addBuildInputs (super.magithub) [
-              (pkgs.git)
-            ];
-            magit-filenotify = addBuildInputs (super.magit-filenotify) [
-              (pkgs.git)
-            ];
-            magit-gh-pulls = addBuildInputs (super.magit-gh-pulls) [
-              (pkgs.git)
-            ];
-            magit-lfs = addBuildInputs (super.magit-lfs) [
-              (pkgs.git)
-            ];
-            magit-tbdiff = addBuildInputs (super.magit-tbdiff) [
-              (pkgs.git)
-            ];
-            magit-imerge = addBuildInputs (super.magit-imerge) [
-              (pkgs.git)
-            ];
-            github-pullrequest = addBuildInputs (super.github-pullrequest) [
-              (pkgs.git)
-            ];
+            magit = addPropagatedBuildInputs (super.magit) [ pkgs.git ];
             powershell = notBroken (super.powershell);
             pdf-tools = lib.overrideDerivation super.pdf-tools (attrs: {
               src = fetchFromGitHub {
@@ -162,11 +192,8 @@ self:
             });
             org-plus-contrib = self.elpaBuild rec {
               pname = "org-plus-contrib";
-              version = "20190520";
-              src = fetchurl {
-                url = "https://orgmode.org/elpa/org-plus-contrib-${version}.tar";
-                sha256 = "0kmq5a4xx0hszbi3cc84q1mkv7qgkl9sgyzhchg4iv0vyzp6prqz";
-              };
+              version = "master";
+              src = sources.org-mode;
               meta = {
                 homepage = "https://elpa.gnu.org/packages/org.html";
                 license = lib.licenses.free;

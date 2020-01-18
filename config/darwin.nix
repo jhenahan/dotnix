@@ -11,6 +11,10 @@
       open
       copycat
     ];
+    sources = import ../nix/sources.nix;
+    nix-src = sources.nixpkgs;
+    darwin-src = sources.darwin;
+    hm-src = sources.home-manager;
   in {
     system.defaults = import ./darwin/defaults.nix;
     networking = {
@@ -311,9 +315,9 @@
       package = pkgs.nixStable;
       nixPath = [
         "darwin-config=\$HOME/src/dotnix/config/darwin.nix"
-        "home-manager=\$HOME/src/dotnix/home-manager"
-        "darwin=\$HOME/src/dotnix/darwin"
-        "nixpkgs=\$HOME/src/dotnix/nixpkgs"
+        "home-manager=${hm-src}"
+        "darwin=${darwin-src}"
+        "nixpkgs=${nix-src}"
       ];
       trustedUsers = [
         "root"

@@ -13,14 +13,13 @@ pkgs:
       company-terraform
       osx-trash
       md4rd
-      objed
       a
       frog-jump-buffer
       frog-menu
       ace-link
       ace-mc
       ace-window
-      agda2-mode
+      #agda2-mode
       aggressive-indent
       alert
       anaphora
@@ -237,7 +236,6 @@ pkgs:
       lsp-haskell
       lsp-mode
       lsp-ui
-      lua-mode
       m-buffer
       macrostep
       magit

@@ -103,7 +103,7 @@ pkgs:
         lens-family-th
         fclabels
         # end lenses
-        Agda
+        #Agda
         Boolean
         ListLike
         Decimal

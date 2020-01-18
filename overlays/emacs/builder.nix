@@ -3,6 +3,7 @@
 , name
 , src
 , buildInputs ? []
+, propagatedBuildInputs ? []
 , patches ? []
 , preBuild ? ""
 }:
@@ -13,6 +14,7 @@ stdenv.mkDerivation {
     test -f "${src}" && mkdir el && cp -p ${src} el/${name}
   '';
   buildInputs = [ emacs ] ++ buildInputs;
+  propagatedBuildInputs = propagatedBuildInputs;
   buildPhase = ''
     ${preBuild}
     ARGS=$(find ${stdenv.lib.concatStrings

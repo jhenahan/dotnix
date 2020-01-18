@@ -206,6 +206,7 @@
         shellInit = ''
           set -x SSH_AUTH_SOCK "${xdg.configHome}/gnupg/S.gpg-agent.ssh";
           set -x GNUPGHOME "${xdg.configHome}/gnupg";
+          set -x GITHUB_TOKEN "${gh_oauth}";
 
           set -x CABAL_CONFIG "${xdg.configHome}/cabal/config";
           set -x LESSHISTFILE "${xdg.cacheHome}/less/history";
@@ -250,6 +251,8 @@
           function cheat -a topic
             set -q topic[1]; and curl "https://cht.sh/$topic[1]/$argv[2..-1]"
           end
+          source ${pkgs.skim}/share/skim/key-bindings.fish
+          skim_key_bindings
         '';
       };
       git = {
