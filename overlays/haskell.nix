@@ -31,7 +31,7 @@ self:
               co-log-polysemy = bigBreak super.co-log-polysemy;
               compressed = bigBreak super.compressed;
               gitignore = doJailbreak (unmarkBroken super.gitignore);
-              #haskell-src-exts-simple = unmarkBroken (super.haskell-src-exts-simple.overrideScope (self: super: { haskell-src-exts = self.haskell-src-exts_1_21_0; }));
+              haskell-src-exts-simple = unmarkBroken super.haskell-src-exts-simple;
               hierarchy = bigBreak super.hierarchy;
               higgledy = doJailbreak (dontCheck (unmarkBroken super.higgledy));
               hpack = dontCheck super.hpack;

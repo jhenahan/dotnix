@@ -14,6 +14,7 @@ pkgs:
       osx-trash
       md4rd
       a
+      compdef
       frog-jump-buffer
       frog-menu
       ace-link
@@ -143,6 +144,7 @@ pkgs:
       fringe-helper
       fullframe
       fuzzy
+      gcmh
       general
       ggtags
       ghub

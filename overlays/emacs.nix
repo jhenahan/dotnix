@@ -151,6 +151,7 @@ self:
               name = "blackout";
               src = sources.blackout;
             };
+            general = super.general.overrideAttrs (attrs: { src = sources.general; });
             frog-jump-buffer = compileEmacsFiles {
               name = "frog-jump-buffer";
               src = sources.frog-jump-buffer;
@@ -190,6 +191,8 @@ self:
                 sha256 = "1vvhgxxg5lpmh0kqjgy8x1scdaah3wb76h2zj7x99ayym2bxyigv";
               };
             });
+            s = super.s.overrideAttrs (attrs: { src = sources.s; });
+            org = self.org-plus-contrib;
             org-plus-contrib = self.elpaBuild rec {
               pname = "org-plus-contrib";
               version = "master";
@@ -223,6 +226,7 @@ self:
         patches = lib.optionals stdenv.isDarwin
           [ ./emacs/patches/tramp-detect-wrapped-gvfsd.patch
             ./emacs/patches/at-fdcwd.patch
+            ./emacs/patches/fix-window-role.patch
           ];
 
           src = ~/src/emacs;
@@ -230,7 +234,7 @@ self:
 
       emacsHEADPackagesNg = mkEmacsPackages self.emacsHEAD;
 
-      emacs = pkgs.emacsMacport;
+      emacs = self.emacsHEAD;
       emacsPackagesNg = self.emacs26PackagesNg;
       emacs26PackagesNg = mkEmacsPackages (self.emacs);
       emacs26System = self.emacs26PackagesNg.emacsWithPackages;

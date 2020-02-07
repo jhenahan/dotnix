@@ -3,7 +3,6 @@
   let
     exe = haskell.lib.justStaticExecutables;
   in [
-    (exe haskPkgs.pointful)
     (exe haskPkgs.pointfree)
     (exe haskPkgs.brittany)
     (exe haskPkgs.darcs)

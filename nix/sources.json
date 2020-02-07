@@ -1,4 +1,16 @@
 {
+    "alacritty": {
+        "branch": "master",
+        "description": "A cross-platform, GPU-accelerated terminal emulator",
+        "homepage": "",
+        "owner": "alacritty",
+        "repo": "alacritty",
+        "rev": "cc33bec7309a6071e3b89ea8d61907db294c2cc9",
+        "sha256": "1jymwyz1506wnlf3v28399xy03visvwl20k3g44z3zikrfjrkqdm",
+        "type": "tarball",
+        "url": "https://github.com/alacritty/alacritty/archive/cc33bec7309a6071e3b89ea8d61907db294c2cc9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "all-hies": {
         "branch": "master",
         "description": "Cached Haskell IDE Engine Nix builds for all GHC versions",
@@ -65,10 +77,10 @@
         "homepage": "",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "3ec36dd6673198a8a6fcd433866654e4155c7eb6",
-        "sha256": "0rb3ssnw66qj2lh8djnpb9crw7s3a7410a0m62p83xp979n4l2ls",
+        "rev": "a14315c96edcedddab74af8353cfec3017a8157d",
+        "sha256": "0bfr3ip9lh5xfxyc843kbi52873334zh1zy4ksxcz2fviv1yx9qf",
         "type": "tarball",
-        "url": "https://github.com/LnL7/nix-darwin/archive/3ec36dd6673198a8a6fcd433866654e4155c7eb6.tar.gz",
+        "url": "https://github.com/LnL7/nix-darwin/archive/a14315c96edcedddab74af8353cfec3017a8157d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dash": {
@@ -77,10 +89,10 @@
         "homepage": null,
         "owner": "magnars",
         "repo": "dash.el",
-        "rev": "ea7adeb09c13de58336caa16243e192ea6ee88fb",
-        "sha256": "045nx37lnp9rncxgdarb6jn81pqrybggjf7ab6aknmh1imppqz0d",
+        "rev": "721436b04da4e2795387cb48a98ac6de37ece0fd",
+        "sha256": "153f55dqkhs8w2xlf6b88wp5vlkap7h8vjd9wxh4jp2ram5g4l1n",
         "type": "tarball",
-        "url": "https://github.com/magnars/dash.el/archive/ea7adeb09c13de58336caa16243e192ea6ee88fb.tar.gz",
+        "url": "https://github.com/magnars/dash.el/archive/721436b04da4e2795387cb48a98ac6de37ece0fd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "doom-modeline": {
@@ -89,10 +101,10 @@
         "homepage": "https://seagle0128.github.io/doom-modeline/",
         "owner": "seagle0128",
         "repo": "doom-modeline",
-        "rev": "2cf1f2a7e76ddbd8a6c6fa7a28dc64597e6f6597",
-        "sha256": "1s0gi5wxvrz1k208bawnpd9a8phnm9cssmgwg5n25cc4vwd72bib",
+        "rev": "a7a0370c50d5c5942e02e9aedb18a645b38322d1",
+        "sha256": "041b4vxf1x4irzarzicbjj7bryx8whaq48rn28ss9il4x5xkl6jc",
         "type": "tarball",
-        "url": "https://github.com/seagle0128/doom-modeline/archive/2cf1f2a7e76ddbd8a6c6fa7a28dc64597e6f6597.tar.gz",
+        "url": "https://github.com/seagle0128/doom-modeline/archive/a7a0370c50d5c5942e02e9aedb18a645b38322d1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "doremi": {
@@ -125,10 +137,10 @@
         "homepage": "",
         "owner": "hlissner",
         "repo": "emacs-doom-themes",
-        "rev": "2ec6df8905e22586f349290b6f39b320fc2e21be",
-        "sha256": "0wbxn41j2i6ca7y7gvdr3qmwhsw2bbazg9ckkbl9ycjmchjpxb20",
+        "rev": "28f60e1ad8fe53d408b13ab6160da3c27ad55d65",
+        "sha256": "1s94bb8724wpixbjd9i6bh248pf3y8wwgp88qczxn3x8wlrsf98p",
         "type": "tarball",
-        "url": "https://github.com/hlissner/emacs-doom-themes/archive/2ec6df8905e22586f349290b6f39b320fc2e21be.tar.gz",
+        "url": "https://github.com/hlissner/emacs-doom-themes/archive/28f60e1ad8fe53d408b13ab6160da3c27ad55d65.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "frame-cmds": {
@@ -174,6 +186,18 @@
         "url": "https://github.com/emacsmirror/fuzzy-match/archive/4ca537ac77e8886f10e4ff2b0ac3bd4cdac25552.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "general": {
+        "branch": "master",
+        "description": "More convenient key definitions in emacs",
+        "homepage": "",
+        "owner": "noctuid",
+        "repo": "general.el",
+        "rev": "f6e928622d78d927c7043da904782ed7160ea803",
+        "sha256": "1l541isnwhcg3y8h709zw6nskhkgwnkbdbl1zv702mgfsbl5am62",
+        "type": "tarball",
+        "url": "https://github.com/noctuid/general.el/archive/f6e928622d78d927c7043da904782ed7160ea803.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "hexrgb": {
         "branch": "master",
         "description": "Functions to manipulate colors, including RGB hex strings",
@@ -204,10 +228,10 @@
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "0bb2d87cfd7967f8d0314c81c0743c7a34a536f8",
-        "sha256": "0ifvz6cg4bn2isf4zhp0zv0p0dhvjldrpzz5wn8i8mbxw96s2wpr",
+        "rev": "95c8007b8fe4433cd217db83ce26b8e29875ba06",
+        "sha256": "1f5fbpsaizz1hrsajprn2bcbjzgjs5jy72yir6gszg6360j61w5q",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/0bb2d87cfd7967f8d0314c81c0743c7a34a536f8.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/95c8007b8fe4433cd217db83ce26b8e29875ba06.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "icicles": {
@@ -276,10 +300,10 @@
         "homepage": "",
         "owner": "emacs-lsp",
         "repo": "lsp-mode",
-        "rev": "e95109b8b84201c299f54d5f22e84e5eb6511ac4",
-        "sha256": "0n8d6hx49f8a8m7qiqbzprqg0yzisw5mbd2fl8vdmhcy2rymjk3r",
+        "rev": "22517458ba3fa80fdee028f5a6921eea6ab13050",
+        "sha256": "0jqnnvnpakdn2ff8zil8vvyz5zy1dhx25i3zxpkg3p923carvqqk",
         "type": "tarball",
-        "url": "https://github.com/emacs-lsp/lsp-mode/archive/e95109b8b84201c299f54d5f22e84e5eb6511ac4.tar.gz",
+        "url": "https://github.com/emacs-lsp/lsp-mode/archive/22517458ba3fa80fdee028f5a6921eea6ab13050.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "lsp-ui": {
@@ -288,10 +312,10 @@
         "homepage": null,
         "owner": "emacs-lsp",
         "repo": "lsp-ui",
-        "rev": "01f89e40f473032376f70a90e33831356832f084",
-        "sha256": "0avi8hfyh61gjrv0c8aj28y8nx8qw1vvsb3l15v9xzblvdrx7v5x",
+        "rev": "cf6906cc45bc207045d57f15607d6a73d124f867",
+        "sha256": "02x7dkp7zx4z8gqz0g2k3whgpsg4bx36vfns7qvkg23zr3lkbl08",
         "type": "tarball",
-        "url": "https://github.com/emacs-lsp/lsp-ui/archive/01f89e40f473032376f70a90e33831356832f084.tar.gz",
+        "url": "https://github.com/emacs-lsp/lsp-ui/archive/cf6906cc45bc207045d57f15607d6a73d124f867.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "mb-depth-plus": {
@@ -324,10 +348,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "abd0de3269fd712955d27b70e32921841c7b8bb7",
-        "sha256": "0b38n1ad00s1qqyw3ml3pypf8i1pw4aqw0bpa02qq9iv7sp3x0gz",
+        "rev": "49157afd2298749b8a5062fd21079542a6b2de35",
+        "sha256": "0q7ymfrcgagcsw6kr93kprag7k358qj8znyzyri53ci1mrsak5y1",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/abd0de3269fd712955d27b70e32921841c7b8bb7.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/49157afd2298749b8a5062fd21079542a6b2de35.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -336,10 +360,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs-channels",
-        "rev": "2e8fc97dbfacc1178ae846ab31210539f7a958f0",
-        "sha256": "1api5vypvw5pihz3kjps8q5hxf02ncgxg6axnpr2lcbc6m14s40q",
+        "rev": "90441b4b47fc7280de6a5bd1a228017caaa0f97f",
+        "sha256": "1nz9lhk53m8j6xm1frs8hk7mb76axbs3wz8xg5mrvi28cv9jldbn",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs-channels/archive/2e8fc97dbfacc1178ae846ab31210539f7a958f0.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/90441b4b47fc7280de6a5bd1a228017caaa0f97f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "org-mode": {
@@ -348,6 +372,18 @@
         "url": "https://orgmode.org/elpa/org-plus-contrib-20191230.tar",
         "url_template": "https://orgmode.org/elpa/org-plus-contrib-<version>.tar",
         "version": "20191230"
+    },
+    "polysemy": {
+        "branch": "master",
+        "description": ":gemini: higher-order, no-boilerplate, zero-cost monads",
+        "homepage": "",
+        "owner": "polysemy-research",
+        "repo": "polysemy",
+        "rev": "06fed2115c96f77d42a6d16496797bb7c416d7b4",
+        "sha256": "1bsgadxm6brqc25s21jml9zzaqfkiq95y6647skbhyrw7pqzckd3",
+        "type": "tarball",
+        "url": "https://github.com/polysemy-research/polysemy/archive/06fed2115c96f77d42a6d16496797bb7c416d7b4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pp-plus": {
         "branch": "master",
@@ -359,6 +395,18 @@
         "sha256": "01jg8v7p57dzc59s8mx6xrd66kzlmp87qd0dg3xnm8dqpcv5mydx",
         "type": "tarball",
         "url": "https://github.com/emacsmirror/pp-plus/archive/d213246d8512715a0566a2bf8106f23bd6c82a2f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "s": {
+        "branch": "master",
+        "description": "The long lost Emacs string manipulation library.",
+        "homepage": "",
+        "owner": "magnars",
+        "repo": "s.el",
+        "rev": "03410e6a7a2b11e47e1fea3b7d9899c7df26435e",
+        "sha256": "074ny8y68fhnknkjxvrijrk534xzdiwip8wkifxfbwv3va315x83",
+        "type": "tarball",
+        "url": "https://github.com/magnars/s.el/archive/03410e6a7a2b11e47e1fea3b7d9899c7df26435e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "synonyms": {

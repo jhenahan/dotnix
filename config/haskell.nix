@@ -48,8 +48,8 @@ pkgs:
         zippers
         # end kmett
         # effects
-        polysemy
-        polysemy-plugin
+        #polysemy
+        #polysemy-plugin
         #polysemy-zoo
         # end effects
         # servant
