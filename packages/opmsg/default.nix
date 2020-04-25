@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
   buildInputs = [ openssl ];
 
   postUnpack = "sourceRoot=\${sourceRoot}/src";
-  
+
   installPhase = ''
     make all
     make contrib

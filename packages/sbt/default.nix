@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ jdk ];
   propagatedBuildInputs = [ jdk ];
   patchPhase = ''
-     echo -java-home ${jdk.home} >>conf/sbtopts
+    echo -java-home ${jdk.home} >>conf/sbtopts
   '';
 
 

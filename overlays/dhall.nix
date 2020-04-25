@@ -1,12 +1,23 @@
 self:
-  super:
-    {
-      easy-dhall =
-        let pkgs = super; in
-        import (pkgs.fetchFromGitHub {
-            owner = "jhenahan";
-            repo = "easy-dhall-nix";
-            rev = "21e4726e7afef16599818f6a0d4f37fde6c765b4";
-            sha256 = "1103sczf2xkwgbmmkmaqf59db6q0gb18vv4v3i7py1f8nlpyv02i";
-        }) {};
-    }
+super:
+let
+  sources = import ../nix/sources.nix;
+  unstable = import (sources.nixos-unstable) {};
+in
+{
+  dhall-terraform =
+    with unstable;
+    lowPrio (
+      haskell.lib.doJailbreak
+        (
+          haskellPackages.callPackage sources.dhall-terraform {
+            dhall = haskellPackages.dhall_1_29_0;
+          }
+        )
+    );
+  easy-dhall =
+    let
+      pkgs = super;
+    in
+      import (sources.easy-dhall-nix) {};
+}

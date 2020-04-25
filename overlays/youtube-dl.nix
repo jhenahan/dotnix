@@ -1,7 +1,7 @@
 self:
-  super:
-    {
-      youtube-dl = super.youtube-dl.override {
-        phantomjsSupport = false;
-      };
-    }
+super:
+{
+  youtube-dl = super.youtube-dl.override {
+    phantomjsSupport = false;
+  };
+}
