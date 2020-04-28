@@ -29,8 +29,8 @@ in
   nix-prefetch-scripts
   emacs-all-the-icons-fonts
   exercism
-  du-dust
-  procs
+  #du-dust
+  #procs
   #gnuapl
   jdk
   kotlin
@@ -56,7 +56,7 @@ in
   nodePackages.node2nix
   nodePackages.tern
   powershell
-  mu
+  #mu
   msmtp
   mysql
   #cachix

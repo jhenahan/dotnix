@@ -51,7 +51,7 @@ super:
     sourceRoot = "Docker.app";
     src = super.fetchurl {
       url = "https://download.docker.com/mac/stable/Docker.dmg";
-      sha256 = "0q71hg34xfa3cm7l09a02a4b5g8hhpnn16bxnz6hq9pgf5c0kyyy";
+      sha256 = "14dgvicl56lzr0p0g1ha7zkqv7wk3kxl90a6zk2cswyxn93br04s";
     };
     description = ''
       Docker CE for Mac is an easy-to-install desktop app for building,
