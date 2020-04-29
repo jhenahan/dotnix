@@ -21,28 +21,13 @@ in
       "Wi-Fi"
     ];
   };
-  launchd.daemons = {
-    #nix-daemon.environment.OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
-    #pdnsd = {
-    #  script = ''
-    #    cp -pL /etc/pdnsd.conf /tmp/.pdnsd.conf
-    #    chmod 700 /tmp/.pdnsd.conf
-    #    chown root /tmp/.pdnsd.conf
-    #    touch /Library/Caches/pdnsd/pdnsd.cache
-    #    ${pkgs.pdnsd}/sbin/pdnsd -c /tmp/.pdnsd.conf
-    #  '';
-    #  serviceConfig.RunAtLoad = true;
-    #  serviceConfig.KeepAlive = true;
-    #};
-  };
+  launchd.daemons = {};
   launchd.user.agents = {};
   system.activationScripts.postActivation.text = ''
     chflags nohidden ${home_directory}/Library
     sudo launchctl load -w \
         /System/Library/LaunchDaemons/com.apple.atrun.plist > /dev/null 2>&1 \
         || exit 0
-    cp -pL /etc/DefaultKeyBinding.dict \
-       ${home_directory}/Library/KeyBindings/DefaultKeyBinding.dict
   '';
   nixpkgs = {
     config = {
@@ -122,136 +107,12 @@ in
     ];
     etc."tmux-gruvbox-dark.conf".source = ../files/tmux-gruvbox-dark.conf;
     etc."tmux-srcery".source = ../files/srcery-tmux;
-    etc."imapfilter.lua".source = ../files/config.lua;
-    etc."configrules.lua".source = ../files/configrules.lua;
-    etc."offlineimap.py".source = ../files/offlineimap.py;
-    etc."msmtprc".text = ''
-      defaults
-      auth           on
-      tls            on
-      tls_trust_file ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      port           587
-
-      account        iCloud
-      host           smtp.mail.me.com
-      from           jhenahan@me.com
-      user           jhenahan
-      passwordeval   "pass jhenahan@me.com"
-
-      account        Outlook
-      host           localhost
-      port           1025
-      tls            off
-      from           jack.henahan@coxautoinc.com
-      user           jack.henahan@coxautoinc.com
-      passwordeval   "pass jack.henahan@coxautoinc.com"
-    '';
-    etc."DefaultKeyBinding.dict".text = ''
-      {
-        "~f"    = "moveWordForward:";
-        "~b"    = "moveWordBackward:";
-        "~d"    = "deleteWordForward:";
-        "~^h"   = "deleteWordBackward:";
-        "~\010" = "deleteWordBackward:";    /* Option-backspace */
-        "~\177" = "deleteWordBackward:";    /* Option-delete */
-        "~v"    = "pageUp:";
-        "^v"    = "pageDown:";
-        "~<"    = "moveToBeginningOfDocument:";
-        "~>"    = "moveToEndOfDocument:";
-        "^/"    = "undo:";
-        "~/"    = "complete:";
-        "^g"    = "_cancelKey:";
-        "^a"    = "moveToBeginningOfLine:";
-        "^e"    = "moveToEndOfLine:";
-        "~c"    = "capitalizeWord:"; /* M-c */
-        "~u"    = "uppercaseWord:";   /* M-u */
-        "~l"    = "lowercaseWord:";   /* M-l */
-        "^t"    = "transpose:";      /* C-t */
-        "~t"    = "transposeWords:"; /* M-t */
-      }
-    '';
   };
-  services.nix-daemon.enable = false;
-  services.activate-system.enable = true;
-  services.emacs = {
-    enable = false;
-    package = pkgs.emacs26System;
+  services = {
+    nix-daemon.enable = false;
+    activate-system.enable = true;
   };
 
-  services.offlineimap = {
-    enable = true;
-    path = [ pkgs.pass pkgs.mu pkgs.bash pkgs.python ];
-    startInterval = 60;
-    extraConfig = ''
-      [general]
-      pythonfile = /etc/offlineimap.py
-      accounts = iCloud, Work, WorkArchive
-      maxsyncaccounts = 2
-    
-      [Account iCloud]
-      presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      localrepository = LocalPersonal
-      remoterepository = Personal
-    
-      [Account Work]
-      presynchook = ${pkgs.imapfilter}/bin/imapfilter -c /etc/imapfilter.lua -t ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      localrepository = LocalWork
-      remoterepository = Work
-
-      [Account WorkArchive]
-      localrepository = LocalWorkArchive
-      remoterepository = WorkArchive
-    
-      [Repository LocalPersonal]
-      type = Maildir
-      sep = /
-      localfolders = ~/Mail/Personal
-    
-      [Repository LocalWork]
-      type = Maildir
-      sep = /
-      localfolders = ~/Mail/Work
-
-      [Repository LocalWorkArchive]
-      type = Maildir
-      sep = /
-      localfolders = ~/Mail/WorkArchive
-    
-      [Repository Personal]
-      type = IMAP
-      ssl = yes
-      sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      remotehost = imap.mail.me.com
-      remoteuser = jhenahan
-      remotepasseval = get_passwordstore(item='jhenahan@me.com')
-      create_folders = True
-      folderfilter = lambda folder: folder in [ 'Sent Messages', 'INBOX', 'Archive', 'Deleted Messages', 'Drafts', 'haskell-cafe-archive', 'Accounts/Github' ]
-
-      [Repository Work]
-      type = IMAP
-      ssl = no
-      sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      remotehost = localhost
-      remoteport = 1143
-      remoteuser = jack.henahan@coxautoinc.com
-      remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
-      create_folders = False
-      folderfilter = lambda folder: folder in [ 'INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Archive' ]
-
-      [Repository WorkArchive]
-      type = IMAP
-      ssl = no
-      sslcacertfile = ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
-      remotehost = localhost
-      remoteport = 1143
-      remoteuser = jack.henahan@coxautoinc.com
-      remotepasseval = get_passwordstore(item='jack.henahan@coxautoinc.com')
-      create_folders = False
-      readonly = yes
-      sync_deletes = no
-      folderfilter = lambda folder: folder in [ 'INBOX', 'Drafts', 'Sent Items', 'Deleted Items', 'Archive' ]
-    '';
-  };
   nix = {
     package = pkgs.nixStable;
     trustedUsers = [

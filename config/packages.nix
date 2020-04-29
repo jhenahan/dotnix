@@ -14,7 +14,6 @@ in
   easy-ps.spago
   easy-dhall.dhall-simple
   easy-dhall.dhall-json-simple
-  easy-dhall.dhall-yaml-simple
   easy-dhall.dhall-bash-simple
   easy-dhall.dhall-lsp-simple
   dhall-terraform
