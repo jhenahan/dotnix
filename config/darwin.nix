@@ -1,9 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   home_directory = builtins.getEnv "HOME";
+  current_user = builtins.getEnv "USER";
   logdir = "${home_directory}/Library/Logs";
-  home_dns = import ../private/home/dns.nix;
-  work_dns = import ../private/work/dns.nix;
   tmuxPlugins = with pkgs.tmuxPlugins; [
     logging
     fpp
@@ -16,7 +15,6 @@ in
 {
   system.defaults = import ./darwin/defaults.nix;
   networking = {
-    hostName = "noether";
     #dns = [ "127.0.0.1" ];
     #search = [ "local" ] ++ work_dns.domains or [];
     knownNetworkServices = [
@@ -24,7 +22,7 @@ in
     ];
   };
   launchd.daemons = {
-    nix-daemon.environment.OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
+    #nix-daemon.environment.OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
     #pdnsd = {
     #  script = ''
     #    cp -pL /etc/pdnsd.conf /tmp/.pdnsd.conf
@@ -148,71 +146,6 @@ in
       user           jack.henahan@coxautoinc.com
       passwordeval   "pass jack.henahan@coxautoinc.com"
     '';
-    etc."ads.pdnsd".source = ../files/ads.pdnsd;
-    etc."pdnsd.conf".text = ''
-      global {
-          perm_cache   = 65536;
-          cache_dir    = "/Library/Caches/pdnsd";
-          server_ip    = 127.0.0.1;
-          status_ctl   = on;
-          query_method = udp_tcp;
-          min_ttl      = 1h;    # Retain cached entries at least 1 hour.
-          max_ttl      = 4h;    # Four hours.
-          timeout      = 10;    # Global timeout option (10 seconds).
-          udpbufsize   = 1024;  # Upper limit on the size of UDP messages.
-          neg_rrs_pol  = on;
-          par_queries  = 2;
-      }
-    '' + home_dns.pdnsd_server + work_dns.pdnsd_server + ''
-      server {
-          label       = "cloudflare";
-          ip          = 1.1.1.1, 1.0.0.1;
-          preset      = on;
-          uptest      = none;
-          edns_query  = yes;
-          exclude     = ".local";
-          proxy_only  = on;
-          purge_cache = off;
-          timeout     = 5;
-      }
-      server {
-          label       = "google";
-          ip          = 8.8.8.8, 8.8.4.4;
-          preset      = on;
-          uptest      = none;
-          edns_query  = yes;
-          exclude     = ".local";
-          proxy_only  = on;
-          purge_cache = off;
-          timeout     = 5;
-      }
-      server {
-          label       = "comcast";
-          ip          = 75.75.75.75, 75.75.76.76;
-          preset      = on;
-          uptest      = none;
-          edns_query  = yes;
-          exclude     = ".local";
-          proxy_only  = on;
-          purge_cache = off;
-          timeout     = 5;
-      }
-      include {file="/etc/ads.pdnsd";}
-      source {
-          owner         = localhost;
-          serve_aliases = on;
-          file          = "/etc/hosts";
-      }
-      rr {
-          name    = localhost;
-          reverse = on;
-          a       = 127.0.0.1;
-          owner   = localhost;
-          soa     = localhost,root.localhost,42,86400,900,86400,86400;
-      }
-      rr { name = localunixsocket;       a = 127.0.0.1; }
-      rr { name = localunixsocket.local; a = 127.0.0.1; }
-    '';
     etc."DefaultKeyBinding.dict".text = ''
       {
         "~f"    = "moveWordForward:";
@@ -238,7 +171,7 @@ in
       }
     '';
   };
-  services.nix-daemon.enable = true;
+  services.nix-daemon.enable = false;
   services.activate-system.enable = true;
   services.emacs = {
     enable = false;
@@ -330,6 +263,7 @@ in
     ];
     maxJobs = 10;
     buildCores = 8;
+    gc.user = current_user;
     gc.automatic = true;
     gc.options = "--max-freed \$((25 * 1024**3 - 1024 * \$(df -P -k /nix/store | tail -n 1 | awk '{ print \$4 }')))";
     distributedBuilds = false;

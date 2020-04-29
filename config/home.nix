@@ -2,8 +2,6 @@
 let
   home_directory = builtins.getEnv "HOME";
   ca-bundle_crt = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-  work_ssh = import ../private/work/ssh.nix;
-  gh_oauth = (import ../private/vars.nix).oauth_token;
   lib = pkgs.stdenv.lib;
 in
 rec {
@@ -78,8 +76,6 @@ rec {
           }
       ) []
     ) // {
-      ".docker".source = "${xdg.configHome}/docker";
-      ".gist".source = "${xdg.configHome}/gist/account_id";
       ".curlrc".text = ''
         capath=${pkgs.cacert}/etc/ssl/certs/
         cacert=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
@@ -218,7 +214,6 @@ rec {
       shellInit = ''
         set -x SSH_AUTH_SOCK "${xdg.configHome}/gnupg/S.gpg-agent.ssh";
         set -x GNUPGHOME "${xdg.configHome}/gnupg";
-        set -x GITHUB_TOKEN "${gh_oauth}";
 
         set -x CABAL_CONFIG "${xdg.configHome}/cabal/config";
         set -x LESSHISTFILE "${xdg.cacheHome}/less/history";
@@ -318,7 +313,6 @@ rec {
         branch.autosetupmerge = true;
         commit.gpgsign = true;
         github.user = "jhenahan";
-        github.oauth-token = gh_oauth;
         credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
         ghi.token = "!${pkgs.pass}/bin/pass api.github.com | head -1";
         hub.protocol = "${pkgs.openssh}/bin/ssh";
@@ -796,7 +790,6 @@ rec {
           identityFile = "${xdg.configHome}/ssh/id_local";
           identitiesOnly = true;
         };
-        #work = (work_ssh xdg).ssh;
       };
     };
   };

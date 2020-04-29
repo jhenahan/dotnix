@@ -280,7 +280,7 @@ in
     attrs: rec {
       name = "emacs-${version}${versionModifier}";
       version = "27.0";
-      versionModifier = ".50";
+      versionModifier = ".91";
 
       doCheck = false;
       buildInputs = attrs.buildInputs ++ [ harfbuzz.dev jansson freetype ];
