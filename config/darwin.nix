@@ -22,7 +22,22 @@ in
     ];
   };
   launchd.daemons = {};
-  launchd.user.agents = {};
+  launchd.user.agents = {
+    "lorri" = {
+      serviceConfig = {
+        WorkingDirectory = (builtins.getEnv "HOME");
+        EnvironmentVariables = {};
+        KeepAlive = true;
+        RunAtLoad = true;
+        StandardOutPath = "/var/tmp/lorri.log";
+        StandardErrorPath = "/var/tmp/lorri.log";
+      };
+      script = ''
+        source ${config.system.build.setEnvironment}
+        exec ${pkgs.lorri}/bin/lorri daemon
+      '';
+    };
+  };
   system.activationScripts.postActivation.text = ''
     chflags nohidden ${home_directory}/Library
     sudo launchctl load -w \
@@ -118,6 +133,7 @@ in
     trustedUsers = [
       "root"
       "jackhenahan"
+      "jack.henahan"
       "JHENAHAN"
       "@admin"
       "@wheel"
@@ -164,7 +180,7 @@ in
     enableVim = true;
     enableSensible = true;
     defaultCommand = "${pkgs.fish}/bin/fish --login";
-    tmuxConfig = ''
+    extraConfig = ''
       set -g @srcery_tmux_patched_font '1'
       run -b /etc/tmux-srcery/srcery.tmux
       ${lib.concatStrings (map (x: "run-shell ${x.rtp}\n") tmuxPlugins)}

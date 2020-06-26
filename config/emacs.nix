@@ -7,4 +7,30 @@ with epkgs;
   doom-themes
   org
   general
+  no-littering
+  use-package
+  evil
+  magit
+  gcmh
+  which-key
+  exec-path-from-shell
+  selectrum
+  prescient
+  undo-tree
+  ctrlf
+  direnv
+  company
+  lsp-mode
+  lsp-ui
+  lsp-haskell
+  lsp-latex
+  company-lsp
+  yasnippet
+  flycheck
+  auctex
+  terraform-mode
+  company-terraform
+  org-bullets
+  org-reveal
+  ormolu
 ]

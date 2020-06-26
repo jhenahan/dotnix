@@ -243,7 +243,7 @@ rec {
         set -x SKIM_DEFAULT_COMMAND 'rg --color=always --line-number "{}"'
         set -x SKIM_DEFAULT_OPTIONS '--ansi --regex'
         set -x SHELL "${pkgs.fish}/bin/fish"
-        set -x PATH /Users/JHENAHAN/.nix-profile/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin $PATH
+        set -x PATH ${home_directory}/vertica/bin ${home_directory}/.nix-profile/bin /run/current-system/sw/bin /nix/var/nix/profiles/default/bin $PATH
         alias cat=bat
         ${pkgs.thefuck}/bin/thefuck --alias | source
         function dvtm_title --on-event fish_prompt

@@ -9,17 +9,18 @@ in
   (exe haskPkgs.cabal-install)
   (hunspellWithDicts [ hunspellDicts.en-us ])
   maven
-  rtorrent
+  terraform-lsp
   easy-ps.purs
   easy-ps.spago
   easy-dhall.dhall-simple
   easy-dhall.dhall-json-simple
   easy-dhall.dhall-bash-simple
   easy-dhall.dhall-lsp-simple
-  dhall-terraform
   cachix
+  lorri
   darwin.iproute2mac
   (exe haskPkgs.niv)
+  texlab
   jl
   ansible
   davmail
@@ -36,7 +37,7 @@ in
   mpv
   stoken
   thefuck
-  aria
+  #aria
   alacritty
   hie865
   tealdeer
@@ -47,7 +48,7 @@ in
   isync
   awscli
   coreutils
-  moreutils
+  parallel
   swagger-codegen
   abduco
   gist

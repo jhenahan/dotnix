@@ -51,7 +51,7 @@ super:
     sourceRoot = "Docker.app";
     src = super.fetchurl {
       url = "https://download.docker.com/mac/stable/Docker.dmg";
-      sha256 = "14dgvicl56lzr0p0g1ha7zkqv7wk3kxl90a6zk2cswyxn93br04s";
+      sha256 = "0pkgsb6wbm715h76lgwza625idi593d2g3crkf0rfd46s3wxi6zn";
     };
     description = ''
       Docker CE for Mac is an easy-to-install desktop app for building,
@@ -61,39 +61,13 @@ super:
   };
   Firefox = self.installApplication rec {
     name = "Firefox";
-    version = "75.0";
+    version = "76.0.1";
     sourceRoot = "Firefox.app";
     src = super.fetchurl {
       name = "Firefox-${version}.dmg";
       url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/${version}/mac/en-US/Firefox%20${version}.dmg";
-      sha256 = "1bh3vaqfsmilc736vi9z1nf0q8k67k2ncm3qbiiqp0gf0mcp8chc";
+      sha256 = "0la4dmvfzjn1ivmnkzvzw9gl9h69pcir8shbs72hg642pcxc5850";
     };
-    postInstall = ''
-          for file in  \
-              $out/Applications/Firefox.app/Contents/MacOS/firefox \
-              $out/Applications/Firefox.app/Contents/MacOS/firefox-bin
-          do
-              dir=$(dirname "$file")
-              base=$(basename "$file")
-              mv $file $dir/.$base
-              cat > $file <<'EOF'
-      #!/bin/bash
-      export PATH=${super.gnupg}/bin:${super.pass}/bin:$PATH
-      export PASSWORD_STORE_ENABLE_EXTENSIONS="true"
-      export PASSWORD_STORE_EXTENSIONS_DIR="/run/current-system/sw/lib/password-store/extensions";
-      export PASSWORD_STORE_DIR="$HOME/Dropbox/.passwords";
-      export GNUPGHOME="$HOME/.config/gnupg"
-      export GPG_TTY=$(tty)
-      if ! pgrep -x "gpg-agent" > /dev/null; then
-      ${super.gnupg}/gpgconf --launch gpg-agent
-      fi
-      dir=$(dirname "$0")
-      name=$(basename "$0")
-      exec "$dir"/."$name" "$@"
-      EOF
-              chmod +x $file
-          done
-    '';
     description = "Mozilla Firefox (or simply Firefox) is a free and open-source web browser.";
     homepage = "https://www.mozilla.org/en-US/firefox/";
   };

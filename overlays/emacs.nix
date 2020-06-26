@@ -87,18 +87,33 @@ let
           };
     in
       {
+        org-reveal = compileNivFile { name = "org-reveal"; };
         flycheck = nivOverride "flycheck";
         doom-themes = nivOverride "doom-themes";
+        evil = nivOverride "evil";
         lsp-haskell = nivOverride "lsp-haskell";
         lsp-mode = nivOverride "lsp-mode";
         lsp-ui = nivOverride "lsp-ui";
+        general = nivOverride "general";
+        lsp-latex = compileNivFile {
+          name = "lsp-latex";
+          buildInputs = [ self.lsp-mode super.s super.f super.dash super.dash-functional super.ht super.lv super.markdown-mode super.spinner ];
+        };
+        ctrlf = compileNivFile {
+          name = "ctrlf";
+        };
+        prescient = compileNivFile {
+          name = "prescient";
+        };
+        selectrum = compileNivFile {
+          name = "selectrum";
+        };
         blackout = compileNivFile {
           name = "blackout";
         };
         formatter = compileNivFile {
           name = "formatter";
         };
-        general = nivOverride "general";
         magit = addPropagatedBuildInputs (super.magit) [ pkgs.git ];
         pdf-tools = lib.overrideDerivation super.pdf-tools (
           attrs: {
@@ -133,7 +148,7 @@ let
                 inherit (super) melpaBuild
                   elpaBuild
                   ;
-                inherit (super.elpaPackages) hyperbole frog-menu;
+                inherit (super.elpaPackages) spinner;
               }
           )
         )
@@ -162,8 +177,6 @@ in
   );
 
   emacsHEADPackagesNg = mkEmacsPackages self.emacsHEAD;
-
-  emacs = self.emacsHEAD;
   emacsPackagesNg = self.emacs26PackagesNg;
   emacs26PackagesNg = mkEmacsPackages (self.emacs);
   emacs26System = self.emacs26PackagesNg.emacsWithPackages;
@@ -172,4 +185,6 @@ in
     name = "emacs26";
     buildInputs = [ (self.emacs26PackagesNg.emacsWithPackages myPkgs) ];
   };
+
+  emacs = self.emacsHEAD;
 }
