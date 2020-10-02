@@ -33,4 +33,5 @@ with epkgs;
   org-bullets
   org-reveal
   ormolu
+  posframe
 ]

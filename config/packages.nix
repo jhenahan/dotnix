@@ -9,7 +9,8 @@ in
   (exe haskPkgs.cabal-install)
   (hunspellWithDicts [ hunspellDicts.en-us ])
   maven
-  terraform-lsp
+  inetutils
+  tectonic
   easy-ps.purs
   easy-ps.spago
   easy-dhall.dhall-simple
