@@ -90,6 +90,8 @@ let
         org-reveal = compileNivFile { name = "org-reveal"; };
         flycheck = nivOverride "flycheck";
         doom-themes = nivOverride "doom-themes";
+        haskell-mode = nivOverride "haskell-mode";
+        company = nivOverride "company";
         evil = nivOverride "evil";
         lsp-haskell = nivOverride "lsp-haskell";
         lsp-mode = nivOverride "lsp-mode";
@@ -98,6 +100,10 @@ let
         lsp-latex = compileNivFile {
           name = "lsp-latex";
           buildInputs = [ self.lsp-mode super.s super.f super.dash super.dash-functional super.ht super.lv super.markdown-mode super.spinner ];
+        };
+        neuron-mode = compileNivFile {
+          name = "neuron-mode";
+          buildInputs = [ super.f super.s super.markdown-mode super.company ];
         };
         ctrlf = compileNivFile {
           name = "ctrlf";

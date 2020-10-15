@@ -20,6 +20,7 @@ with epkgs;
   ctrlf
   direnv
   company
+  haskell-mode
   lsp-mode
   lsp-ui
   lsp-haskell
@@ -34,4 +35,6 @@ with epkgs;
   org-reveal
   ormolu
   posframe
+  neuron-mode
+  nix-mode
 ]

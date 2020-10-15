@@ -2,11 +2,9 @@ self:
 super:
 let
   sources = import ../nix/sources.nix;
-  hies-src = sources.all-hies;
 in
 {
-  all-hies = import hies-src {};
-  hie865 = self.all-hies.unstableFallback.selection { selector = p: { inherit (p) ghc865; }; };
+  neuron = import sources.neuron {};
   duma = super.callPackage ../packages/duma {};
   sbt = super.callPackage ../packages/sbt {};
   opmsg = super.callPackage ../packages/opmsg {};

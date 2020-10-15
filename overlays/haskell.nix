@@ -3,70 +3,68 @@ pkgs:
 let
   srcs = [];
   sources = import ../nix/sources.nix;
+
+  packageDrv = ghc:
+    callPackage (usingWithHoogle self.haskell.packages.${ghc}) ghc;
+
   otherHackagePackages = ghc:
     let
-      pkg = p:
-        self.packageDrv ghc p {};
-      seriously = p:
-        with pkgs.haskell.lib;
-        dontCheck (doJailbreak p);
-      seriouslyWith = p: ps:
-        with pkgs.haskell.lib;
-        seriously (addSetupDepends p ps);
-      bigBreak = p:
-        with pkgs.haskell.lib;
-        doJailbreak (unmarkBroken p);
+      pkg = p: self.packageDrv ghc p {};
     in
-      self:
-      super:
-        with pkgs.haskell.lib;
-        {
-          Agda-dev = self.callCabal2nix "Agda" (
-            pkgs.fetchFromGitHub {
-              owner = "agda";
-              repo = "agda";
-              rev = "cfba5317228f50d2d248b622b162bc8bd2932bc7";
-              sha256 = "1c42xpnsml5rsqmspxb8y6lk36abzaxgnmdnz3iqjvdvr34vwny2";
+      self: super:
+        with pkgs.haskell.lib; {
+          Agda = doJailbreak (dontHaddock super.Agda);
+          Diff = dontCheck super.Diff;
+          aeson = overrideCabal super.aeson (
+            attrs: {
+              libraryHaskellDepends =
+                attrs.libraryHaskellDepends ++ [ self.contravariant ];
             }
-          ) {};
-          Agda = dontCheck (
-            self.Agda-dev.overrideScope (
-              self: super: {
-                regex-compat = self.regex-compat_0_95_2_0;
-                regex-pcre-builtin = self.regex-pcre-builtin_0_95_1_1_8_43;
-                regex-posix = self.regex-posix_0_96_0_0;
-                regex-base = self.regex-base_0_94_0_0;
-                regex-tdfa = self.regex-tdfa_1_3_1_0;
-              }
-            )
           );
-          #base-compat-batteries = doJailbreak (overrideCabal (super.base-compat-batteries) (attrs:
-          #  {
-          #    libraryHaskellDepends = attrs.libraryHaskellDepends ++ [
-          #      self.contravariant
-          #    ];
-          #  }));
-          #ghc-heap-view = overrideCabal (super.ghc-heap-view) (attrs:
-          #  {
-          #    enableLibraryProfiling = false;
-          #    enableExecutableProfiling = false;
-          #  });
+          base-compat-batteries = doJailbreak super.base-compat-batteries;
+          diagrams-contrib = doJailbreak super.diagrams-contrib;
+          diagrams-graphviz = doJailbreak super.diagrams-graphviz;
+          diagrams-svg = doJailbreak super.diagrams-svg;
+          generic-lens = dontCheck super.generic-lens;
+          haddock-library = dontHaddock super.haddock-library;
+          hasktags = dontCheck super.hasktags;
+          language-ecmascript = doJailbreak super.language-ecmascript;
+          liquidhaskell = doJailbreak super.liquidhaskell;
+          pipes-binary = doJailbreak super.pipes-binary;
+          pipes-text = unmarkBroken (doJailbreak super.pipes-text);
+          EdisonAPI = unmarkBroken super.EdisonAPI;
+          EdisonCore = unmarkBroken super.EdisonCore;
+          pipes-zlib = dontCheck (doJailbreak super.pipes-zlib);
+          text-show = dontCheck (doJailbreak super.text-show);
+          time-compat = doJailbreak super.time-compat;
+          time-recurrence = unmarkBroken (doJailbreak super.time-recurrence);
+          tls = dontCheck super.tls;
+          rebase = doJailbreak super.rebase;
+
+          ListLike = overrideCabal super.ListLike (
+            attrs: {
+              libraryHaskellDepends =
+                attrs.libraryHaskellDepends ++ [ self.semigroups ];
+            }
+          );
+
+          cabal2nix = dontCheck super.cabal2nix;
         };
-  callPackage = hpkgs:
-  ghc:
-  path:
-  args:
+
+  callPackage = hpkgs: ghc: path: args:
     filtered (
       if builtins.pathExists (path + "/default.nix")
-      then hpkgs.callPackage path (
-        {
-          pkgs = self;
-          compiler = ghc;
-          returnShellEnv = false;
-        } // args
-      )
+      then hpkgs.callPackage path
+        (
+          {
+            pkgs = self;
+            compiler = ghc;
+            returnShellEnv = false;
+          } // args
+        )
       else hpkgs.callCabal2nix hpkgs (builtins.baseNameOf path) path args
     );
+
   myHaskellPackages = ghc: self: super:
     let
       fromSrc = arg:
@@ -85,6 +83,7 @@ let
     ghc = hpkgs.ghc // { withPackages = hpkgs.ghc.withHoogle; };
     ghcWithPackages = ghc.withPackages;
   };
+
   overrideHask = ghc: hpkgs: hoverrides: hpkgs.override {
     overrides =
       pkgs.lib.composeExtensions
@@ -119,7 +118,8 @@ let
                                     overrides
                                 )
                             ) {} super;
-                          drv = hpkgs.callCabal2nix name root {};
+                          drv =
+                            hpkgs.callCabal2nix name root {};
                         in
                           if returnShellEnv
                           then (modifier drv).env
@@ -129,98 +129,100 @@ let
             )
         );
   };
-  breakout = super:
-  names:
-    builtins.listToAttrs (
-      builtins.map (
-        x:
-          {
-            name = x;
-            value = pkgs.haskell.lib.doJailbreak (super.${x});
-          }
-      ) names
-    );
+
+  breakout = super: names:
+    builtins.listToAttrs
+      (
+        builtins.map
+          (
+            x: {
+              name = x;
+              value = pkgs.haskell.lib.doJailbreak super.${x};
+            }
+          )
+          names
+      );
+
   filtered = drv:
-    drv.overrideAttrs (
-      attrs:
-        {
-          src = self.haskellFilterSource [] (attrs.src);
-        }
-    );
+    drv.overrideAttrs
+      (attrs: { src = self.haskellFilterSource [] attrs.src; });
+
 in
 {
-  haskellFilterSource = paths:
-  src:
-    pkgs.lib.cleanSourceWith {
-      inherit src;
-      filter = path:
-      type:
-        let
-          baseName = baseNameOf path;
-        in
-          !(
-            type == "directory" && builtins.elem baseName (
-              [
-                ".git"
-                ".cabal-sandbox"
-                "dist"
-              ] ++ paths
-            )
-          ) && !(type == "unknown" || baseName == "cabal.sandbox.config" || baseName == "result" || pkgs.stdenv.lib.hasSuffix ".hdevtools.sock" path || pkgs.stdenv.lib.hasSuffix ".sock" path || pkgs.stdenv.lib.hasSuffix ".hi" path || pkgs.stdenv.lib.hasSuffix ".hi-boot" path || pkgs.stdenv.lib.hasSuffix ".o" path || pkgs.stdenv.lib.hasSuffix ".dyn_o" path || pkgs.stdenv.lib.hasSuffix ".dyn_p" path || pkgs.stdenv.lib.hasSuffix ".o-boot" path || pkgs.stdenv.lib.hasSuffix ".p_o" path);
-    };
-  packageDrv = ghc:
-    callPackage (usingWithHoogle (self.haskell.packages.${ghc})) ghc;
-  packageDeps = path:
-    let
-      ghc = self.ghcDefaultVersion;
-      package = self.packageDrv ghc path {};
-      compiler = package.compiler;
-      packages = self.haskell.lib.getHaskellBuildInputs package;
-      cabal = {
-        ghc865 = "3.0.0.0";
-      };
-    in
-      compiler.withHoogle (
-        p:
-          with p;
-          [
-            hpack
-            criterion
-            (self.haskell.lib.doJailbreak (callHackage "cabal-install" (cabal.${ghc}) {}))
-          ] ++ packages.haskellBuildInputs
-      );
+
+  haskellFilterSource = paths: src: pkgs.lib.cleanSourceWith {
+    inherit src;
+    filter = path: type:
+      let
+        baseName = baseNameOf path;
+      in
+        !(
+          type == "directory"
+          && builtins.elem baseName ([ ".git" ".cabal-sandbox" "dist" ] ++ paths)
+        )
+        && !(
+          type == "unknown"
+          || baseName == "cabal.sandbox.config"
+          || baseName == "result"
+          || pkgs.stdenv.lib.hasSuffix ".hdevtools.sock" path
+          || pkgs.stdenv.lib.hasSuffix ".sock" path
+          || pkgs.stdenv.lib.hasSuffix ".hi" path
+          || pkgs.stdenv.lib.hasSuffix ".hi-boot" path
+          || pkgs.stdenv.lib.hasSuffix ".o" path
+          || pkgs.stdenv.lib.hasSuffix ".dyn_o" path
+          || pkgs.stdenv.lib.hasSuffix ".dyn_p" path
+          || pkgs.stdenv.lib.hasSuffix ".o-boot" path
+          || pkgs.stdenv.lib.hasSuffix ".p_o" path
+        );
+  };
+
   haskell = pkgs.haskell // {
     packages = pkgs.haskell.packages // {
-      ghc865 = overrideHask "ghc865" pkgs.haskell.packages.ghc865 (self: super: {});
+      ghc865 = overrideHask "ghc865" pkgs.haskell.packages.ghc865 (
+        self: super:
+          (
+            breakout super [
+              "hakyll"
+              "pandoc"
+            ]
+          )
+          // (
+            with pkgs.haskell.lib; {
+              inherit (pkgs.haskell.packages.ghc884) hpack;
+            }
+          )
+      );
+
+      ghc884 = overrideHask "ghc884" pkgs.haskell.packages.ghc884 (
+        self: super:
+          (
+            breakout super [
+              "hakyll"
+              "pandoc"
+            ]
+          )
+      );
     };
   };
+
   haskellPackages_8_6 = self.haskell.packages.ghc865;
-  ghcDefaultVersion = "ghc865";
+  haskellPackages_8_8 = self.haskell.packages.ghc884;
+  haskellPackages_8_10 = self.haskell.packages.ghc8101;
+
   haskellPackages = self.haskell.packages.${self.ghcDefaultVersion};
   haskPkgs = self.haskellPackages;
-  ghcSystem = myPkgs: hpkgs: (
+
+  ghcDefaultVersion = "ghc884";
+
+
+  ghcVersionInstance = myPkgs: hpkgs: (
     hpkgs.ghcWithHoogle (
       pkgs:
         with pkgs;
-        myPkgs pkgs ++ [ compact ]
+        myPkgs pkgs
     )
   );
 
-  ghc86System = with self; myPkgs: (ghcSystem myPkgs haskellPackages_8_6);
+  ghcSystem = with self; myPkgs: (ghcVersionInstance myPkgs haskPkgs);
 
-  ghcEnv = myPkgs: hpkgs: envName:
-    pkgs.myEnvFun {
-      name = envName;
-      buildInputs = with hpkgs;
-        [
-          (
-            ghcWithHoogle (
-              pkgs:
-                with pkgs;
-                myPkgs pkgs ++ [ compact ]
-            )
-          )
-        ];
-    };
-  ghc86Env = with self; myPkgs: (ghcEnv myPkgs haskellPackages_8_6 "ghc86");
 }

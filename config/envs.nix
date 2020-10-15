@@ -6,8 +6,8 @@ let
   myRustConfig = import ./rust.nix;
 in
 {
-  emacs26System = pkgs.emacs26System myEmacsPackages;
+  #emacs26System = pkgs.emacs26System myEmacsPackages;
   emacs27System = pkgs.emacs27System myEmacsPackages;
-  ghc86System = pkgs.ghc86System (myHaskellPackages 8.6);
+  ghcSystem = pkgs.ghcSystem (myHaskellPackages 8.8);
   rustSystem = pkgs.latest.rustChannels.stable.rust.override myRustConfig;
 }

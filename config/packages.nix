@@ -4,10 +4,11 @@ let
   exe = haskell.lib.justStaticExecutables;
 in
 [
-  (exe haskPkgs.pointfree)
-  (exe haskPkgs.ShellCheck)
-  (exe haskPkgs.cabal-install)
+  #(exe haskPkgs.pointfree)
+  #(exe haskPkgs.ShellCheck)
+  #(exe haskPkgs.cabal-install)
   (hunspellWithDicts [ hunspellDicts.en-us ])
+  neuron
   maven
   inetutils
   tectonic
@@ -17,7 +18,6 @@ in
   easy-dhall.dhall-json-simple
   easy-dhall.dhall-bash-simple
   easy-dhall.dhall-lsp-simple
-  cachix
   lorri
   darwin.iproute2mac
   (exe haskPkgs.niv)
@@ -40,7 +40,6 @@ in
   thefuck
   #aria
   alacritty
-  hie865
   tealdeer
   emms-print-metadata
   mb2md
@@ -86,12 +85,13 @@ in
   skim
   epipe
   emacs27System
+  #gccEmacs
   exa
   exiv2
   fd
   findutils
   gawk
-  ghc86System
+  ghcSystem
   scala
   sbt
   gnugrep
